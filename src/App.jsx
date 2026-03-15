@@ -8,15 +8,9 @@ function App() {
     <BrowserRouter basename="/cha-panela">
       <Routes>
 
-        <Route
-          path="/"
-          element={<IdentificacaoPage />}
-        />
+        <Route path="/" element={<IdentificacaoPage />} />
 
-        <Route
-          path="/introducao"
-          element={<IntroducaoPage />}
-        />
+        <Route path="/introducao" element={<IntroducaoPage />} />
 
       </Routes>
     </BrowserRouter>
