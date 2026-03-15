@@ -5,7 +5,7 @@ import IntroducaoPage from "./pages/Introducao/IntroducaoPage";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/cha-panela">
       <Routes>
 
         <Route
