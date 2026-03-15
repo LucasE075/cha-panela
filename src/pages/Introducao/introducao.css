@@ -1,0 +1,244 @@
+
+/* ========================= PAGE ROOT ========================= */ 
+.introducao-page { 
+    width: 100%; 
+    min-height: 100vh; 
+    overflow-x: hidden; 
+    font-family: 'Playfair Display', serif;
+} 
+/* ========================= HEADER / NAVBAR ========================= */ 
+.header { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 106px; 
+    background: #B8A660; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 0 40px; 
+    z-index: 1000; 
+} 
+.logo-area { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+} 
+.logo { 
+    height: 51px; 
+    width: 55.17px;
+} 
+.logo-text { 
+    font-family: 'Mate', serif; 
+    font-size: 20px; 
+    color: white;
+} 
+.menu { 
+    display: flex; 
+    gap: 30px;
+    align-items: center;
+} 
+.menu a { 
+    text-decoration: none; 
+    color: white; 
+    font-family: 'Mate', serif; 
+    font-size: 20px; 
+    transition: opacity 0.2s ease; 
+} 
+.menu a:hover { 
+    opacity: 0.7; 
+}
+
+/* ========================= SEÇÃO CARTA ========================= */ 
+.secao-carta { 
+    margin-top: 90px; 
+    position: relative; 
+    padding: 120px 20px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background: linear-gradient( #E8EEF5, #E8EEF5 ); } 
+/* pontilhado */ 
+.secao-carta::before { 
+    content: ""; 
+    position: absolute; 
+    inset: 0; 
+    background-image: radial-gradient( rgb(219, 211, 211) 1px, transparent 1px ); 
+    background-size: 20px 20px; 
+    opacity: 0.35; 
+    pointer-events: none; } 
+/* ========================= FLORES ========================= */ 
+.flores-esquerda { 
+    position: absolute; 
+    left: 0;
+    top : 0;  
+    width: 419px;
+    height: 364.42px;
+} 
+.flores-direita { 
+    position: absolute; 
+    right: 0;
+    top: 0;
+    width: 419px;
+    height: 364.42px; 
+} 
+.ornamento-medalhao { 
+    position: absolute; 
+    top: 0; 
+    width: 631.28px;
+    height: 186px;
+} 
+/* ========================= CARTA ========================= */ 
+.carta {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  background: #F6F1E7;
+}
+
+.borda-externa {
+
+  width: 100%;
+  border: 3px solid #B8A660;
+  padding: 14px;
+}
+
+.borda-interna {
+  border: 2px solid #86732A;
+  padding: 40px;
+  font-size: 20px;
+  line-height: 1.7;
+  font-family: Playfair Display, serif;
+  text-align: left;
+  color: #000000;
+}
+/* ========================= BOTÃO AUDIO ========================= */ 
+.botao-audio { 
+    position: absolute; 
+    right: 40px; 
+    bottom: 40px; 
+    width: 48px; 
+    height: 48px; 
+    border-radius: 50%; 
+    border: none; 
+    background: white; 
+    font-size: 22px; 
+    cursor: pointer; 
+    transition: transform 0.2s ease; 
+} 
+.botao-audio:hover { 
+    transform: scale(1.1); 
+} 
+/* ========================= FOTO DO CASAL ========================= */ 
+.secao-foto { 
+    width: 100%; 
+} 
+.foto-casal { 
+    width: 100%; 
+    height: auto; 
+    display: block; } 
+/* ========================= SEÇÃO EVENTO ========================= */ 
+.secao-evento { 
+    position: relative; 
+    padding: 120px 20px; 
+    background: linear-gradient( #E8EEF5 0%, #C9D6E5 100% ); 
+    display: flex; 
+    justify-content: center; 
+} 
+/*Pontilhado evento*/
+.secao-evento::before { 
+    content: ""; 
+    position: absolute; 
+    inset: 0; 
+    background-image: radial-gradient( rgb(219, 211, 211) 1px, transparent 1px ); 
+    background-size: 20px 20px; 
+    opacity: 0.35; 
+    pointer-events: none; } 
+/* flores evento */ 
+.flores-evento-esq { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 603.74px;
+    height: 615.92px;
+} 
+.flores-evento-dir { 
+    position: absolute; 
+    right: 0; 
+    bottom: 0; 
+    width: 529.1px;
+    height: 558.53px;
+} 
+/* conteúdo central */ 
+.conteudo-evento { 
+    max-width: 700px; 
+    text-align: center; 
+} 
+/* ========================= TÍTULOS ========================= */ 
+.ornamento-titulo { 
+    width: 535px;
+    height: 392.81px; 
+    margin-bottom: 20px; 
+} 
+/* ========================= INFO EVENTO ========================= */ 
+.info-evento { 
+    margin-top: 40px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px;
+    text-align: left;
+} 
+.linha-info { 
+    display: flex; 
+    justify-content: center; 
+    align-items: left; 
+    gap: 12px; 
+    font-size: 28px;
+    color: #000000;
+    text-align: left;
+} 
+.linha-info img { 
+    width: 37.87px;
+    height: 32.61px;
+    align-items: left; 
+} 
+/* ========================= DIVISOR ========================= */ 
+.divisor-ornamento { 
+    margin: 40px auto; 
+    width: 436.03px;
+    height: 30.28;
+}
+/* ========================= MENSAGEM FINAL ========================= */ 
+.mensagem-final { 
+    max-width: 520px; 
+    margin: 0 auto; 
+    font-size: 28px;
+    color: #000000; 
+}
+/* ========================= BOTÕES ========================= */ 
+.botoes-evento { 
+    margin-top: 40px; 
+    display: flex; 
+    justify-content: center; 
+    gap: 30px; 
+} 
+.botao-img { 
+    width: 399px;
+    height: 94.72;
+    cursor: pointer; 
+    transition: transform 0.2s ease; 
+} 
+.botao-img:hover { 
+    transform: scale(1.05); }
+
+/* ========================= RESPONSIVO ========================= */ 
+@media (max-width: 768px) { 
+    .menu { display: none; } 
+    .titulo-evento { font-size: 32px; } 
+    .nomes-evento { font-size: 48px; } 
+    .borda-interna { padding: 25px; font-size: 18px; } 
+    .flores-esquerda, .flores-direita { width: 150px; height: auto; }
+    .carta { margin: auto; }
+    .flores-evento-esq, .flores-evento-dir { width: 200px; height: auto; }
+}

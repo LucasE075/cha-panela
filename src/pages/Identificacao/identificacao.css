@@ -1,0 +1,178 @@
+/* ============================= */
+/* FONTES */
+/* ============================= */
+
+@font-face {
+  font-family: "Imprima";
+  src: url("../../assets/fonts/Imprima.ttf");
+}
+
+@font-face {
+  font-family: "MeaCulpa";
+  src: url("../../assets/fonts/MeaCulpa.ttf");
+}
+
+/* ============================= */
+/* FUNDO DA PÁGINA */
+/* ============================= */
+
+.pagina {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(#E8EEF5, #C9D6E5);
+
+  padding: 40px;
+}
+
+/* ============================= */
+/* CONVITE (RETÂNGULO CENTRAL) */
+/* ============================= */
+
+.convite {
+  width: 95%;
+  height: 95%;
+
+  padding: 50px;
+
+  border: 4px solid #C0B070;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: linear-gradient(#E8EEF5, #C9D6E5);
+
+  /* fundo pontilhado */
+  background-image: radial-gradient(#d9d9d9 1px, transparent 1px);
+  background-size: 18px 18px;
+
+  box-shadow: 0 10px 30px rgba(255, 254, 254, 0.08);
+}
+
+/* ============================= */
+/* IMAGENS */
+/* ============================= */
+
+.logo {
+  width: 128px;
+  height: 126px;
+  margin-bottom: 25px;
+}
+
+.casal {
+  width: 782px;
+  height: 550px;
+  max-width: 90%;
+  margin-bottom: 25px;
+}
+
+/* ============================= */
+/* TÍTULOS */
+/* ============================= */
+
+.titulo {
+  font-family: "Imprima";
+  font-size: 40px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  color: #000000;
+}
+
+.nomes {
+  font-family: "MeaCulpa";
+  font-size: 64px;
+  color: #B89C44;
+  margin-bottom: 40px;
+}
+
+/* ============================= */
+/* FORMULÁRIO */
+/* ============================= */
+
+.formulario {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ============================= */
+/* CAMPOS */
+/* ============================= */
+
+.campo {
+  display: flex;
+  flex-direction: column;
+}
+
+.campo label {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.campo input {
+  width: 230px;
+  height: 42px;
+
+  border: none;
+
+  padding: 8px;
+
+  background: #DAD2E4;
+
+  border-radius: 4px;
+
+  font-size: 14px;
+}
+
+/* ============================= */
+/* BOTÃO */
+/* ============================= */
+
+.botao {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.botao img {
+  width: 100px;  
+  transition: transform 0.2s;
+}
+
+.botao img:hover {
+  transform: scale(1.05);
+}
+
+/* ============================= */
+/* ERRO */
+/* ============================= */
+
+.erro {
+  margin-top: 20px;
+  color: #b00020;
+  font-size: 14px;
+}
+
+/* ============================= */
+/* RESPONSIVO */
+/* ============================= */
+
+@media (max-width: 700px) {
+
+  .formulario {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .campo input {
+    width: 260px;
+  }
+
+}
