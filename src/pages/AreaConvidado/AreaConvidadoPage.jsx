@@ -1,6 +1,7 @@
-import { useEffect, useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useGuest } from "@/context";
+import { useScrollToTop, useRequireGuest } from "@/hooks";
 import { supabase } from "@/services/supabase/supabaseClient";
 
 import logo from "@/assets/images/header-logo.png";
@@ -18,10 +19,8 @@ export default function AreaConvidadoPage() {
   const [loading, setLoading] = useState(true);
   const [menuAberto, setMenuAberto] = useState(false);
   const [confirmando, setConfirmando] = useState(null);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useScrollToTop();
+  useRequireGuest();
 
   // Determinar status e cor/mensagem
   const getStatusInfo = () => {

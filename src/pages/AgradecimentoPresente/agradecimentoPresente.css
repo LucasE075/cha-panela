@@ -228,6 +228,15 @@
     font-size: 28px;
   }
 
+  .agr-presente-pix-dados {
+    padding: 18px;
+    gap: 10px;
+  }
+
+  .pix-dado {
+    font-size: 15px;
+  }
+
   .btn-voltar {
     padding: 12px 28px;
     font-size: 15px;
@@ -448,8 +457,21 @@
     width: 150px;
     height: 150px;
   }
+  .agr-presente-pix-dados {
+    padding: 12px;
+    gap: 8px;
+    max-width: 100%;
+  }
 
-  .valor-amount {
+  .pix-dado {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .pix-label {
+    font-size: 12px;
+  }
+}  .valor-amount {
     font-size: 20px;
   }
 
@@ -457,7 +479,6 @@
     padding: 15px 10px;
     gap: 10px;
   }
-}
 
 @media (max-width: 320px) {
   .agr-presente-header {
@@ -715,6 +736,54 @@
   animation: fadeIn 0.6s ease-out 0.3s both;
 }
 
+.agr-presente-pix-code {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 380px;
+  padding: 12px;
+  background: white;
+  border: 2px solid #B8A660;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: #333;
+  word-break: break-all;
+}
+
+.agr-presente-pix-code:hover {
+  background: #f9f8f5;
+  border-color: #86732A;
+  box-shadow: 0 4px 12px rgba(184, 166, 96, 0.2);
+  transform: translateY(-2px);
+}
+
+.agr-presente-pix-code:active {
+  transform: translateY(0);
+}
+
+.pix-code-text {
+  flex: 1;
+  width: 100%;
+  line-height: 1.4;
+}
+
+.pix-copy-feedback {
+  font-size: 12px;
+  font-family: 'Mate', serif;
+  color: #B8A660;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.agr-presente-pix-code:hover .pix-copy-feedback {
+  color: #86732A;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -748,4 +817,35 @@
   font-weight: 700;
   color: #B8A660;
   margin: 0;
+}
+
+/* ========================= DADOS PIX ========================= */
+.agr-presente-pix-dados {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 500px;
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  animation: fadeIn 0.6s ease-out 0.4s both;
+}
+
+.pix-dado {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: #333;
+  margin: 0;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.pix-label {
+  font-family: 'Mate', serif;
+  font-weight: 700;
+  color: #B8A660;
+  font-size: 15px;
 }

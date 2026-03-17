@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useGuest } from '@/context';
+import { useScrollToTop, useRequireGuest } from '@/hooks';
 
 import logo from '@/assets/images/header-logo.png';
 import btnPresentes from '@/assets/images/btn-presentes.png';
@@ -10,10 +11,8 @@ import './agradecimento.css';
 export default function AgradecimentoPage() {
   const { guest } = useGuest();
   const [menuAberto, setMenuAberto] = useState(false);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useScrollToTop();
+  useRequireGuest();
 
   // Determinar a mensagem com base na presença
   const mensagem =

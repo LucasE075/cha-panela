@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useScrollToTop, useRequireGuest } from "@/hooks";
 
 import logo from "@/assets/images/header-logo.png";
 
@@ -28,13 +29,8 @@ import "./introducao.css";
 export default function IntroducaoPage() {
 
   const [menuAberto, setMenuAberto] = useState(false);
-
-  useEffect(() => {
-    // Scroll para o topo com pequeno delay para garantir que executa após render
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 0);
-  }, []);
+  useScrollToTop();
+  useRequireGuest();
 
   return (
     <div className="introducao-page">

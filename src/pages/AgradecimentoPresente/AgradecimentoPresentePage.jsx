@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useGuest } from '@/context';
+import { useScrollToTop, useRequireGuest } from '@/hooks';
 
 import logo from '@/assets/images/header-logo.png';
 import qrcodeImage from '@/assets/images/qrcode.png';
@@ -12,10 +13,23 @@ export default function AgradecimentoPresentePage() {
   const location = useLocation();
   const { guest } = useGuest();
   const [menuAberto, setMenuAberto] = useState(false);
+  const [copiado, setCopiado] = useState(false);
+  useScrollToTop();
+  useRequireGuest();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // Código PIX
+  const PIX_CODE = '00020126330014BR.GOV.BCB.PIX0111065196341905204000053039865802BR5925Estella Gabriela Santos d6009SAO PAULO62140510SEI5aCq2qL63043B2D';
+
+  // Copiar código para clipboard
+  const copiarCodigoPix = async () => {
+    try {
+      await navigator.clipboard.writeText(PIX_CODE);
+      setCopiado(true);
+      setTimeout(() => setCopiado(false), 2000);
+    } catch (err) {
+      console.error('Erro ao copiar:', err);
+    }
+  };
 
   // Obter dados do presente do state
   const presente = location.state?.presente;
@@ -42,7 +56,7 @@ export default function AgradecimentoPresentePage() {
     if (isFisico) {
       return `Obrigada por ${presente.nome}!`;
     }
-    return `PIX recebido com sucesso!`;
+    return `Escaneie o QR Code para ${tipoPresente === 'pix_fechado' ? 'confirmar seu presente' : 'enviar sua contribuição'}!`;
   };
 
   const getMensagemDetalhes = () => {
@@ -109,6 +123,18 @@ export default function AgradecimentoPresentePage() {
                 className="agr-presente-qrcode" 
               />
 
+              {/* CÓDIGO PIX CLICÁVEL */}
+              <button
+                onClick={copiarCodigoPix}
+                className="agr-presente-pix-code"
+                title="Clique para copiar o código PIX"
+              >
+                <span className="pix-code-text">{PIX_CODE}</span>
+                <span className="pix-copy-feedback">
+                  {copiado ? '✓ Copiado!' : '📋 Clique para copiar'}
+                </span>
+              </button>
+
               {/* VALOR (se existir) */}
               {presente.preco && (
                 <div className="agr-presente-valor">
@@ -116,6 +142,15 @@ export default function AgradecimentoPresentePage() {
                   <p className="valor-amount">R$ {Number(presente.preco).toFixed(2)}</p>
                 </div>
               )}
+            </div>
+          )}
+
+          {/* DADOS PIX */}
+          {isPix && (
+            <div className="agr-presente-pix-dados">
+              <p className="pix-dado"><span className="pix-label">Chave Pix:</span> 065.196.341-90</p>
+              <p className="pix-dado"><span className="pix-label">Nome:</span> Estella Gabriela Santos de Oliveira</p>
+              <p className="pix-dado"><span className="pix-label">Banco:</span> 260 - Nu Pagamentos S.A. - Instituição de Pagamento</p>
             </div>
           )}
 

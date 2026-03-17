@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGuest } from '@/context';
+import { useScrollToTop, useRequireGuest } from '@/hooks';
 import { useSupabase } from '@/hooks';
 
 import logo from '@/assets/images/header-logo.png';
@@ -15,10 +16,8 @@ export default function PresencaPage() {
   const { updateGuest, loading } = useSupabase();
   const [respondendo, setRespondendo] = useState(false);
   const [menuAberto, setMenuAberto] = useState(false);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useScrollToTop();
+  useRequireGuest();
 
   const handlePresenca = async (confirmado) => {
     if (!guest?.id) {

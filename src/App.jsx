@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { GuestProvider } from "@/context";
+import { GuestProvider, MusicProvider } from "@/context";
+import MusicToggle from "@/components/MusicToggle/MusicToggle";
 
 import IdentificacaoPage from "@/pages/Identificacao/IdentificacaoPage";
 import IntroducaoPage from "@/pages/Introducao/IntroducaoPage";
@@ -9,20 +10,26 @@ import AgradecimentoPage from "@/pages/Agradecimento/AgradecimentoPage";
 import AreaConvidadoPage from "@/pages/AreaConvidado/AreaConvidadoPage";
 import AgradecimentoPresentePage from "@/pages/AgradecimentoPresente/AgradecimentoPresentePage";
 
+import musica from "@/assets/audio/musica.mp3";
+
 function App() {
   return (
     <GuestProvider>
-      <BrowserRouter basename="/cha-panela">
-        <Routes>
-          <Route path="/" element={<IdentificacaoPage />} />
-          <Route path="/introducao" element={<IntroducaoPage />} />
-          <Route path="/presentes" element={<PresentesPage />} />
-          <Route path="/confirmacao" element={<PresencaPage />} />
-          <Route path="/agradecimento" element={<AgradecimentoPage />} />
-          <Route path="/area-convidado" element={<AreaConvidadoPage />} />
-          <Route path="/agradecimento-presente" element={<AgradecimentoPresentePage />} />
-        </Routes>
-      </BrowserRouter>
+      <MusicProvider>
+        <BrowserRouter basename="/cha-panela">
+          <MusicToggle />
+          <Routes>
+            <Route path="/" element={<IdentificacaoPage />} />
+            <Route path="/introducao" element={<IntroducaoPage />} />
+            <Route path="/presentes" element={<PresentesPage />} />
+            <Route path="/confirmacao" element={<PresencaPage />} />
+            <Route path="/agradecimento" element={<AgradecimentoPage />} />
+            <Route path="/area-convidado" element={<AreaConvidadoPage />} />
+            <Route path="/agradecimento-presente" element={<AgradecimentoPresentePage />} />
+          </Routes>
+          <audio id="global-music" src={musica} loop />
+        </BrowserRouter>
+      </MusicProvider>
     </GuestProvider>
   );
 }

@@ -285,7 +285,7 @@
   }
 
   .presentes-resumo {
-    padding: 15px;
+    padding: 15px 15px 15px 80px;
     margin-bottom: 20px;
   }
 
@@ -397,9 +397,11 @@
   }
 
   .presentes-resumo {
-    padding: 12px;
+    padding: 12px 12px 12px 70px;
     border-radius: 8px;
     animation: slideUp 0.3s ease-out;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .resumo-texto {
@@ -488,8 +490,10 @@
   }
 
   .presentes-resumo {
-    padding: 10px;
+    padding: 10px 10px 10px 60px;
     animation: slideUp 0.3s ease-out;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .resumo-texto {
@@ -845,9 +849,9 @@
   right: 0;
   background: white;
   border-top: 2px solid #b8a660;
-  padding: 20px 40px;
+  padding: 20px 40px 20px 100px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   gap: 30px;
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
