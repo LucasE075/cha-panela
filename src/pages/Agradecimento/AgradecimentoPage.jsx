@@ -1,0 +1,56 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useGuest } from '@/context';
+
+import logo from '@/assets/images/header-logo.png';
+
+import './agradecimento.css';
+
+export default function AgradecimentoPage() {
+  const { guest } = useGuest();
+  const [menuAberto, setMenuAberto] = useState(false);
+
+  // Determinar a mensagem com base na presença
+  const mensagem =
+    guest?.confirmou_presenca === true
+      ? 'Obrigada por confirmar sua presença! Que alegria poder compartilhar esse momento especial com você. Nos vemos no nosso Chá de Panela!'
+      : 'Obrigada por confirmar sua presença! Que pena, sentiremos sua falta no nosso Chá de Panela, mas esperamos nos encontrar em breve.';
+
+  return (
+    <div className="agradecimento-page">
+      {/* HEADER */}
+      <header className="agradecimento-header">
+        <div className="agradecimento-logo-area">
+          <img src={logo} alt="logo" className="agradecimento-logo" />
+          <p className="agradecimento-logo-text">Estella & Lucas</p>
+        </div>
+
+        <button
+          className={`agradecimento-menu-toggle ${menuAberto ? 'active' : ''}`}
+          onClick={() => setMenuAberto(!menuAberto)}
+          aria-label="Menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav className={`agradecimento-menu ${menuAberto ? 'open' : ''}`}>
+          <Link to="/confirmacao" onClick={() => setMenuAberto(false)}>Confirmar presença</Link>
+          <Link to="/presentes" onClick={() => setMenuAberto(false)}>Lista de presentes</Link>
+          <Link to="/area-convidado" onClick={() => setMenuAberto(false)}>Área do convidado</Link>
+        </nav>
+      </header>
+
+      {/* MAIN CONTENT */}
+      <section className="agradecimento-container">
+        <div className="agradecimento-content">
+          {/* MENSAGEM */}
+          <h1 className="agradecimento-message">
+            {mensagem}
+          </h1>
+        </div>
+      </section>
+    </div>
+  );
+}

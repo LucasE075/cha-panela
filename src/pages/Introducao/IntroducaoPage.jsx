@@ -1,29 +1,29 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
-import logo from "../../assets/images/header-logo.png";
+import logo from "@/assets/images/header-logo.png";
 
-import floresEsquerda from "../../assets/images/flowers-left.png";
-import floresDireita from "../../assets/images/flowers-right.png";
-import ornamentoMedalhao from "../../assets/images/ornament-medalhao.png";
+import floresEsquerda from "@/assets/images/flowers-left.png";
+import floresDireita from "@/assets/images/flowers-right.png";
+import ornamentoMedalhao from "@/assets/images/ornament-medalhao.png";
 
-import fotoCasal from "../../assets/images/couple-photo.png";
+import fotoCasal from "@/assets/images/couple-photo.png";
 
-import floresEventoEsq from "../../assets/images/event-flowers-left.png";
-import floresEventoDir from "../../assets/images/event-flowers-right.png";
+import floresEventoEsq from "@/assets/images/event-flowers-left.png";
+import floresEventoDir from "@/assets/images/event-flowers-right.png";
 
-import tituloOrnamento from "../../assets/images/title-ornament.png";
+import tituloOrnamento from "@/assets/images/title-ornament.png";
 
-import iconData from "../../assets/images/icon-date.png";
-import iconHora from "../../assets/images/icon-time.png";
-import iconLocal from "../../assets/images/icon-location.png";
+import iconData from "@/assets/images/icon-date.png";
+import iconHora from "@/assets/images/icon-time.png";
+import iconLocal from "@/assets/images/icon-location.png";
 
-import divisorOrnamento from "../../assets/images/ornament-divider.png";
+import divisorOrnamento from "@/assets/images/ornament-divider.png";
 
-import botaoConfirmar from "../../assets/images/btn-confirmar.png";
-import botaoPresentes from "../../assets/images/btn-presentes.png";
+import botaoConfirmar from "@/assets/images/btn-confirmar.png";
+import botaoPresentes from "@/assets/images/btn-presentes.png";
 
-import musica from "../../assets/audio/musica.mp3";
+import musica from "@/assets/audio/musica.mp3";
 
 import "./introducao.css";
 
@@ -31,6 +31,7 @@ export default function IntroducaoPage() {
 
   const audioRef = useRef(null);
   const [tocando, setTocando] = useState(false);
+  const [menuAberto, setMenuAberto] = useState(false);
 
   function toggleMusica() {
     if (tocando) {
@@ -47,20 +48,28 @@ export default function IntroducaoPage() {
       <audio ref={audioRef} src={musica} />
 
       {/* HEADER */}
-      <header className="header">
-
-        <div className="logo-area">
-          <img src={logo} alt="logo" className="logo" />
-          <span className="logo-text">Estella & Lucas</span>
-        </div>
-
-        <nav className="menu">
-          <Link to="/confirmacao">Confirmar presença</Link>
-          <Link to="/presentes">Lista de presentes</Link>
-          <Link to="/convidado">Área do convidado</Link>
-        </nav>
-
-      </header>
+            <header className="presenca-header">
+              <div className="presenca-logo-area">
+                <img src={logo} alt="logo" className="presenca-logo" />
+                <p className="presenca-logo-text">Estella & Lucas</p>
+              </div>
+      
+              <button 
+                className={`presenca-menu-toggle ${menuAberto ? 'active' : ''}`}
+                onClick={() => setMenuAberto(!menuAberto)}
+                aria-label="Menu"
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+      
+              <nav className={`presenca-menu ${menuAberto ? 'open' : ''}`}>
+                <Link to="/confirmacao" onClick={() => setMenuAberto(false)}>Confirmar presença</Link>
+                <Link to="/presentes" onClick={() => setMenuAberto(false)}>Lista de presentes</Link>
+                <Link to="/area-convidado" onClick={() => setMenuAberto(false)}>Área do convidado</Link>
+              </nav>
+            </header>
 
       {/* SEÇÃO CARTA */}
       <section className="secao-carta">

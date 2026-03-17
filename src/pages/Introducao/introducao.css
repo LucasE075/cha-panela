@@ -6,53 +6,211 @@
     overflow-x: hidden; 
     font-family: 'Playfair Display', serif;
 } 
-/* ========================= HEADER / NAVBAR ========================= */ 
-.header { 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 106px; 
-    background: #B8A660; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    padding: 0 40px; 
-    z-index: 1000; 
-} 
-.logo-area { 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-} 
-.logo { 
-    height: 51px; 
-    width: 55.17px;
-} 
-.logo-text { 
-    font-family: 'Mate', serif; 
-    font-size: 20px; 
-    color: white;
-} 
-.menu { 
-    display: flex; 
-    gap: 30px;
-    align-items: center;
-} 
-.menu a { 
-    text-decoration: none; 
-    color: white; 
-    font-family: 'Mate', serif; 
-    font-size: 20px; 
-    transition: opacity 0.2s ease; 
-} 
-.menu a:hover { 
-    opacity: 0.7; 
+/* ========================= HEADER / NAVBAR ========================= */
+.header {
+  position: fixed;
+  width: 100%;
+  height: 106px;
+  background: #B8A660;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+.logo-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.logo {
+  height: 51px;
+  width: 55.17px;
+}
+
+.logo-text {
+  font-family: 'Mate', serif;
+  font-size: 20px;
+  color: white;
+  margin: 0;
+}
+
+.menu {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.menu a {
+  text-decoration: none;
+  color: white;
+  font-family: 'Mate', serif;
+  font-size: 20px;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.menu a:hover {
+  opacity: 0.7;
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  gap: 6px;
+  z-index: 1100;
+}
+
+.menu-toggle span {
+  width: 28px;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* ========================= MEDIA QUERIES ========================= */
+@media (max-width: 768px) {
+  .header {
+    padding: 0 20px;
+    height: 80px;
+    overflow: hidden;
+  }
+
+  .logo {
+    height: 40px;
+    width: 43px;
+  }
+
+  .logo-text {
+    font-size: 16px;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .menu {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(184, 166, 96, 0.95);
+    padding: 0;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    visibility: hidden;
+  }
+
+  .menu.open {
+    max-height: 300px;
+    padding: 20px 0;
+    visibility: visible;
+  }
+
+  .menu a {
+    padding: 12px 20px;
+    font-size: 18px;
+    white-space: normal;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: block;
+  }
+
+  .menu a:last-child {
+    border-bottom: none;
+  }
+
+  .secao-carta {
+    margin-top: 80px;
+    padding: 60px 20px;
+  }
+
+  .flores-esquerda,
+  .flores-direita {
+    display: none;
+  }
+
+  .foto-casal {
+    max-width: 100%;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .flores-evento-esq,
+  .flores-evento-dir {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0 15px;
+    height: 70px;
+  }
+
+  .logo {
+    height: 35px;
+    width: 37px;
+  }
+
+  .logo-text {
+    font-size: 14px;
+  }
+
+  .menu {
+    top: 70px;
+  }
+
+  .secao-carta {
+    margin-top: 70px;
+    padding: 40px 15px;
+  }
+
+  .flores-esquerda,
+  .flores-direita {
+    display: none;
+  }
+
+  .foto-casal {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+  }
+
+  .flores-evento-esq,
+  .flores-evento-dir {
+    display: none;
+  }
 }
 
 /* ========================= SEÇÃO CARTA ========================= */ 
 .secao-carta { 
-    margin-top: 90px; 
+    margin-top: 106px; 
     position: relative; 
     padding: 120px 20px; 
     display: flex; 
@@ -122,10 +280,10 @@
     height: 48px; 
     border-radius: 50%; 
     border: none; 
-    background: white; 
     font-size: 22px; 
     cursor: pointer; 
-    transition: transform 0.2s ease; 
+    transition: transform 0.2s ease;
+    background-color: #E8EEF5;
 } 
 .botao-audio:hover { 
     transform: scale(1.1); 
@@ -133,18 +291,24 @@
 /* ========================= FOTO DO CASAL ========================= */ 
 .secao-foto { 
     width: 100%; 
+    height: 600px;
+    overflow: hidden;
 } 
 .foto-casal { 
     width: 100%; 
-    height: auto; 
-    display: block; } 
+    height: 100%;
+    display: block;
+    object-fit: cover;
+} 
+
 /* ========================= SEÇÃO EVENTO ========================= */ 
 .secao-evento { 
     position: relative; 
-    padding: 120px 20px; 
+    
     background: linear-gradient( #E8EEF5 0%, #C9D6E5 100% ); 
     display: flex; 
-    justify-content: center; 
+    justify-content: center;
+    overflow: hidden;
 } 
 /*Pontilhado evento*/
 .secao-evento::before { 
@@ -154,7 +318,8 @@
     background-image: radial-gradient( rgb(219, 211, 211) 1px, transparent 1px ); 
     background-size: 20px 20px; 
     opacity: 0.35; 
-    pointer-events: none; } 
+    pointer-events: none; 
+} 
 /* flores evento */ 
 .flores-evento-esq { 
     position: absolute; 
@@ -162,6 +327,7 @@
     left: 0; 
     width: 603.74px;
     height: 615.92px;
+    object-fit: cover;
 } 
 .flores-evento-dir { 
     position: absolute; 
@@ -169,11 +335,11 @@
     bottom: 0; 
     width: 529.1px;
     height: 558.53px;
+    object-fit: cover;
 } 
 /* conteúdo central */ 
 .conteudo-evento { 
-    max-width: 700px; 
-    text-align: center; 
+    max-width: 700px;
 } 
 /* ========================= TÍTULOS ========================= */ 
 .ornamento-titulo { 
@@ -188,10 +354,11 @@
     flex-direction: column; 
     gap: 15px;
     text-align: left;
+    
 } 
 .linha-info { 
     display: flex; 
-    justify-content: center; 
+    justify-content: left; 
     align-items: left; 
     gap: 12px; 
     font-size: 28px;
@@ -234,11 +401,16 @@
 
 /* ========================= RESPONSIVO ========================= */ 
 @media (max-width: 768px) { 
-    .menu { display: none; } 
     .titulo-evento { font-size: 32px; } 
     .nomes-evento { font-size: 48px; } 
     .borda-interna { padding: 25px; font-size: 18px; } 
-    .flores-esquerda, .flores-direita { width: 150px; height: auto; }
-    .carta { margin: auto; }
-    .flores-evento-esq, .flores-evento-dir { width: 200px; height: auto; }
+    .carta { width: auto; margin: auto; }
+    .secao-evento { padding: 80px 20px; }
+    .conteudo-evento { max-width: 100%; }
+    .ornamento-titulo { width: 70%; height: auto; }
+    .botoes-evento { flex-direction: column; gap: 20px; }
+    .botao-img { width: 80%; height: auto; }
+    .info-evento { font-size: 18px; }
+    .linha-info { font-size: 18px; }
+    .linha-info img { width: 30px; height: 25px; }
 }

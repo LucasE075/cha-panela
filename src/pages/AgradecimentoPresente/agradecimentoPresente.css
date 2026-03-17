@@ -1,0 +1,460 @@
+
+/* ========================= PAGE ROOT ========================= */
+.agradecimento-presente-page {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-top: 106px;
+  padding-bottom: 40px;
+  background: linear-gradient(135deg, #E8EEF5 0%, #C9D6E5 100%);
+  position: relative;
+}
+
+/* Background com opacidade */
+.agradecimento-presente-page::before {
+  content: '';
+  position: fixed;
+  top: 106px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(/src/assets/images/backgroundConvidado.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  opacity: 0.5;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ========================= HEADER / NAVBAR ========================= */
+.agr-presente-header {
+  position: fixed;
+  width: 100%;
+  height: 106px;
+  background: #B8A660;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+.agr-presente-logo-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.agr-presente-logo {
+  height: 51px;
+  width: 55.17px;
+}
+
+.agr-presente-logo-text {
+  font-family: 'Mate', serif;
+  font-size: 20px;
+  color: white;
+  margin: 0;
+}
+
+.agr-presente-menu {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.agr-presente-menu a {
+  text-decoration: none;
+  color: white;
+  font-family: 'Mate', serif;
+  font-size: 20px;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.agr-presente-menu a:hover {
+  opacity: 0.7;
+}
+
+.agr-presente-menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  gap: 6px;
+  z-index: 1100;
+}
+
+.agr-presente-menu-toggle span {
+  width: 28px;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.agr-presente-menu-toggle.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.agr-presente-menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.agr-presente-menu-toggle.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* ========================= MEDIA QUERIES HEADER ========================= */
+@media (max-width: 768px) {
+  .agr-presente-header {
+    padding: 0 20px;
+    height: 80px;
+    overflow: hidden;
+  }
+
+  .agr-presente-logo {
+    height: 40px;
+    width: 43px;
+  }
+
+  .agr-presente-logo-text {
+    font-size: 16px;
+  }
+
+  .agr-presente-menu-toggle {
+    display: flex;
+  }
+
+  .agr-presente-menu {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(184, 166, 96, 0.95);
+    padding: 0;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    visibility: hidden;
+  }
+
+  .agr-presente-menu.open {
+    max-height: 300px;
+    padding: 20px 0;
+    visibility: visible;
+  }
+
+  .agr-presente-menu a {
+    padding: 12px 20px;
+    font-size: 18px;
+    white-space: normal;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: block;
+  }
+
+  .agr-presente-menu a:last-child {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .agr-presente-header {
+    padding: 0 15px;
+    height: 70px;
+  }
+
+  .agr-presente-logo {
+    height: 35px;
+    width: 37px;
+  }
+
+  .agr-presente-logo-text {
+    font-size: 14px;
+  }
+
+  .agr-presente-menu {
+    top: 70px;
+  }
+}
+
+/* ========================= MAIN CONTAINER ========================= */
+.agr-presente-container {
+  margin-top: 106px;
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  min-height: calc(100vh - 106px);
+  overflow: hidden;
+  width: 100%;
+  z-index: 1;
+}
+
+/* ========================= CONTENT WRAPPER ========================= */
+.agr-presente-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 700px;
+  width: 100%;
+  gap: 25px;
+  background: white;
+  padding: 50px 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================= ÍCONE PRESENTE ========================= */
+.presente-icon {
+  font-size: 80px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* ========================= TÍTULOS E MENSAGENS ========================= */
+.agr-presente-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: #3d3424;
+  text-align: center;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.agr-presente-mensagem {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #B8A660;
+  text-align: center;
+  margin: 0;
+}
+
+.agr-presente-detalhes {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: #6b6375;
+  text-align: center;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ========================= BOTÕES ========================= */
+.agr-presente-botoes {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.btn-voltar {
+  display: inline-block;
+  padding: 14px 32px;
+  background: #B8A660;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-family: 'Mate', serif;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid #B8A660;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-voltar:hover {
+  background: #a89450;
+  border-color: #a89450;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(184, 166, 96, 0.3);
+}
+
+.btn-voltar:active {
+  transform: translateY(0);
+}
+
+/* ========================= SEÇÃO PIX ========================= */
+.agr-presente-pix-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: 25px;
+  background: rgba(184, 166, 96, 0.08);
+  border-radius: 12px;
+  border: 2px solid rgba(184, 166, 96, 0.2);
+}
+
+.agr-presente-qrcode {
+  width: 280px;
+  height: 280px;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.6s ease-out 0.3s both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.agr-presente-valor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.valor-label {
+  font-family: 'Mate', serif;
+  font-size: 14px;
+  color: #6b6375;
+  margin: 0;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.valor-amount {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #B8A660;
+  margin: 0;
+}
+
+/* ========================= MEDIA QUERIES ========================= */
+@media (max-width: 768px) {
+  .agr-presente-container {
+    margin-top: 80px;
+    padding: 30px 15px;
+  }
+
+  .agr-presente-content {
+    padding: 40px 25px;
+    gap: 20px;
+  }
+
+  .agr-presente-title {
+    font-size: 28px;
+  }
+
+  .agr-presente-mensagem {
+    font-size: 22px;
+  }
+
+  .agr-presente-detalhes {
+    font-size: 14px;
+  }
+
+  .presente-icon {
+    font-size: 60px;
+  }
+
+  .agr-presente-qrcode {
+    width: 220px;
+    height: 220px;
+  }
+
+  .valor-amount {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .agr-presente-container {
+    margin-top: 70px;
+    padding: 20px 10px;
+  }
+
+  .agr-presente-content {
+    padding: 30px 20px;
+    gap: 15px;
+    border-radius: 12px;
+  }
+
+  .agr-presente-title {
+    font-size: 24px;
+  }
+
+  .agr-presente-mensagem {
+    font-size: 18px;
+  }
+
+  .agr-presente-detalhes {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .presente-icon {
+    font-size: 50px;
+  }
+
+  .btn-voltar {
+    padding: 12px 24px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .agr-presente-qrcode {
+    width: 180px;
+    height: 180px;
+  }
+
+  .valor-amount {
+    font-size: 24px;
+  }
+
+  .agr-presente-pix-section {
+    padding: 20px 15px;
+    gap: 15px;
+  }
+}

@@ -1,0 +1,449 @@
+/* ========================= PAGE ROOT ========================= */
+.presenca-page {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========================= HEADER / NAVBAR ========================= */
+.presenca-header {
+  position: fixed;
+  width: 100%;
+  height: 106px;
+  background: #B8A660;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+.presenca-logo-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.presenca-logo {
+  height: 51px;
+  width: 55.17px;
+}
+
+.presenca-logo-text {
+  font-family: 'Mate', serif;
+  font-size: 20px;
+  color: white;
+  margin: 0;
+}
+
+.presenca-menu {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.presenca-menu a {
+  text-decoration: none;
+  color: white;
+  font-family: 'Mate', serif;
+  font-size: 20px;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.presenca-menu a:hover {
+  opacity: 0.7;
+}
+
+.presenca-menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  gap: 6px;
+  z-index: 1100;
+}
+
+.presenca-menu-toggle span {
+  width: 28px;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.presenca-menu-toggle.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.presenca-menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.presenca-menu-toggle.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* ========================= MEDIA QUERIES ========================= */
+@media (max-width: 768px) {
+  .presenca-header {
+    padding: 0 20px;
+    height: 80px;
+    overflow: hidden;
+  }
+
+  .presenca-logo {
+    height: 40px;
+    width: 43px;
+  }
+
+  .presenca-logo-text {
+    font-size: 16px;
+  }
+
+  .presenca-menu-toggle {
+    display: flex;
+  }
+
+  .presenca-menu {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(184, 166, 96, 0.95);
+    padding: 0;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    visibility: hidden;
+  }
+
+  .presenca-menu.open {
+    max-height: 300px;
+    padding: 20px 0;
+    visibility: visible;
+  }
+
+  .presenca-menu a {
+    padding: 12px 20px;
+    font-size: 18px;
+    white-space: normal;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: block;
+  }
+
+  .presenca-menu a:last-child {
+    border-bottom: none;
+  }
+
+  .presenca-container {
+    margin-top: 80px;
+    padding: 30px 15px;
+  }
+
+  .presenca-message {
+    font-size: 24px;
+  }
+
+  .presenca-pergunta {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .presenca-header {
+    padding: 0 15px;
+    height: 70px;
+  }
+
+  .presenca-logo {
+    height: 35px;
+    width: 37px;
+  }
+
+  .presenca-logo-text {
+    font-size: 14px;
+  }
+
+  .presenca-menu {
+    top: 70px;
+  }
+
+  .presenca-container {
+    margin-top: 70px;
+    padding: 20px 10px;
+  }
+
+  .presenca-message {
+    font-size: 20px;
+  }
+
+  .presenca-pergunta {
+    font-size: 24px;
+  }
+}
+
+/* ========================= MAIN CONTENT ========================= */
+.presenca-container {
+  margin-top: 106px;
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  min-height: calc(100vh - 106px);
+  overflow: hidden;
+  width: 100%;
+  background-image: url(/src/assets/images/backgroundpresenca.png);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Sobreposição para clarear a imagem */
+.presenca-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.35);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Background pattern */
+
+
+/* ========================= BACKGROUND IMAGE ========================= */
+/* Overlay removido - implementado via ::before do container */
+
+/* ========================= CONTENT WRAPPER ========================= */
+.presenca-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 900px;
+  width: 100%;
+  gap: 30px;
+}
+
+/* ========================= TITLE / MESSAGE ========================= */
+.presenca-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: #3d3424;
+  text-align: center;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ========================= INFO MESSAGE ========================= */
+.presenca-message {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #3d3424;
+  text-align: center;
+  line-height: 1.5;
+  max-width: 700px;
+}
+
+/* ========================= CASAL IMAGE ========================= */
+.presenca-casal-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 20px 0;
+}
+
+.presenca-casal-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* ========================= PERGUNTA ========================= */
+.presenca-pergunta {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: #86732A;
+  text-align: center;
+  margin: 40px 0 30px 0;
+  line-height: 1.4;
+}
+
+/* ========================= BOTÕES ========================= */
+.presenca-botoes {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  align-items: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.presenca-botao {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.presenca-botao:hover {
+  transform: scale(1.1);
+}
+
+.presenca-botao:active {
+  transform: scale(0.95);
+}
+
+.presenca-botao-img {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+}
+
+.presenca-botao-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #3d3424;
+}
+
+/* ========================= LOADING STATE ========================= */
+.presenca-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  color: #3d3424;
+}
+
+/* ========================= RESPONSIVO ========================= */
+@media (max-width: 768px) {
+  .presenca-header {
+    padding: 0 20px;
+  }
+
+  .presenca-menu {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .presenca-menu a {
+    font-size: 14px;
+  }
+
+  .presenca-logo-text {
+    font-size: 16px;
+  }
+
+  .presenca-titulo {
+    font-size: 24px;
+  }
+
+  .presenca-message {
+    font-size: 20px;
+  }
+
+  .presenca-pergunta {
+    font-size: 28px;
+  }
+
+  .presenca-botoes {
+    gap: 30px;
+  }
+
+  .presenca-botao-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .presenca-botao-label {
+    font-size: 18px;
+  }
+
+  .presenca-casal-img {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .presenca-header {
+    height: 80px;
+    padding: 0 15px;
+  }
+
+  .presenca-container {
+    margin-top: 80px;
+    padding: 20px 10px;
+  }
+
+  .presenca-titulo {
+    font-size: 20px;
+  }
+
+  .presenca-message {
+    font-size: 18px;
+  }
+
+  .presenca-pergunta {
+    font-size: 22px;
+  }
+
+  .presenca-botoes {
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .presenca-botao-img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .presenca-botao-label {
+    font-size: 14px;
+  }
+
+  .presenca-menu {
+    gap: 12px;
+    flex-direction: column;
+  }
+
+  .presenca-menu a {
+    font-size: 12px;
+  }
+
+  .presenca-logo {
+    height: 40px;
+    width: 43px;
+  }
+
+  .presenca-logo-text {
+    font-size: 14px;
+  }
+}

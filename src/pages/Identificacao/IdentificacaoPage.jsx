@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useGuest } from "@/context";
 import { supabase } from "../../services/supabase/supabaseClient";
 
 import logo from "../../assets/images/logo.png";
@@ -10,6 +11,7 @@ import "./identificacao.css";
 
 export default function IdentificacaoPage() {
   const navigate = useNavigate();
+  const { setCurrentGuest } = useGuest();
 
   const [nome, setNome] = useState("");
   const [celular, setCelular] = useState("");
@@ -55,11 +57,8 @@ export default function IdentificacaoPage() {
         convidado = novoConvidado;
       }
 
-      // salvar convidado no navegador
-      localStorage.setItem(
-        "convidado",
-        JSON.stringify(convidado)
-      );
+      // Salvar no contexto
+      setCurrentGuest(convidado);
 
       // redirecionar
       navigate("/introducao");
