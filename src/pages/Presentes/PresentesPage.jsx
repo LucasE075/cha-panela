@@ -4,7 +4,7 @@ import { useGuest } from '@/context';
 import { supabase } from '@/services/supabase/supabaseClient';
 
 import logo from '@/assets/images/header-logo.png';
-import botaoConfirmar from '@/assets/images/btn-confirmar.png';
+import btnConfirmarPresente from "@/assets/images/btn-confirmarPresente.png";
 
 import './presentes.css';
 
@@ -31,6 +31,11 @@ export default function PresentesPage() {
           descricao,
           preco,
           imagem,
+          tipo,
+          cor,
+          link1,
+          link2,
+          link3,
           selecoes (
             id,
             convidado_id,
@@ -38,12 +43,13 @@ export default function PresentesPage() {
           )
         `);
 
-      if (error) {
-        console.error('Erro ao carregar presentes:', error);
-        throw error;
-      }
-
-      setPresentes(data || []);
+      console.log('Presentes carregados:', data);
+      const sortedData = (data || []).sort((a, b) => {
+        if (a.id === 'f85fadf5-33d9-4a29-bbde-b9d9a17b49a8') return -1;
+        if (b.id === 'f85fadf5-33d9-4a29-bbde-b9d9a17b49a8') return 1;
+        return Math.random() - 0.5; // embaralha os demais
+      });
+      setPresentes(sortedData);
 
       // Carregar seleções do convidado atual
       if (guest?.id) {
@@ -71,17 +77,26 @@ export default function PresentesPage() {
   // Verificar se presente está indisponível
   const estáIndisponível = useCallback(
     (presente) => {
-      const selecao = presente.selecoes?.[0];
-      if (!selecao) return false;
+      const selecoes = Array.isArray(presente.selecoes) ? presente.selecoes : (presente.selecoes ? [presente.selecoes] : []);
+      if (selecoes.length === 0) return false;
 
-      // Indisponível se selecionado por outro ou se foi confirmado
-      return (
-        selecao.convidado_id !== guest?.id ||
-        selecao.status === 'confirmado'
-      );
+      // Verificar se há alguma seleção confirmada
+      const temConfirmado = selecoes.some(s => s.status === 'confirmado');
+      if (temConfirmado) return true;
+
+      // Verificar se há seleção de outro usuário
+      const selecaoDeOutro = selecoes.find(s => s.convidado_id !== guest?.id && s.status === 'selecionado');
+      if (selecaoDeOutro) return true;
+
+      return false;
     },
     [guest?.id]
   );
+
+
+
+
+
 
   // Toggle seleção de presente
   const toggleSeleção = async (presenteId) => {
@@ -158,6 +173,7 @@ export default function PresentesPage() {
     }
   };
 
+
   if (loading) {
     return (
       <div className="presentes-page">
@@ -203,37 +219,93 @@ export default function PresentesPage() {
             );
             const indisponivel = estáIndisponível(presente);
 
+            const tipoClass = presente.tipo
+              ? `tipo-${presente.tipo.replace(/_/g, '-')}`
+              : '';
+
             return (
-              <div
+              <button
                 key={presente.id}
-                className={`presente-card 
+                type="button"
+                className={`presente-card ${tipoClass} 
                   ${selecionadoPorMim ? 'selecionado' : ''}
                   ${indisponivel ? 'indisponivel' : ''}
                 `}
+                onClick={() => {
+                  if (!indisponivel && !salvando) {
+                    toggleSeleção(presente.id);
+                  }
+                }}
+                disabled={indisponivel || salvando}
               >
+                <h3 className="presente-nome">{presente.nome}</h3>
+
                 {/* IMAGEM */}
                 <div className="presente-imagem">
                   {presente.imagem && (
-                    <img
-                      src={presente.imagem}
-                      alt={presente.nome}
-                    />
+                    <img src={presente.imagem} alt={presente.nome} />
                   )}
                 </div>
 
                 {/* CONTEÚDO */}
                 <div className="presente-content">
-                  <h3 className="presente-nome">
-                    {presente.nome}
-                  </h3>
+                  {presente.tipo === 'fisico' && (
+                    <>
+                      {presente.cor && (
+                        <p className="presente-cor">
+                          <strong>Sugestão de cores:</strong> {presente.cor}
+                        </p>
+                      )}
 
-                  {presente.descricao && (
+                      {(presente.link1 || presente.link2 || presente.link3) && (
+                        <div className="presente-links">
+                          <span className="links-label">
+                            Link para se inspirar:
+                          </span>
+                          <div className="links-list">
+                            {presente.link1 && (
+                              <a
+                                href={presente.link1}
+                                target="_blank"
+                                rel="noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                Sugestão 1
+                              </a>
+                            )}
+                            {presente.link2 && (
+                              <a
+                                href={presente.link2}
+                                target="_blank"
+                                rel="noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                Sugestão 2
+                              </a>
+                            )}
+                            {presente.link3 && (
+                              <a
+                                href={presente.link3}
+                                target="_blank"
+                                rel="noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                Sugestão 3
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  {presente.tipo === 'pix_livre' && presente.descricao && (
                     <p className="presente-descricao">
                       {presente.descricao}
                     </p>
                   )}
 
-                  {presente.preco && (
+                  {presente.tipo === 'pix_fechado' && presente.preco && (
                     <span className="presente-preco">
                       R$ {Number(presente.preco).toFixed(2)}
                     </span>
@@ -242,32 +314,15 @@ export default function PresentesPage() {
 
                 {/* BADGE */}
                 {selecionadoPorMim && (
-                  <div className="badge-selecionado">
-                    ✓ Selecionado
-                  </div>
+                  <div className="badge-selecionado">✓ Selecionado</div>
                 )}
 
                 {indisponivel && !selecionadoPorMim && (
-                  <div className="badge-indisponivel">
-                    Indisponível
-                  </div>
+                  <div className="badge-indisponivel">Indisponível</div>
                 )}
 
-                {/* BOTÃO */}
-                {!indisponivel && (
-                  <button
-                    className={`btn-selecionar ${
-                      selecionadoPorMim ? 'remover' : ''
-                    }`}
-                    onClick={() => toggleSeleção(presente.id)}
-                    disabled={salvando}
-                  >
-                    {selecionadoPorMim
-                      ? 'Remover'
-                      : 'Selecionar'}
-                  </button>
-                )}
-              </div>
+                <span className="presente-acao">Selecionar</span>
+              </button>
             );
           })}
         </div>
@@ -288,7 +343,7 @@ export default function PresentesPage() {
               onClick={confirmarSeleção}
               disabled={salvando}
             >
-              <img src={botaoConfirmar} alt="Confirmar" />
+              <img src={btnConfirmarPresente} alt="Confirmar" />
             </button>
           </div>
         )}

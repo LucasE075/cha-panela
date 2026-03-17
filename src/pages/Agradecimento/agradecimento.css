@@ -237,6 +237,33 @@
   max-width: 700px;
 }
 
+/* ========================= BOTÃO LISTA DE PRESENTES ========================= */
+.agradecimento-botoes-extra {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.btn-presentes-extra-link {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn-presentes-extra-link img {
+  width: 150px;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.btn-presentes-extra-link:hover img {
+  transform: scale(1.05);
+}
+
+.btn-presentes-extra-link:active img {
+  transform: scale(0.95);
+}
+
 /* ========================= LOADING STATE ========================= */
 .agradecimento-loading {
   display: flex;

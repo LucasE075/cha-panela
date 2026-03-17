@@ -5,9 +5,28 @@
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
+  background: linear-gradient(135deg, #E8EEF5 0%, #C9D6E5 100%);
+  position: relative;
 }
 
-/* ========================= HEADER / NAVBAR ========================= */
+/* Background com opacidade */
+.presenca-page::before {
+  content: '';
+  position: fixed;
+  top: 106px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(/src/assets/images/backgroundpresenca.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  opacity: 0.8;
+  filter: blur(1px);
+  z-index: 0;
+  pointer-events: none;
+}
 .presenca-header {
   position: fixed;
   width: 100%;
@@ -204,21 +223,6 @@
   padding: 40px 20px;
   min-height: calc(100vh - 106px);
   width: 100%;
-  background-image: url(/src/assets/images/backgroundpresenca.png);
-  background-color: black;
-  opacity: 40%;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-}
-
-/* Sobreposição para clarear a imagem */
-.presenca-container::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
 }
 
 /* Background pattern */
@@ -256,7 +260,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 32px;
   font-weight: 700;
-  color: #3d3424;
+  color: #86732A;
   text-align: center;
   line-height: 1.5;
   max-width: 700px;
@@ -323,13 +327,6 @@
   width: 140px;
   height: 140px;
   object-fit: contain;
-}
-
-.presenca-botao-label {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px;
-  font-weight: 700;
-  color: #3d3424;
 }
 
 /* ========================= LOADING STATE ========================= */

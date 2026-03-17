@@ -111,7 +111,6 @@ export default function PresencaPage() {
                 alt="Sim" 
                 className="presenca-botao-img"
               />
-              <span className="presenca-botao-label">SIM</span>
             </button>
 
             <button
@@ -125,7 +124,6 @@ export default function PresencaPage() {
                 alt="Não" 
                 className="presenca-botao-img"
               />
-              <span className="presenca-botao-label">NÃO</span>
             </button>
           </div>
         </div>

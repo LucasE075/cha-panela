@@ -52,7 +52,7 @@
 .menu a {
   text-decoration: none;
   color: white;
-  font-family: 'Mate', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 20px;
   transition: opacity 0.2s ease;
   white-space: nowrap;
@@ -261,6 +261,20 @@
   flex-direction: column;
   position: relative;
   height: 100%;
+  border: none;
+  text-align: left;
+}
+
+.presente-card.tipo-fisico {
+  background: linear-gradient(135deg, #FDFFED 23%, #F4F9B9 100%);
+}
+
+.presente-card.tipo-pix-livre {
+  background: linear-gradient(135deg, #F6E6FF 11%, #DCAFF6 100%);
+}
+
+.presente-card.tipo-pix-fechado {
+  background: linear-gradient(135deg, #F2EACC 31%, #B8A660 100%);
 }
 
 .presente-card:hover:not(.indisponivel) {
@@ -273,6 +287,17 @@
   cursor: not-allowed;
 }
 
+.presente-card.indisponivel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.12);
+  filter: blur(1px);
+  pointer-events: none;
+  border-radius: 12px;
+}
+
+
 .presente-card.selecionado {
   border: 3px solid #4caf50;
   box-shadow: 0 8px 20px rgba(76, 175, 80, 0.25);
@@ -282,7 +307,7 @@
 .presente-imagem {
   width: 100%;
   height: 280px;
-  background: linear-gradient(135deg, #f5f3f0 0%, #efe9e4 100%);
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -304,6 +329,8 @@
   flex-direction: column;
   gap: 12px;
   flex: 1;
+  align-items: center;
+  text-align: center;
 }
 
 .presente-nome {
@@ -312,6 +339,9 @@
   color: #3d3424;
   margin: 0;
   line-height: 1.3;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
 }
 
 .presente-descricao {
@@ -323,12 +353,13 @@
 }
 
 .presente-preco {
-  font-size: 28px;
+  font-size: 40px;
   font-weight: 700;
-  color: #aa3bff;
+  color: white;
   margin-top: auto;
   padding-top: 10px;
   border-top: 1px solid #e5e4e7;
+  font-family: 'Quintessential', serif;
 }
 
 /* ========================= BADGES ========================= */
@@ -355,39 +386,55 @@
   color: white;
 }
 
-/* ========================= BOTÃO SELECIONAR ========================= */
-.btn-selecionar {
-  background: linear-gradient(135deg, #aa3bff 0%, #8b2ed8 100%);
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 6px;
-  font-size: 14px;
+/* ========================= AÇÃO DO CARD ========================= */
+.presente-acao {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  font-size: 12px;
   font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Playfair Display', serif;
-  margin-top: auto;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-}
-
-.btn-selecionar:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(170, 59, 255, 0.3);
-}
-
-.btn-selecionar:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-.btn-selecionar.remover {
-  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
-}
-
-.btn-selecionar:disabled {
   opacity: 0.6;
-  cursor: not-allowed;
+  pointer-events: none;
+  color: #3d3424;
+}
+
+.presente-cor {
+  font-size: 14px;
+  color: #3d3424;
+  margin: 0;
+}
+
+.presente-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.links-label {
+  font-size: 14px;
+  color: #3d3424;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+}
+
+.links-list {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.links-list a {
+  font-size: 13px;
+  color: #86732A;
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 1px solid transparent;
+}
+
+.links-list a:hover {
+  border-bottom: 1px solid #86732A;
 }
 
 /* ========================= RESUMO E CONFIRMAR ========================= */
@@ -435,7 +482,7 @@
 }
 
 .btn-confirmar-presentes img {
-  width: 100px;
+  width: 120px;
   height: auto;
   display: block;
 }
@@ -543,7 +590,7 @@
   }
 
   .btn-confirmar-presentes img {
-    width: 80px;
+    width: 100px;
   }
 }
 
@@ -587,11 +634,6 @@
     grid-row: 1;
   }
 
-  .btn-selecionar {
-    grid-column: 2;
-    grid-row: 2;
-    margin: 0 15px 15px 15px;
-  }
 
   .presente-nome {
     font-size: 16px;

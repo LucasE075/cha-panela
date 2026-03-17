@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useGuest } from '@/context';
 
 import logo from '@/assets/images/header-logo.png';
+import btnPresentes from '@/assets/images/btn-presentes.png';
 
 import './agradecimento.css';
 
@@ -49,6 +50,13 @@ export default function AgradecimentoPage() {
           <h1 className="agradecimento-message">
             {mensagem}
           </h1>
+
+          {/* BOTÃO LISTA DE PRESENTES */}
+          <div className="agradecimento-botoes-extra">
+            <Link to="/presentes" className="btn-presentes-extra-link">
+              <img src={btnPresentes} alt="Lista de Presentes" />
+            </Link>
+          </div>
         </div>
       </section>
     </div>
