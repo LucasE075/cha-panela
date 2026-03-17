@@ -61,7 +61,9 @@ export default function IdentificacaoPage() {
       }
 
       // Salvar no contexto
+      console.log('IdentificacaoPage - Salvando guest:', convidado);
       setCurrentGuest(convidado);
+      console.log('IdentificacaoPage - Guest salvo, redirecionando para introducao');
 
       // redirecionar
       navigate("/introducao");

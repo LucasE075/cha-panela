@@ -7,7 +7,9 @@ export function useRequireGuest() {
   const { guest, loading } = useGuest();
 
   useEffect(() => {
-    if (!loading && !guest) {
+    // Só redireciona se terminou de carregar E não há guest
+    if (loading === false && !guest) {
+      console.warn('useRequireGuest - Usuário não autenticado, redirecionando para login');
       navigate('/');
     }
   }, [guest, loading, navigate]);

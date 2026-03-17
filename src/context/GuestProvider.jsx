@@ -7,40 +7,44 @@ export function GuestProvider({ children }) {
   const [error, setError] = useState(null);
 
   const setCurrentGuest = useCallback((guestData) => {
-    setGuest(guestData);
     if (guestData?.id) {
       // Salvar no localStorage para persistência (usa 'convidado' para compatibilidade)
       localStorage.setItem('convidado', JSON.stringify(guestData));
+      setGuest(guestData);
+      console.log('GuestProvider - Guest salvo no localStorage:', guestData);
+    } else {
+      console.warn('GuestProvider - Tentativa de salvar guest sem ID:', guestData);
     }
   }, []);
 
   const clearGuest = useCallback(() => {
     setGuest(null);
     localStorage.removeItem('convidado');
+    console.log('GuestProvider - Guest limpo');
   }, []);
 
-  const loadGuestFromStorage = useCallback(() => {
-    const stored = localStorage.getItem('convidado');
-    if (stored) {
+  // Carregar guest do localStorage ao inicializar (uma única vez)
+  useEffect(() => {
+    const initializeGuest = () => {
+      console.log('GuestProvider - Inicializando guest do localStorage');
       try {
-        const guestData = JSON.parse(stored);
-        setGuest(guestData);
-        return guestData;
+        const stored = localStorage.getItem('convidado');
+        if (stored) {
+          const guestData = JSON.parse(stored);
+          setGuest(guestData);
+          console.log('GuestProvider - Guest carregado do localStorage:', guestData);
+        } else {
+          console.log('GuestProvider - Nenhum guest encontrado no localStorage');
+        }
       } catch (err) {
-        console.error('Erro ao carregar convidado do localStorage:', err);
+        console.error('GuestProvider - Erro ao carregar guest do localStorage:', err);
         localStorage.removeItem('convidado');
       }
-    }
-    return null;
-  }, []);
+    };
 
-  // Carregar guest do localStorage ao inicializar
-  useEffect(() => {
-    console.log('GuestProvider - Carregando guest do localStorage');
-    const loaded = loadGuestFromStorage();
-    console.log('GuestProvider - Guest carregado:', loaded);
+    initializeGuest();
     setLoading(false);
-  }, [loadGuestFromStorage]);
+  }, []); // Array vazio para executar apenas uma vez na montagem
 
   const value = {
     guest,
@@ -48,7 +52,6 @@ export function GuestProvider({ children }) {
     error,
     setCurrentGuest,
     clearGuest,
-    loadGuestFromStorage,
     setLoading,
     setError,
   };
