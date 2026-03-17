@@ -90,124 +90,6 @@
   transform: translateY(-9px) rotate(-45deg);
 }
 
-/* ========================= MEDIA QUERIES ========================= */
-@media (max-width: 768px) {
-  .header {
-    padding: 0 20px;
-    height: 80px;
-    overflow: hidden;
-  }
-
-  .logo {
-    height: 40px;
-    width: 43px;
-  }
-
-  .logo-text {
-    font-size: 16px;
-  }
-
-  .menu-toggle {
-    display: flex;
-  }
-
-  .menu {
-    position: absolute;
-    top: 80px;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    background: rgba(184, 166, 96, 0.95);
-    padding: 0;
-    gap: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
-    visibility: hidden;
-  }
-
-  .menu.open {
-    max-height: 300px;
-    padding: 20px 0;
-    visibility: visible;
-  }
-
-  .menu a {
-    padding: 12px 20px;
-    font-size: 18px;
-    white-space: normal;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    display: block;
-  }
-
-  .menu a:last-child {
-    border-bottom: none;
-  }
-
-  .secao-carta {
-    margin-top: 80px;
-    padding: 60px 20px;
-  }
-
-  .flores-esquerda,
-  .flores-direita {
-    display: none;
-  }
-
-  .foto-casal {
-    max-width: 100%;
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-  }
-
-  .flores-evento-esq,
-  .flores-evento-dir {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .header {
-    padding: 0 15px;
-    height: 70px;
-  }
-
-  .logo {
-    height: 35px;
-    width: 37px;
-  }
-
-  .logo-text {
-    font-size: 14px;
-  }
-
-  .menu {
-    top: 70px;
-  }
-
-  .secao-carta {
-    margin-top: 70px;
-    padding: 40px 15px;
-  }
-
-  .flores-esquerda,
-  .flores-direita {
-    display: none;
-  }
-
-  .foto-casal {
-    max-width: 100%;
-    width: 100%;
-    height: auto;
-  }
-
-  .flores-evento-esq,
-  .flores-evento-dir {
-    display: none;
-  }
-}
-
 /* ========================= SEÇÃO CARTA ========================= */ 
 .secao-carta { 
     margin-top: 106px; 
@@ -216,7 +98,8 @@
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    background: linear-gradient( #E8EEF5, #E8EEF5 ); } 
+    background: linear-gradient( #E8EEF5, #E8EEF5 ); 
+} 
 /* pontilhado */ 
 .secao-carta::before { 
     content: ""; 
@@ -225,7 +108,8 @@
     background-image: radial-gradient( rgb(219, 211, 211) 1px, transparent 1px ); 
     background-size: 20px 20px; 
     opacity: 0.35; 
-    pointer-events: none; } 
+    pointer-events: none; 
+} 
 /* ========================= FLORES ========================= */ 
 .flores-esquerda { 
     position: absolute; 
@@ -256,7 +140,6 @@
 }
 
 .borda-externa {
-
   width: 100%;
   border: 3px solid #B8A660;
   padding: 14px;
@@ -271,28 +154,11 @@
   text-align: left;
   color: #000000;
 }
-/* ========================= BOTÃO AUDIO ========================= */ 
-.botao-audio { 
-    position: absolute; 
-    right: 40px; 
-    bottom: 40px; 
-    width: 48px; 
-    height: 48px; 
-    border-radius: 50%; 
-    border: none; 
-    font-size: 22px; 
-    cursor: pointer; 
-    transition: transform 0.2s ease;
-    background-color: #E8EEF5;
-} 
-.botao-audio:hover { 
-    transform: scale(1.1); 
-} 
+
 /* ========================= FOTO DO CASAL ========================= */ 
 .secao-foto { 
     width: 100%; 
     height: 600px;
-    overflow: hidden;
 } 
 .foto-casal { 
     width: 100%; 
@@ -304,11 +170,13 @@
 /* ========================= SEÇÃO EVENTO ========================= */ 
 .secao-evento { 
     position: relative; 
-    
+    min-height: 100vh;
+    padding: 100px 20px;
     background: linear-gradient( #E8EEF5 0%, #C9D6E5 100% ); 
     display: flex; 
+    flex-direction: column;
     justify-content: center;
-    overflow: hidden;
+    align-items: center;
 } 
 /*Pontilhado evento*/
 .secao-evento::before { 
@@ -340,6 +208,10 @@
 /* conteúdo central */ 
 .conteudo-evento { 
     max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 } 
 /* ========================= TÍTULOS ========================= */ 
 .ornamento-titulo { 
@@ -354,7 +226,6 @@
     flex-direction: column; 
     gap: 15px;
     text-align: left;
-    
 } 
 .linha-info { 
     display: flex; 
@@ -397,20 +268,499 @@
     transition: transform 0.2s ease; 
 } 
 .botao-img:hover { 
-    transform: scale(1.05); }
+    transform: scale(1.05); 
+}
 
-/* ========================= RESPONSIVO ========================= */ 
-@media (max-width: 768px) { 
-    .titulo-evento { font-size: 32px; } 
-    .nomes-evento { font-size: 48px; } 
-    .borda-interna { padding: 25px; font-size: 18px; } 
-    .carta { width: auto; margin: auto; }
-    .secao-evento { padding: 80px 20px; }
-    .conteudo-evento { max-width: 100%; }
-    .ornamento-titulo { width: 70%; height: auto; }
-    .botoes-evento { flex-direction: column; gap: 20px; }
-    .botao-img { width: 80%; height: auto; }
-    .info-evento { font-size: 18px; }
-    .linha-info { font-size: 18px; }
-    .linha-info img { width: 30px; height: 25px; }
+/* ========================= MEDIA QUERIES ========================= */
+@media (max-width: 1024px) {
+  .header {
+    padding: 0 30px;
+  }
+
+  .secao-carta {
+    padding: 100px 30px;
+  }
+
+  .borda-interna {
+    padding: 35px;
+    font-size: 18px;
+  }
+
+  .titulo-evento {
+    font-size: 42px;
+  }
+
+  .nomes-evento {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0 20px;
+    height: 80px;
+  }
+
+  .logo {
+    height: 40px;
+    width: 43px;
+  }
+
+  .logo-text {
+    font-size: 16px;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .menu {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    background: rgba(184, 166, 96, 0.95);
+    padding: 0;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    visibility: hidden;
+    z-index: 999;
+  }
+
+  .menu.open {
+    max-height: 350px;
+    padding: 20px 0;
+    visibility: visible;
+  }
+
+  .menu a {
+    padding: 12px 20px;
+    font-size: 16px;
+    white-space: normal;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: block;
+  }
+
+  .menu a:last-child {
+    border-bottom: none;
+  }
+
+  .secao-carta {
+    margin-top: 80px;
+    padding: 80px 20px;
+  }
+
+  .flores-esquerda,
+  .flores-direita {
+    display: none;
+  }
+
+  .ornamento-medalhao {
+    width: 80%;
+    height: auto;
+    max-width: 500px;
+  }
+
+  .carta {
+    width: 95%;
+  }
+
+  .borda-interna {
+    padding: 30px;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .foto-casal {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .secao-evento {
+    padding: 60px 20px;
+  }
+
+  .flores-evento-esq,
+  .flores-evento-dir {
+    display: none;
+  }
+
+  .conteudo-evento {
+    max-width: 100%;
+    width: 90%;
+  }
+
+  .titulo-evento {
+    font-size: 32px;
+  }
+
+  .nomes-evento {
+    font-size: 42px;
+  }
+
+  .ornamento-titulo {
+    width: 80%;
+    height: auto;
+    max-width: 400px;
+  }
+
+  .info-evento {
+    font-size: 18px;
+    gap: 12px;
+  }
+
+  .linha-info {
+    font-size: 16px;
+  }
+
+  .mensagem-final {
+    font-size: 18px;
+  }
+
+  .botoes-evento {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .botao-img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    height: 75px;
+    padding: 0 15px;
+  }
+
+  .logo {
+    height: 38px;
+    width: 41px;
+  }
+
+  .logo-text {
+    font-size: 15px;
+  }
+
+  .secao-carta {
+    margin-top: 75px;
+    padding: 70px 15px;
+  }
+
+  .borda-externa {
+    border: 2px solid #B8A660;
+    padding: 12px;
+  }
+
+  .borda-interna {
+    padding: 25px;
+    font-size: 15px;
+    border: 1px solid #86732A;
+  }
+
+  .secao-foto {
+    height: 400px;
+  }
+
+  .foto-casal {
+    height: 100%;
+  }
+
+  .secao-evento {
+    padding: 50px 15px;
+  }
+
+  .conteudo-evento {
+    width: 95%;
+  }
+
+  .titulo-evento {
+    font-size: 28px;
+  }
+
+  .nomes-evento {
+    font-size: 36px;
+  }
+
+  .info-evento {
+    font-size: 14px;
+    gap: 10px;
+  }
+
+  .linha-info {
+    font-size: 13px;
+  }
+
+  .linha-info img {
+    width: 30px;
+    height: 26px;
+  }
+
+  .mensagem-final {
+    font-size: 14px;
+  }
+
+  .botoes-evento {
+    gap: 15px;
+  }
+
+  .botao-img {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0 12px;
+    height: 70px;
+  }
+
+  .logo {
+    height: 35px;
+    width: 37px;
+  }
+
+  .logo-text {
+    font-size: 13px;
+  }
+
+  .menu {
+    top: 70px;
+    max-height: 300px;
+  }
+
+  .menu a {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+
+  .secao-carta {
+    margin-top: 70px;
+    padding: 60px 12px;
+  }
+
+  .borda-externa {
+    border: 2px solid #B8A660;
+    padding: 10px;
+  }
+
+  .borda-interna {
+    padding: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .secao-foto {
+    height: 350px;
+  }
+
+  .secao-evento {
+    padding: 40px 12px;
+  }
+
+  .ornamento-titulo {
+    width: 85%;
+    height: auto;
+  }
+
+  .titulo-evento {
+    font-size: 24px;
+  }
+
+  .nomes-evento {
+    font-size: 30px;
+  }
+
+  .info-evento {
+    font-size: 12px;
+    gap: 8px;
+    margin-top: 25px;
+  }
+
+  .linha-info {
+    font-size: 12px;
+    gap: 10px;
+  }
+
+  .linha-info img {
+    width: 28px;
+    height: 24px;
+  }
+
+  .divisor-ornamento {
+    width: 80%;
+    margin: 25px auto;
+  }
+
+  .mensagem-final {
+    font-size: 13px;
+    max-width: 100%;
+  }
+
+  .botoes-evento {
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+  }
+
+  .botao-img {
+    width: 100%;
+    max-width: none;
+    height: auto;
+  }
+}
+
+@media (max-width: 380px) {
+  .header {
+    height: 65px;
+    padding: 0 10px;
+  }
+
+  .logo {
+    height: 32px;
+    width: 34px;
+  }
+
+  .logo-text {
+    font-size: 12px;
+  }
+
+  .secao-carta {
+    padding: 50px 10px;
+  }
+
+  .carta {
+    width: 100%;
+  }
+
+  .borda-externa {
+    padding: 8px;
+  }
+
+  .borda-interna {
+    padding: 18px;
+    font-size: 13px;
+  }
+
+  .secao-foto {
+    height: 300px;
+  }
+
+  .secao-evento {
+    padding: 35px 10px;
+  }
+
+  .conteudo-evento {
+    width: 100%;
+  }
+
+  .titulo-evento {
+    font-size: 22px;
+  }
+
+  .nomes-evento {
+    font-size: 26px;
+  }
+
+  .info-evento {
+    font-size: 11px;
+  }
+
+  .linha-info {
+    font-size: 11px;
+  }
+
+  .linha-info img {
+    width: 25px;
+    height: 22px;
+  }
+
+  .mensagem-final {
+    font-size: 12px;
+  }
+
+  .botoes-evento {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 320px) {
+  .header {
+    height: 60px;
+    padding: 0 8px;
+  }
+
+  .logo {
+    height: 30px;
+    width: 32px;
+  }
+
+  .logo-text {
+    font-size: 11px;
+  }
+
+  .secao-carta {
+    padding: 40px 8px;
+  }
+
+  .borda-interna {
+    padding: 15px;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .secao-foto {
+    height: 250px;
+  }
+
+  .secao-evento {
+    padding: 30px 8px;
+  }
+
+  .titulo-evento {
+    font-size: 20px;
+  }
+
+  .nomes-evento {
+    font-size: 24px;
+  }
+
+  .ornamento-titulo {
+    width: 90%;
+  }
+
+  .info-evento {
+    font-size: 10px;
+    gap: 6px;
+  }
+
+  .linha-info {
+    font-size: 10px;
+    gap: 8px;
+  }
+
+  .linha-info img {
+    width: 22px;
+    height: 20px;
+  }
+
+  .divisor-ornamento {
+    margin: 20px auto;
+  }
+
+  .mensagem-final {
+    font-size: 11px;
+  }
+
+  .botoes-evento {
+    gap: 10px;
+    margin-top: 20px;
+  }
 }

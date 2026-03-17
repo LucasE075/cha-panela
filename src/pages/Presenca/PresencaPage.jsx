@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGuest } from '@/context';
 import { useSupabase } from '@/hooks';
@@ -15,6 +15,10 @@ export default function PresencaPage() {
   const { updateGuest, loading } = useSupabase();
   const [respondendo, setRespondendo] = useState(false);
   const [menuAberto, setMenuAberto] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handlePresenca = async (confirmado) => {
     if (!guest?.id) {
@@ -61,10 +65,12 @@ export default function PresencaPage() {
     <div className="presenca-page">
       {/* HEADER */}
       <header className="presenca-header">
-        <div className="presenca-logo-area">
-          <img src={logo} alt="logo" className="presenca-logo" />
-          <p className="presenca-logo-text">Estella & Lucas</p>
-        </div>
+        <Link to="/introducao" style={{textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', flexShrink: 0}}>
+          <div className="presenca-logo-area">
+            <img src={logo} alt="logo" className="presenca-logo" />
+            <p className="presenca-logo-text">Estella & Lucas</p>
+          </div>
+        </Link>
 
         <button 
           className={`presenca-menu-toggle ${menuAberto ? 'active' : ''}`}

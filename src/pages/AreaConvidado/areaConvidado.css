@@ -453,6 +453,111 @@
   cursor: not-allowed;
 }
 
+/* Botão Confirmar - tamanho reduzido */
+.btn-presente.btn-confirmar {
+  min-height: 50px;
+}
+
+.btn-presente.btn-confirmar img {
+  height: 50px;
+}
+
+/* Botão Remover - com X vermelho */
+.btn-presente.btn-remover {
+  background: #f5f5f5;
+  border: 2px solid #e74c3c;
+  border-radius: 8px;
+  min-height: auto;
+  padding: 8px 12px;
+  gap: 8px;
+  font-family: 'Playfair Display', serif;
+}
+
+.btn-remover-text {
+  color: #e74c3c;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.btn-presente.btn-remover:hover:not(:disabled) {
+  background: #ffe6e6;
+  transform: scale(1.05);
+}
+
+.btn-presente.btn-remover:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+/* Botão Pix/QRcode - estilo texto */
+.btn-presente.btn-pix {
+  background: linear-gradient(135deg, #b8a660 0%, #9d8f52 100%);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 16px;
+  min-height: auto;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.5px;
+}
+
+.btn-presente.btn-pix:hover:not(:disabled) {
+  transform: scale(1.08);
+}
+
+.btn-presente.btn-pix:active:not(:disabled) {
+  transform: scale(0.92);
+}
+
+/* Detalhes dos presentes confirmados */
+.detalhe-cor {
+  font-size: 14px;
+  color: #6b6375;
+  margin: 8px 0;
+}
+
+.detalhe-descricao {
+  font-size: 14px;
+  color: #6b6375;
+  line-height: 1.5;
+  margin: 8px 0;
+}
+
+.detalhe-links {
+  margin: 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.links-label {
+  font-size: 13px;
+  color: #3d3424;
+  font-weight: 700;
+  display: block;
+}
+
+.links-list {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.links-list a {
+  font-size: 12px;
+  color: #86732A;
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.links-list a:hover {
+  border-bottom: 1px solid #86732A;
+}
+
 /* ========================= MEDIA QUERIES TABLET ========================= */
 @media (max-width: 1024px) {
   .area-main-container {
@@ -493,6 +598,7 @@
     top: 80px;
     left: 0;
     right: 0;
+    display: flex;
     flex-direction: column;
     background: rgba(184, 166, 96, 0.95);
     padding: 0;
@@ -1132,6 +1238,17 @@
 }
 
 /* ========================= MEDIA QUERIES ========================= */
+@media (max-width: 1024px) {
+  .area-header {
+    padding: 0 30px;
+  }
+
+  .status-card,
+  .presentes-section {
+    max-width: 95%;
+  }
+}
+
 @media (max-width: 768px) {
   .area-header {
     padding: 0 20px;
@@ -1156,6 +1273,7 @@
     top: 80px;
     left: 0;
     right: 0;
+    display: flex;
     flex-direction: column;
     background: rgba(184, 166, 96, 0.95);
     padding: 0;
@@ -1174,7 +1292,7 @@
 
   .area-menu a {
     padding: 12px 20px;
-    font-size: 18px;
+    font-size: 16px;
     white-space: normal;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     display: block;
@@ -1186,13 +1304,37 @@
 
   .area-container {
     margin-top: 80px;
-    padding: 30px 15px 60px;
+    padding: 25px 15px 40px;
+  }
+
+  .status-card {
+    padding: 25px;
+    margin-bottom: 20px;
+  }
+
+  .status-card h2 {
+    font-size: 24px;
+  }
+
+  .status-badge {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .presentes-section {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .presentes-section h2 {
+    font-size: 22px;
   }
 
   .presente-item {
     grid-template-columns: 100px 1fr auto;
     gap: 15px;
     padding: 15px;
+    border-radius: 8px;
   }
 
   .presente-imagem-container {
@@ -1208,19 +1350,101 @@
     font-size: 13px;
   }
 
+  .presente-preco {
+    font-size: 18px;
+  }
+
   .area-confirmar-section {
     flex-direction: column;
     text-align: center;
+    padding: 20px;
   }
 
   .confirmar-texto {
     font-size: 14px;
   }
+
+  .checkmark {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .area-header {
+    height: 75px;
+    padding: 0 15px;
+  }
+
+  .area-logo {
+    height: 38px;
+    width: 41px;
+  }
+
+  .area-logo-text {
+    font-size: 15px;
+  }
+
+  .area-container {
+    margin-top: 75px;
+    padding: 20px 12px 35px;
+  }
+
+  .status-card {
+    padding: 20px;
+    margin-bottom: 18px;
+  }
+
+  .status-card h2 {
+    font-size: 20px;
+  }
+
+  .status-mensagem {
+    font-size: 13px;
+  }
+
+  .presentes-section {
+    padding: 15px;
+  }
+
+  .presentes-section h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+
+  .presente-item {
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .presente-imagem-container {
+    width: 90px;
+    height: 90px;
+    border-radius: 6px;
+  }
+
+  .presente-details h3 {
+    font-size: 15px;
+    line-height: 1.2;
+  }
+
+  .presente-descricao {
+    font-size: 12px;
+  }
+
+  .presente-preco {
+    font-size: 16px;
+  }
+
+  .checkbox-container {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 @media (max-width: 480px) {
   .area-header {
-    padding: 0 15px;
+    padding: 0 12px;
     height: 70px;
   }
 
@@ -1230,39 +1454,64 @@
   }
 
   .area-logo-text {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .area-menu {
     top: 70px;
+    max-height: 350px;
+  }
+
+  .area-menu a {
+    font-size: 14px;
+    padding: 10px 15px;
   }
 
   .area-container {
     margin-top: 70px;
-    padding: 20px 10px 60px;
+    padding: 15px 10px 30px;
   }
 
   .status-card {
-    padding: 20px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
   }
 
   .status-card h2 {
-    font-size: 22px;
-    margin-bottom: 15px;
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .status-badge {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .status-mensagem {
+    font-size: 12px;
   }
 
   .presentes-section {
-    padding: 20px;
+    padding: 12px;
+    margin-bottom: 15px;
   }
 
   .presentes-section h2 {
-    font-size: 22px;
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .presentes-list {
+    gap: 10px;
   }
 
   .presente-item {
-    grid-template-columns: 80px 1fr auto;
-    gap: 12px;
-    padding: 12px;
+    grid-template-columns: 80px 1fr 40px;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    align-items: flex-start;
   }
 
   .presente-imagem-container {
@@ -1271,19 +1520,226 @@
   }
 
   .presente-details h3 {
-    font-size: 14px;
+    font-size: 13px;
+    line-height: 1.1;
   }
 
   .presente-descricao {
-    font-size: 12px;
+    font-size: 11px;
+  }
+
+  .presente-preco {
+    font-size: 14px;
+  }
+
+  .badge-confirmed {
+    font-size: 9px;
+    padding: 4px 8px;
+  }
+
+  .checkbox-container {
+    width: 18px;
+    height: 18px;
   }
 
   .checkmark {
-    width: 28px;
-    height: 28px;
+    width: 18px;
+    height: 18px;
   }
 
-  .btn-confirmar-grupo img {
-    width: 80px;
+  .area-confirmar-section {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .confirmar-texto {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .confirmar-texto strong {
+    font-size: 13px;
+  }
+
+  .link-presentes {
+    font-size: 12px;
+  }
+
+  .presentes-empty p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 380px) {
+  .area-header {
+    height: 65px;
+    padding: 0 10px;
+  }
+
+  .area-logo {
+    height: 32px;
+    width: 34px;
+  }
+
+  .area-logo-text {
+    font-size: 12px;
+  }
+
+  .area-container {
+    margin-top: 65px;
+    padding: 12px 8px 25px;
+  }
+
+  .status-card {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+
+  .status-card h2 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .status-info {
+    gap: 8px;
+  }
+
+  .status-badge {
+    font-size: 11px;
+  }
+
+  .presentes-section {
+    padding: 10px;
+  }
+
+  .presentes-section h2 {
+    font-size: 14px;
+  }
+
+  .presente-item {
+    grid-template-columns: 70px 1fr 35px;
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .presente-imagem-container {
+    width: 70px;
+    height: 70px;
+  }
+
+  .presente-details h3 {
+    font-size: 12px;
+  }
+
+  .presente-descricao {
+    font-size: 10px;
+  }
+
+  .presente-preco {
+    font-size: 13px;
+  }
+
+  .checkbox-container {
+    width: 16px;
+    height: 16px;
+  }
+
+  .checkmark {
+    width: 16px;
+    height: 16px;
+  }
+
+  .area-confirmar-section {
+    padding: 10px;
+  }
+
+  .confirmar-texto {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 320px) {
+  .area-header {
+    height: 60px;
+    padding: 0 8px;
+  }
+
+  .area-logo {
+    height: 30px;
+    width: 32px;
+  }
+
+  .area-logo-text {
+    font-size: 11px;
+  }
+
+  .area-menu {
+    top: 60px;
+  }
+
+  .area-container {
+    margin-top: 60px;
+    padding: 10px 6px 20px;
+    gap: 12px;
+  }
+
+  .status-card {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .status-card h2 {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .status-badge {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  .presentes-section {
+    padding: 8px;
+  }
+
+  .presentes-section h2 {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+
+  .presente-item {
+    grid-template-columns: 60px 1fr 30px;
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .presente-imagem-container {
+    width: 60px;
+    height: 60px;
+  }
+
+  .presente-details h3 {
+    font-size: 11px;
+  }
+
+  .presente-descricao {
+    font-size: 9px;
+  }
+
+  .presente-preco {
+    font-size: 12px;
+  }
+
+  .checkbox-container {
+    width: 15px;
+    height: 15px;
+  }
+
+  .confirmar-texto {
+    font-size: 10px;
+  }
+
+  .presentes-empty p {
+    font-size: 11px;
   }
 }

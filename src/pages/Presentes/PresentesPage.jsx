@@ -18,6 +18,25 @@ export default function PresentesPage() {
   const [salvando, setSalvando] = useState(false);
   const [menuAberto, setMenuAberto] = useState(false);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // Função para validar e formatar URL
+  const formatarURL = (url) => {
+    if (!url || typeof url !== 'string') return null;
+    
+    const urlLimpa = url.trim();
+    if (!urlLimpa) return null;
+    
+    // Se não começa com http/https, adiciona https://
+    if (!urlLimpa.match(/^https?:\/\//)) {
+      return `https://${urlLimpa}`;
+    }
+    
+    return urlLimpa;
+  };
+
   // Carregar presentes
   const carregarPresentes = useCallback(async () => {
     setLoading(true);
@@ -44,11 +63,22 @@ export default function PresentesPage() {
         `);
 
       console.log('Presentes carregados:', data);
+      if (error) console.error('Erro na query:', error);
+      
       const sortedData = (data || []).sort((a, b) => {
-        if (a.id === 'f85fadf5-33d9-4a29-bbde-b9d9a17b49a8') return -1;
-        if (b.id === 'f85fadf5-33d9-4a29-bbde-b9d9a17b49a8') return 1;
-        return Math.random() - 0.5; // embaralha os demais
+        return a.nome.localeCompare(b.nome, 'pt-BR');
       });
+      
+      // Debug: mostrar campos de links dos primeiros presentes
+      console.log('Primeiros presentes com links:', sortedData.slice(0, 3).map(p => ({
+        id: p.id,
+        nome: p.nome,
+        tipo: p.tipo,
+        link1: p.link1,
+        link2: p.link2,
+        link3: p.link3
+      })));
+      
       setPresentes(sortedData);
 
       // Carregar seleções do convidado atual
@@ -59,9 +89,12 @@ export default function PresentesPage() {
           .eq('convidado_id', guest.id)
           .eq('status', 'selecionado');
 
-        setSelecionados(
-          minhasSeleções?.map((s) => s.presente_id) || []
-        );
+        // Apenas atualizar se houver dados (evita limpar o estado local se a replicação estiver lenta)
+        if (minhasSeleções && minhasSeleções.length > 0) {
+          setSelecionados(
+            minhasSeleções.map((s) => s.presente_id)
+          );
+        }
       }
     } catch (erro) {
       console.error('Erro ao carregar presentes:', erro);
@@ -75,8 +108,14 @@ export default function PresentesPage() {
   }, [carregarPresentes]);
 
   // Verificar se presente está indisponível
+  // Apenas presentes do tipo 'fisico' são únicos
   const estáIndisponível = useCallback(
     (presente) => {
+      // Pix livre e pix fechado podem ser comprados por múltiplos usuários
+      if (presente.tipo !== 'fisico') {
+        return false;
+      }
+
       const selecoes = Array.isArray(presente.selecoes) ? presente.selecoes : (presente.selecoes ? [presente.selecoes] : []);
       if (selecoes.length === 0) return false;
 
@@ -106,49 +145,74 @@ export default function PresentesPage() {
       return;
     }
 
-    try {
-      const jáSelecionado = selecionados.includes(presenteId);
+    const presente = presentes.find(p => p.id === presenteId);
+    
+    // Guard: verificar se o presente existe
+    if (!presente) {
+      console.error('Presente não encontrado:', presenteId);
+      alert('Erro: presente não encontrado');
+      return;
+    }
 
+    const jáSelecionado = selecionados.includes(presenteId);
+    
+    console.log('Toggle seleção:', {
+      presenteId,
+      jáSelecionado,
+      selecionadosAntes: selecionados.length,
+      tipo: presente.tipo
+    });
+
+    try {
       if (jáSelecionado) {
-        // Remover seleção
+        // Remover seleção - atualizar estado ANTES do banco
+        setSelecionados((prev) => {
+          const novo = prev.filter((id) => id !== presenteId);
+          console.log('Removendo, novo estado:', novo);
+          return novo;
+        });
+
         await supabase
           .from('selecoes')
           .delete()
           .eq('presente_id', presenteId)
           .eq('convidado_id', guest.id);
-
-        setSelecionados((prev) =>
-          prev.filter((id) => id !== presenteId)
-        );
       } else {
-        // Verificar disponibilidade
-        const { data: selecaoExistente } = await supabase
-          .from('selecoes')
-          .select('id, convidado_id, status')
-          .eq('presente_id', presenteId)
-          .maybeSingle();
+        // Verificar disponibilidade apenas para presentes 'fisico'
+        if (presente.tipo === 'fisico') {
+          const { data: selecaoExistente } = await supabase
+            .from('selecoes')
+            .select('id, convidado_id, status')
+            .eq('presente_id', presenteId)
+            .maybeSingle();
 
-        if (selecaoExistente) {
-          alert('Este presente já foi selecionado por outro convidado.');
-          return;
+          if (selecaoExistente) {
+            alert('Este presente já foi selecionado por outro convidado.');
+            return;
+          }
         }
 
-        // Criar nova seleção
+        // Adicionar seleção - atualizar estado ANTES do banco para feedback imediato
+        setSelecionados((prev) => {
+          const novo = [...prev, presenteId];
+          console.log('Adicionando, novo estado:', novo);
+          return novo;
+        });
+
         await supabase.from('selecoes').insert({
           presente_id: presenteId,
           convidado_id: guest.id,
           status: 'selecionado',
           eh_presente_fisico: true,
         });
-
-        setSelecionados((prev) => [...prev, presenteId]);
       }
-
-      // Recarregar para atualizar estado
-      await carregarPresentes();
     } catch (erro) {
-      console.error('Erro ao selecionar presente:', erro);
-      alert('Erro ao selecionar presente');
+      console.error('Erro ao selecionar presente:', erro, erro.message);
+      alert('Erro ao selecionar presente: ' + erro.message);
+      // Se houver erro, reverter o estado apenas se foi adição
+      if (!jáSelecionado) {
+        setSelecionados((prev) => prev.filter((id) => id !== presenteId));
+      }
     }
   };
 
@@ -186,10 +250,12 @@ export default function PresentesPage() {
     <div className="presentes-page">
       {/* HEADER */}
       <header className="presenca-header">
-        <div className="presenca-logo-area">
-          <img src={logo} alt="logo" className="presenca-logo" />
-          <p className="presenca-logo-text">Estella & Lucas</p>
-        </div>
+        <Link to="/introducao" style={{textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', flexShrink: 0}}>
+          <div className="presenca-logo-area">
+            <img src={logo} alt="logo" className="presenca-logo" />
+            <p className="presenca-logo-text">Estella & Lucas</p>
+          </div>
+        </Link>
 
         <button 
           className={`presenca-menu-toggle ${menuAberto ? 'active' : ''}`}
@@ -257,15 +323,15 @@ export default function PresentesPage() {
                         </p>
                       )}
 
-                      {(presente.link1 || presente.link2 || presente.link3) && (
+                      {(formatarURL(presente.link1) || formatarURL(presente.link2) || formatarURL(presente.link3)) && (
                         <div className="presente-links">
                           <span className="links-label">
                             Link para se inspirar:
                           </span>
                           <div className="links-list">
-                            {presente.link1 && (
+                            {formatarURL(presente.link1) && (
                               <a
-                                href={presente.link1}
+                                href={formatarURL(presente.link1)}
                                 target="_blank"
                                 rel="noreferrer"
                                 onClick={(e) => e.stopPropagation()}
@@ -273,9 +339,9 @@ export default function PresentesPage() {
                                 Sugestão 1
                               </a>
                             )}
-                            {presente.link2 && (
+                            {formatarURL(presente.link2) && (
                               <a
-                                href={presente.link2}
+                                href={formatarURL(presente.link2)}
                                 target="_blank"
                                 rel="noreferrer"
                                 onClick={(e) => e.stopPropagation()}
@@ -283,9 +349,9 @@ export default function PresentesPage() {
                                 Sugestão 2
                               </a>
                             )}
-                            {presente.link3 && (
+                            {formatarURL(presente.link3) && (
                               <a
-                                href={presente.link3}
+                                href={formatarURL(presente.link3)}
                                 target="_blank"
                                 rel="noreferrer"
                                 onClick={(e) => e.stopPropagation()}

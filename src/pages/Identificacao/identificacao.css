@@ -164,15 +164,371 @@
 /* RESPONSIVO */
 /* ============================= */
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
+  .convite {
+    width: 98%;
+    padding: 40px 30px;
+  }
+
+  .casal {
+    width: 90%;
+    height: auto;
+    max-width: 600px;
+  }
+
+  .titulo {
+    font-size: 36px;
+  }
+
+  .nomes {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pagina {
+    padding: 30px 20px;
+  }
+
+  .convite {
+    width: 100%;
+    max-width: 100%;
+    padding: 35px 25px;
+    border: 3px solid #C0B070;
+  }
+
+  .logo {
+    width: 110px;
+    height: 108px;
+    margin-bottom: 20px;
+  }
+
+  .casal {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .titulo {
+    font-size: 32px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .nomes {
+    font-size: 48px;
+    margin-bottom: 30px;
+  }
 
   .formulario {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .campo {
+    width: 100%;
   }
 
   .campo input {
-    width: 260px;
+    width: 100%;
+    height: 40px;
+    font-size: 13px;
   }
 
+  .campo label {
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+  .botao img {
+    width: 90px;
+  }
+
+  .erro {
+    font-size: 13px;
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 640px) {
+  .pagina {
+    padding: 25px 15px;
+    min-height: calc(100vh - 50px);
+  }
+
+  .convite {
+    padding: 30px 20px;
+    background-size: 16px 16px;
+  }
+
+  .logo {
+    width: 100px;
+    height: 98px;
+    margin-bottom: 18px;
+  }
+
+  .casal {
+    margin-bottom: 18px;
+  }
+
+  .titulo {
+    font-size: 28px;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+
+  .nomes {
+    font-size: 42px;
+    margin-bottom: 25px;
+  }
+
+  .campo label {
+    font-size: 12px;
+  }
+
+  .campo input {
+    width: 100%;
+    height: 38px;
+    font-size: 12px;
+  }
+
+  .botao img {
+    width: 85px;
+  }
+
+  .erro {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pagina {
+    padding: 20px 12px;
+    min-height: calc(100vh - 40px);
+  }
+
+  .convite {
+    padding: 25px 18px;
+    border: 2px solid #C0B070;
+    background-size: 15px 15px;
+  }
+
+  .logo {
+    width: 90px;
+    height: 88px;
+    margin-bottom: 15px;
+  }
+
+  .casal {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+  }
+
+  .titulo {
+    font-size: 24px;
+    letter-spacing: 0px;
+    margin-bottom: 5px;
+  }
+
+  .nomes {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  .formulario {
+    gap: 12px;
+  }
+
+  .campo label {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  .campo input {
+    width: 100%;
+    height: 36px;
+    font-size: 11px;
+    padding: 6px;
+  }
+
+  .botao {
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  .botao img {
+    width: 80px;
+  }
+
+  .erro {
+    font-size: 11px;
+    margin-top: 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .pagina {
+    padding: 18px 10px;
+  }
+
+  .convite {
+    padding: 22px 15px;
+    border: 2px solid #C0B070;
+    background-size: 14px 14px;
+  }
+
+  .logo {
+    width: 85px;
+    height: 83px;
+    margin-bottom: 12px;
+  }
+
+  .casal {
+    margin-bottom: 12px;
+  }
+
+  .titulo {
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+
+  .nomes {
+    font-size: 32px;
+    margin-bottom: 18px;
+  }
+
+  .campo label {
+    font-size: 10px;
+  }
+
+  .campo input {
+    width: 100%;
+    height: 34px;
+    font-size: 10px;
+  }
+
+  .botao img {
+    width: 75px;
+  }
+
+  .erro {
+    font-size: 10px;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 320px) {
+  .pagina {
+    padding: 15px 8px;
+    min-height: 100vh;
+  }
+
+  .convite {
+    padding: 20px 12px;
+    border: 2px solid #C0B070;
+    background-size: 12px 12px;
+  }
+
+  .logo {
+    width: 80px;
+    height: 78px;
+    margin-bottom: 10px;
+  }
+
+  .casal {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .titulo {
+    font-size: 20px;
+    margin-bottom: 3px;
+  }
+
+  .nomes {
+    font-size: 28px;
+    margin-bottom: 15px;
+  }
+
+  .formulario {
+    gap: 10px;
+  }
+
+  .campo label {
+    font-size: 9px;
+    margin-bottom: 3px;
+  }
+
+  .campo input {
+    width: 100%;
+    height: 32px;
+    font-size: 9px;
+    padding: 4px;
+  }
+
+  .botao img {
+    width: 70px;
+  }
+
+  .erro {
+    font-size: 9px;
+    margin-top: 10px;
+  }
+}
+
+/* ============================= */
+/* BOTÃO DE MÚSICA */
+/* ============================= */
+
+.botao-audio-identificacao {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #B8A660;
+  border: 2px solid #8B7A4A;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 900;
+}
+
+.botao-audio-identificacao:hover {
+  transform: scale(1.1);
+  background: #9B8A50;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.botao-audio-identificacao:active {
+  transform: scale(0.95);
+}
+
+@media (max-width: 480px) {
+  .botao-audio-identificacao {
+    width: 55px;
+    height: 55px;
+    bottom: 15px;
+    right: 15px;
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 320px) {
+  .botao-audio-identificacao {
+    width: 50px;
+    height: 50px;
+    bottom: 12px;
+    right: 12px;
+    font-size: 20px;
+  }
 }

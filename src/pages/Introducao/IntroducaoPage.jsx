@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import logo from "@/assets/images/header-logo.png";
@@ -23,53 +23,47 @@ import divisorOrnamento from "@/assets/images/ornament-divider.png";
 import botaoConfirmar from "@/assets/images/btn-confirmar.png";
 import botaoPresentes from "@/assets/images/btn-presentes.png";
 
-import musica from "@/assets/audio/musica.mp3";
-
 import "./introducao.css";
 
 export default function IntroducaoPage() {
 
-  const audioRef = useRef(null);
-  const [tocando, setTocando] = useState(false);
   const [menuAberto, setMenuAberto] = useState(false);
 
-  function toggleMusica() {
-    if (tocando) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play();
-    }
-    setTocando(!tocando);
-  }
+  useEffect(() => {
+    // Scroll para o topo com pequeno delay para garantir que executa após render
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 0);
+  }, []);
 
   return (
     <div className="introducao-page">
 
-      <audio ref={audioRef} src={musica} />
-
       {/* HEADER */}
-            <header className="presenca-header">
-              <div className="presenca-logo-area">
-                <img src={logo} alt="logo" className="presenca-logo" />
-                <p className="presenca-logo-text">Estella & Lucas</p>
-              </div>
-      
-              <button 
-                className={`presenca-menu-toggle ${menuAberto ? 'active' : ''}`}
-                onClick={() => setMenuAberto(!menuAberto)}
-                aria-label="Menu"
-              >
-                <span></span>
-                <span></span>
-                <span></span>
-              </button>
-      
-              <nav className={`presenca-menu ${menuAberto ? 'open' : ''}`}>
-                <Link to="/confirmacao" onClick={() => setMenuAberto(false)}>Confirmar presença</Link>
-                <Link to="/presentes" onClick={() => setMenuAberto(false)}>Lista de presentes</Link>
-                <Link to="/area-convidado" onClick={() => setMenuAberto(false)}>Área do convidado</Link>
-              </nav>
-            </header>
+      <header className="presenca-header">
+        <Link to="/introducao" style={{textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', flexShrink: 0}}>
+          <div className="presenca-logo-area">
+            <img src={logo} alt="logo" className="presenca-logo" />
+            <p className="presenca-logo-text">Estella & Lucas</p>
+          </div>
+        </Link>
+
+        <button 
+          className={`presenca-menu-toggle ${menuAberto ? 'active' : ''}`}
+          onClick={() => setMenuAberto(!menuAberto)}
+          aria-label="Menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav className={`presenca-menu ${menuAberto ? 'open' : ''}`}>
+          <Link to="/confirmacao" onClick={() => setMenuAberto(false)}>Confirmar presença</Link>
+          <Link to="/presentes" onClick={() => setMenuAberto(false)}>Lista de presentes</Link>
+          <Link to="/area-convidado" onClick={() => setMenuAberto(false)}>Área do convidado</Link>
+        </nav>
+      </header>
 
       {/* SEÇÃO CARTA */}
       <section className="secao-carta">
@@ -98,10 +92,6 @@ export default function IntroducaoPage() {
             </div>
           </div>
         </div>
-
-        <button className="botao-audio" onClick={toggleMusica}>
-          🔊
-        </button>
 
       </section>
 

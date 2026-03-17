@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useGuest } from '@/context';
 
@@ -12,6 +12,10 @@ export default function AgradecimentoPresentePage() {
   const location = useLocation();
   const { guest } = useGuest();
   const [menuAberto, setMenuAberto] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Obter dados do presente do state
   const presente = location.state?.presente;
@@ -43,7 +47,7 @@ export default function AgradecimentoPresentePage() {
 
   const getMensagemDetalhes = () => {
     if (isFisico) {
-      return `Muito obrigada por escolher ${presente.nome}! 💝 Sua doação será essencial para deixar nosso Chá de Panela especial.`;
+      return `Muito obrigada por escolher ${presente.nome}! 💝 `;
     }
     if (tipoPresente === 'pix_fechado') {
       return `Obrigada pela sua contribuição! Use o QR Code abaixo para confirmar seu presente.`;
@@ -55,10 +59,12 @@ export default function AgradecimentoPresentePage() {
     <div className="agradecimento-presente-page">
       {/* HEADER */}
       <header className="area-header">
-        <div className="area-logo-area">
-          <img src={logo} alt="logo" className="area-logo" />
-          <p className="area-logo-text">Estella & Lucas</p>
-        </div>
+        <Link to="/introducao" style={{textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', flexShrink: 0}}>
+          <div className="area-logo-area">
+            <img src={logo} alt="logo" className="area-logo" />
+            <p className="area-logo-text">Estella & Lucas</p>
+          </div>
+        </Link>
 
         <button 
           className={`area-menu-toggle ${menuAberto ? 'active' : ''}`}

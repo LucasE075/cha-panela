@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useGuest } from '@/context';
 
@@ -11,6 +11,10 @@ export default function AgradecimentoPage() {
   const { guest } = useGuest();
   const [menuAberto, setMenuAberto] = useState(false);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Determinar a mensagem com base na presença
   const mensagem =
     guest?.confirmou_presenca === true
@@ -21,10 +25,12 @@ export default function AgradecimentoPage() {
     <div className="agradecimento-page">
       {/* HEADER */}
       <header className="agradecimento-header">
-        <div className="agradecimento-logo-area">
-          <img src={logo} alt="logo" className="agradecimento-logo" />
-          <p className="agradecimento-logo-text">Estella & Lucas</p>
-        </div>
+        <Link to="/introducao" style={{textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', flexShrink: 0}}>
+          <div className="agradecimento-logo-area">
+            <img src={logo} alt="logo" className="agradecimento-logo" />
+            <p className="agradecimento-logo-text">Estella & Lucas</p>
+          </div>
+        </Link>
 
         <button
           className={`agradecimento-menu-toggle ${menuAberto ? 'active' : ''}`}

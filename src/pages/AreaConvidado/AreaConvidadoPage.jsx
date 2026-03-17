@@ -7,7 +7,6 @@ import logo from "@/assets/images/header-logo.png";
 import ornamentoDivisor from "@/assets/images/ornament-divider.png";
 import btnConfirmar from "@/assets/images/btn-confirmar.png";
 import btnConfirmarPresente from "@/assets/images/btn-confirmarPresente.png";
-import btnPresentes from "@/assets/images/btn-presentes.png";
 
 import "./areaConvidado.css";
 
@@ -19,6 +18,10 @@ export default function AreaConvidadoPage() {
   const [loading, setLoading] = useState(true);
   const [menuAberto, setMenuAberto] = useState(false);
   const [confirmando, setConfirmando] = useState(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Determinar status e cor/mensagem
   const getStatusInfo = () => {
@@ -112,6 +115,28 @@ export default function AreaConvidadoPage() {
     }
   };
 
+  // Remover uma seleção de presente
+  const removerPresente = async (selecaoId) => {
+    if (!guest?.id) return;
+
+    try {
+      setConfirmando(selecaoId);
+
+      await supabase
+        .from("selecoes")
+        .delete()
+        .eq("id", selecaoId);
+
+      // Recarregar presentes
+      await carregarPresentes();
+    } catch (erro) {
+      console.error("Erro ao remover presente:", erro);
+      alert("Erro ao remover presente");
+    } finally {
+      setConfirmando(null);
+    }
+  };
+
   // Confirmar presença (se pendente)
   const confirmarPresenca = async () => {
     try {
@@ -146,10 +171,12 @@ export default function AreaConvidadoPage() {
     <div className="area-convidado-page">
       {/* HEADER */}
       <header className="area-header">
-        <div className="area-logo-area">
-          <img src={logo} alt="logo" className="area-logo" />
-          <p className="area-logo-text">Estella & Lucas</p>
-        </div>
+        <Link to="/introducao" style={{textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', flexShrink: 0}}>
+          <div className="area-logo-area">
+            <img src={logo} alt="logo" className="area-logo" />
+            <p className="area-logo-text">Estella & Lucas</p>
+          </div>
+        </Link>
 
         <button 
           className={`area-menu-toggle ${menuAberto ? 'active' : ''}`}
@@ -228,6 +255,17 @@ export default function AreaConvidadoPage() {
                   const presente = selecao.presentes;
                   const jáConfirmado = selecao.status === "confirmado";
 
+                  // Helper para formatar URL
+                  const formatarURL = (url) => {
+                    if (!url || typeof url !== 'string') return null;
+                    const urlLimpa = url.trim();
+                    if (!urlLimpa) return null;
+                    if (!urlLimpa.match(/^https?:\/\//)) {
+                      return `https://${urlLimpa}`;
+                    }
+                    return urlLimpa;
+                  };
+
                   return (
                     <div key={selecao.id} className="presente-item">
                       {/* COLUNA 1: IMAGEM */}
@@ -240,39 +278,95 @@ export default function AreaConvidadoPage() {
                       {/* COLUNA 2: DETALHES */}
                       <div className="presente-details">
                         <h3>{presente.nome}</h3>
-                        {presente.descricao && (
-                          <p>{presente.descricao}</p>
-                        )}
-                        {presente.preco && (
-                          <span className="presente-price">
-                            R$ {Number(presente.preco).toFixed(2)}
-                          </span>
-                        )}
-                        {jáConfirmado && (
-                          <span className="badge-confirmado">✓ Confirmado</span>
+                        
+                        {jáConfirmado ? (
+                          // PRESENTES CONFIRMADOS
+                          <>
+                            {presente.tipo === 'fisico' && (
+                              <>
+                                {presente.cor && (
+                                  <p className="detalhe-cor">
+                                    <strong>Cor:</strong> {presente.cor}
+                                  </p>
+                                )}
+                                {(formatarURL(presente.link1) || formatarURL(presente.link2) || formatarURL(presente.link3)) && (
+                                  <div className="detalhe-links">
+                                    <span className="links-label"><strong>Links:</strong></span>
+                                    <div className="links-list">
+                                      {formatarURL(presente.link1) && (
+                                        <a href={formatarURL(presente.link1)} target="_blank" rel="noreferrer">
+                                          Sugestão 1
+                                        </a>
+                                      )}
+                                      {formatarURL(presente.link2) && (
+                                        <a href={formatarURL(presente.link2)} target="_blank" rel="noreferrer">
+                                          Sugestão 2
+                                        </a>
+                                      )}
+                                      {formatarURL(presente.link3) && (
+                                        <a href={formatarURL(presente.link3)} target="_blank" rel="noreferrer">
+                                          Sugestão 3
+                                        </a>
+                                      )}
+                                    </div>
+                                  </div>
+                                )}
+                              </>
+                            )}
+                            {(presente.tipo === 'pix_livre' || presente.tipo === 'pix_fechado') && (
+                              <p className="detalhe-descricao">{presente.descricao}</p>
+                            )}
+                            <span className="badge-confirmado">✓ Confirmado</span>
+                          </>
+                        ) : (
+                          // PRESENTES SELECIONADOS
+                          <>
+                            {presente.descricao && (
+                              <p>{presente.descricao}</p>
+                            )}
+                            {presente.preco && (
+                              <span className="presente-price">
+                                R$ {Number(presente.preco).toFixed(2)}
+                              </span>
+                            )}
+                          </>
                         )}
                       </div>
 
                       {/* COLUNA 3: BOTÕES */}
                       <div className="presente-botoes">
-                        {!jáConfirmado && (
+                        {!jáConfirmado ? (
+                          // PRESENTES SELECIONADOS
+                          <>
+                            <button 
+                              className="btn-presente btn-confirmar"
+                              onClick={() => confirmarPresente(selecao.id, presente)}
+                              disabled={confirmando === selecao.id}
+                              title="Confirmar este presente"
+                            >
+                              <img src={btnConfirmarPresente} alt="Confirmar" />
+                            </button>
+                            <button 
+                              className="btn-presente btn-remover"
+                              onClick={() => removerPresente(selecao.id)}
+                              disabled={confirmando === selecao.id}
+                              title="Remover este presente"
+                            >
+                              <span className="btn-remover-text">✕ Remover</span>
+                            </button>
+                          </>
+                        ) : (
+                          // PRESENTES CONFIRMADOS
                           <button 
-                            className="btn-presente"
-                            onClick={() => confirmarPresente(selecao.id, presente)}
-                            disabled={confirmando === selecao.id}
-                            title="Confirmar este presente"
+                            className="btn-presente btn-pix"
+                            onClick={() => navigate("/agradecimento-presente", {
+                              state: { presente }
+                            })}
+                            title="Ver chave Pix/QRcode"
                           >
-                            <img src={btnConfirmarPresente} alt="Confirmar" />
+                            Chave Pix/QRcode
                           </button>
                         )}
-                        
-                        <button 
-                          className="btn-presente"
-                          onClick={() => navigate("/presentes")}
-                          title="Voltar à lista de presentes"
-                        >
-                          <img src={btnPresentes} alt="Presentes" />
-                        </button>
                       </div>
                     </div>
                   );

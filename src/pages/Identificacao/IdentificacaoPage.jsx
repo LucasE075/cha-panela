@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGuest } from "@/context";
 import { supabase } from "../../services/supabase/supabaseClient";
@@ -6,6 +6,7 @@ import { supabase } from "../../services/supabase/supabaseClient";
 import logo from "../../assets/images/logo.png";
 import casal from "../../assets/images/casal.png";
 import selo from "../../assets/images/selo.png";
+import musica from "../../assets/audio/musica.mp3";
 
 import "./identificacao.css";
 
@@ -15,9 +16,24 @@ export default function IdentificacaoPage() {
 
   const [nome, setNome] = useState("");
   const [celular, setCelular] = useState("");
-
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState("");
+
+  const audioRef = useRef(null);
+  const [tocando, setTocando] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  function toggleMusica() {
+    if (tocando) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
+    setTocando(!tocando);
+  }
 
   async function handleEntrar() {
     if (loading) return;
@@ -79,6 +95,12 @@ export default function IdentificacaoPage() {
 
   return (
     <div className="pagina">
+
+      <audio ref={audioRef} src={musica} />
+
+      <button className="botao-audio-identificacao" onClick={toggleMusica}>
+        🔊
+      </button>
 
       <div className="convite">
 
