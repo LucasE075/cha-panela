@@ -1,10 +1,10 @@
 import { useState, useCallback, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useGuest } from '@/context';
 import { useScrollToTop, useRequireGuest } from '@/hooks';
 import { supabase } from '@/services/supabase/supabaseClient';
+import Header from '@/components/Header';
 
-import logo from '@/assets/images/header-logo.png';
 import btnConfirmarPresente from "@/assets/images/btn-confirmarPresente.png";
 
 import './presentes.css';
@@ -17,7 +17,6 @@ export default function PresentesPage() {
   const [selecionados, setSelecionados] = useState([]);
   const [loading, setLoading] = useState(true);
   const [salvando, setSalvando] = useState(false);
-  const [menuAberto, setMenuAberto] = useState(false);
   useScrollToTop();
   useRequireGuest();
 
@@ -41,7 +40,7 @@ export default function PresentesPage() {
     setLoading(true);
 
     try {
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from('presentes')
         .select(`
           id,
@@ -60,27 +59,12 @@ export default function PresentesPage() {
             status
           )
         `);
-
-      console.log('Presentes carregados:', data);
-      if (error) console.error('Erro na query:', error);
       
-      const sortedData = (data || []).sort((a, b) => {
-        return a.nome.localeCompare(b.nome, 'pt-BR');
-      });
+      // IDs que devem aparecer primeiro
+      const idsFixos = ['f85fadf5-33d9-4a29-bbde-b9d9a17b49a8', 'b5df096c-f05b-4031-aaf6-1ba56b8a69e8'];
       
-      // Debug: mostrar campos de links dos primeiros presentes
-      console.log('Primeiros presentes com links:', sortedData.slice(0, 3).map(p => ({
-        id: p.id,
-        nome: p.nome,
-        tipo: p.tipo,
-        link1: p.link1,
-        link2: p.link2,
-        link3: p.link3
-      })));
-      
-      setPresentes(sortedData);
-
       // Carregar seleções do convidado atual
+      let minhasSelecionadas = [];
       if (guest?.id) {
         const { data: minhasSeleções } = await supabase
           .from('selecoes')
@@ -88,15 +72,47 @@ export default function PresentesPage() {
           .eq('convidado_id', guest.id)
           .eq('status', 'selecionado');
 
-        // Apenas atualizar se houver dados (evita limpar o estado local se a replicação estiver lenta)
         if (minhasSeleções && minhasSeleções.length > 0) {
-          setSelecionados(
-            minhasSeleções.map((s) => s.presente_id)
-          );
+          minhasSelecionadas = minhasSeleções.map((s) => s.presente_id);
         }
       }
-    } catch (erro) {
-      console.error('Erro ao carregar presentes:', erro);
+      
+      // Ordenar presentes seguindo a lógica:
+      // 1. Presentes fixos (pelos IDs)
+      // 2. Presentes selecionados pelo usuário (por ordem alfabética)
+      // 3. Demais presentes (por ordem alfabética)
+      const sortedData = (data || []).sort((a, b) => {
+        const aEhFixo = idsFixos.includes(a.id);
+        const bEhFixo = idsFixos.includes(b.id);
+        
+        const aEhSelecionado = minhasSelecionadas.includes(a.id);
+        const bEhSelecionado = minhasSelecionadas.includes(b.id);
+        
+        // Se ambos são fixos, manter a ordem dos IDs fixos
+        if (aEhFixo && bEhFixo) {
+          return idsFixos.indexOf(a.id) - idsFixos.indexOf(b.id);
+        }
+        
+        // Fixos vêm primeiro
+        if (aEhFixo && !bEhFixo) return -1;
+        if (!aEhFixo && bEhFixo) return 1;
+        
+        // Depois, selecionados pelo usuário
+        if (aEhSelecionado && !bEhSelecionado) return -1;
+        if (!aEhSelecionado && bEhSelecionado) return 1;
+        
+        // Por fim, ordem alfabética
+        return a.nome.localeCompare(b.nome, 'pt-BR');
+      });
+      
+      setPresentes(sortedData);
+
+      // Apenas atualizar se houver dados (evita limpar o estado local se a replicação estiver lenta)
+      if (minhasSelecionadas.length > 0) {
+        setSelecionados(minhasSelecionadas);
+      }
+    } catch {
+      // Erro ao carregar presentes
     } finally {
       setLoading(false);
     }
@@ -148,26 +164,17 @@ export default function PresentesPage() {
     
     // Guard: verificar se o presente existe
     if (!presente) {
-      console.error('Presente não encontrado:', presenteId);
       alert('Erro: presente não encontrado');
       return;
     }
 
     const jáSelecionado = selecionados.includes(presenteId);
-    
-    console.log('Toggle seleção:', {
-      presenteId,
-      jáSelecionado,
-      selecionadosAntes: selecionados.length,
-      tipo: presente.tipo
-    });
 
     try {
       if (jáSelecionado) {
         // Remover seleção - atualizar estado ANTES do banco
         setSelecionados((prev) => {
           const novo = prev.filter((id) => id !== presenteId);
-          console.log('Removendo, novo estado:', novo);
           return novo;
         });
 
@@ -194,7 +201,6 @@ export default function PresentesPage() {
         // Adicionar seleção - atualizar estado ANTES do banco para feedback imediato
         setSelecionados((prev) => {
           const novo = [...prev, presenteId];
-          console.log('Adicionando, novo estado:', novo);
           return novo;
         });
 
@@ -206,7 +212,6 @@ export default function PresentesPage() {
         });
       }
     } catch (erro) {
-      console.error('Erro ao selecionar presente:', erro, erro.message);
       alert('Erro ao selecionar presente: ' + erro.message);
       // Se houver erro, reverter o estado apenas se foi adição
       if (!jáSelecionado) {
@@ -228,8 +233,7 @@ export default function PresentesPage() {
       // Presentes já foram gravados como 'selecionado' ao clicar
       // Apenas redirecionar para Área do Convidado
       navigate('/area-convidado');
-    } catch (erro) {
-      console.error('Erro ao confirmar:', erro);
+    } catch {
       alert('Erro ao confirmar seleção');
     } finally {
       setSalvando(false);
@@ -247,31 +251,7 @@ export default function PresentesPage() {
 
   return (
     <div className="presentes-page">
-      {/* HEADER */}
-      <header className="presenca-header">
-        <Link to="/introducao" style={{textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', flexShrink: 0}}>
-          <div className="presenca-logo-area">
-            <img src={logo} alt="logo" className="presenca-logo" />
-            <p className="presenca-logo-text">Estella & Lucas</p>
-          </div>
-        </Link>
-
-        <button 
-          className={`presenca-menu-toggle ${menuAberto ? 'active' : ''}`}
-          onClick={() => setMenuAberto(!menuAberto)}
-          aria-label="Menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
-        <nav className={`presenca-menu ${menuAberto ? 'open' : ''}`}>
-          <Link to="/confirmacao" onClick={() => setMenuAberto(false)}>Confirmar presença</Link>
-          <Link to="/presentes" onClick={() => setMenuAberto(false)}>Lista de presentes</Link>
-          <Link to="/area-convidado" onClick={() => setMenuAberto(false)}>Área do convidado</Link>
-        </nav>
-      </header>
+      <Header />
 
       {/* MAIN CONTENT */}
       <div className="presentes-container">

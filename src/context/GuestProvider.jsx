@@ -11,7 +11,6 @@ export function GuestProvider({ children }) {
       // Salvar no localStorage para persistência (usa 'convidado' para compatibilidade)
       localStorage.setItem('convidado', JSON.stringify(guestData));
       setGuest(guestData);
-      console.log('GuestProvider - Guest salvo no localStorage:', guestData);
     } else {
       console.warn('GuestProvider - Tentativa de salvar guest sem ID:', guestData);
     }
@@ -20,21 +19,16 @@ export function GuestProvider({ children }) {
   const clearGuest = useCallback(() => {
     setGuest(null);
     localStorage.removeItem('convidado');
-    console.log('GuestProvider - Guest limpo');
   }, []);
 
   // Carregar guest do localStorage ao inicializar (uma única vez)
   useEffect(() => {
     const initializeGuest = () => {
-      console.log('GuestProvider - Inicializando guest do localStorage');
       try {
         const stored = localStorage.getItem('convidado');
         if (stored) {
           const guestData = JSON.parse(stored);
           setGuest(guestData);
-          console.log('GuestProvider - Guest carregado do localStorage:', guestData);
-        } else {
-          console.log('GuestProvider - Nenhum guest encontrado no localStorage');
         }
       } catch (err) {
         console.error('GuestProvider - Erro ao carregar guest do localStorage:', err);

@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useGuest } from '@/context';
 import { useScrollToTop, useRequireGuest } from '@/hooks';
-
-import logo from '@/assets/images/header-logo.png';
+import Header from '@/components/Header';
 import qrcodeImage from '@/assets/images/qrcode.png';
+import copiarTextoIcon from '@/assets/images/copiar-texto.png';
 
 import './agradecimentoPresente.css';
 
@@ -12,13 +12,14 @@ export default function AgradecimentoPresentePage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { guest } = useGuest();
-  const [menuAberto, setMenuAberto] = useState(false);
   const [copiado, setCopiado] = useState(false);
+  const [copiadoCpf, setCopiadoCpf] = useState(false);
   useScrollToTop();
   useRequireGuest();
 
   // Código PIX
   const PIX_CODE = '00020126330014BR.GOV.BCB.PIX0111065196341905204000053039865802BR5925Estella Gabriela Santos d6009SAO PAULO62140510SEI5aCq2qL63043B2D';
+  const PIX_CPF = '065.196.341-90';
 
   // Copiar código para clipboard
   const copiarCodigoPix = async () => {
@@ -28,6 +29,16 @@ export default function AgradecimentoPresentePage() {
       setTimeout(() => setCopiado(false), 2000);
     } catch (err) {
       console.error('Erro ao copiar:', err);
+    }
+  };
+
+  const copiarCpfPix = async () => {
+    try {
+      await navigator.clipboard.writeText(PIX_CPF);
+      setCopiadoCpf(true);
+      setTimeout(() => setCopiadoCpf(false), 2000);
+    } catch (err) {
+      console.error('Erro ao copiar CPF:', err);
     }
   };
 
@@ -52,50 +63,20 @@ export default function AgradecimentoPresentePage() {
   const isFisico = tipoPresente === 'fisico';
 
   // Mensagens personalizadas
-  const getTituloMensagem = () => {
-    if (isFisico) {
-      return `Obrigada por ${presente.nome}!`;
-    }
-    return `Escaneie o QR Code para ${tipoPresente === 'pix_fechado' ? 'confirmar seu presente' : 'enviar sua contribuição'}!`;
-  };
 
   const getMensagemDetalhes = () => {
     if (isFisico) {
       return `Muito obrigada por escolher ${presente.nome}! 💝 `;
     }
     if (tipoPresente === 'pix_fechado') {
-      return `Obrigada pela sua contribuição! Use o QR Code abaixo para confirmar seu presente.`;
+      return `Obrigada pelo presente! Abaixo tem as informações para o Pix: `;
     }
-    return `Obrigada pela sua contribuição! Você pode enviar qualquer valor através do QR Code abaixo.`;
+    return `Obrigada pelo presente!  Você pode enviar qualquer valor através do QR Code abaixo.`;
   };
 
   return (
     <div className="agradecimento-presente-page">
-      {/* HEADER */}
-      <header className="area-header">
-        <Link to="/introducao" style={{textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', flexShrink: 0}}>
-          <div className="area-logo-area">
-            <img src={logo} alt="logo" className="area-logo" />
-            <p className="area-logo-text">Estella & Lucas</p>
-          </div>
-        </Link>
-
-        <button 
-          className={`area-menu-toggle ${menuAberto ? 'active' : ''}`}
-          onClick={() => setMenuAberto(!menuAberto)}
-          aria-label="Menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
-        <nav className={`area-menu ${menuAberto ? 'open' : ''}`}>
-          <Link to="/confirmacao" onClick={() => setMenuAberto(false)}>Confirmar presença</Link>
-          <Link to="/presentes" onClick={() => setMenuAberto(false)}>Lista de presentes</Link>
-          <Link to="/area-convidado" onClick={() => setMenuAberto(false)}>Área do convidado</Link>
-        </nav>
-      </header>
+      <Header />
 
       {/* MAIN CONTENT */}
       <section className="agr-presente-container">
@@ -104,9 +85,6 @@ export default function AgradecimentoPresentePage() {
           <div className="presente-icon">🎁</div>
 
           {/* TÍTULO PERSONALIZADO */}
-          <h1 className="agr-presente-title">
-            {getTituloMensagem()}
-          </h1>
 
           {/* MENSAGEM PERSONALIZADA */}
           <p className="agr-presente-mensagem">
@@ -131,7 +109,12 @@ export default function AgradecimentoPresentePage() {
               >
                 <span className="pix-code-text">{PIX_CODE}</span>
                 <span className="pix-copy-feedback">
-                  {copiado ? '✓ Copiado!' : '📋 Clique para copiar'}
+                  <img
+                    src={copiarTextoIcon}
+                    alt="Copiar código PIX"
+                    className="pix-copy-icon"
+                  />
+                  {copiado ? '✓ Copiado!' : 'Copiar'}
                 </span>
               </button>
 
@@ -148,7 +131,25 @@ export default function AgradecimentoPresentePage() {
           {/* DADOS PIX */}
           {isPix && (
             <div className="agr-presente-pix-dados">
-              <p className="pix-dado"><span className="pix-label">Chave Pix:</span> 065.196.341-90</p>
+              <p className="pix-dado">
+                <span className="pix-label">Chave Pix:</span>
+                <button
+                  type="button"
+                  className="pix-copy-inline"
+                  onClick={copiarCpfPix}
+                  title="Clique para copiar"
+                >
+                  {PIX_CPF}
+                </button>
+                <span className="pix-copy-feedback">
+                  <img
+                    src={copiarTextoIcon}
+                    alt="Copiar CPF"
+                    className="pix-copy-icon"
+                  />
+                  {copiadoCpf ? '✓ Copiado!' : 'Copiar'}
+                </span>
+              </p>
               <p className="pix-dado"><span className="pix-label">Nome:</span> Estella Gabriela Santos de Oliveira</p>
               <p className="pix-dado"><span className="pix-label">Banco:</span> 260 - Nu Pagamentos S.A. - Instituição de Pagamento</p>
             </div>

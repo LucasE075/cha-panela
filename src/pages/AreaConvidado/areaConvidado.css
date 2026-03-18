@@ -1,4 +1,3 @@
-
 /* ========================= PAGE ROOT ========================= */
 .area-convidado-page {
   width: 100%;
@@ -7,9 +6,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 106px;
+  padding-top: var(--header-height);
   padding-bottom: 40px;
-  background: linear-gradient(135deg, #E8EEF5 0%, #C9D6E5 100%);
+  background: linear-gradient(135deg, var(--color-bg-gradient-1) 0%, var(--color-bg-gradient-2) 100%);
   position: relative;
 }
 
@@ -17,115 +16,30 @@
 .area-convidado-page::before {
   content: '';
   position: fixed;
-  top: 106px;
+  top: var(--header-height);
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url(/src/assets/images/backgroundConvidado.png);
+  background-image: url(../../assets/images/backgroundConvidado.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   opacity: 0.5;
-  z-index: 0;
+  z-index: var(--z-base);
   pointer-events: none;
-}
-
-/* ========================= HEADER / NAVBAR ========================= */
-.area-header {
-  position: fixed;
-  width: 100%;
-  height: 106px;
-  background: #B8A660;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
-  padding: 0 40px;
-  box-sizing: border-box;
-  top: 0;
-}
-
-.area-logo-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  flex-shrink: 0;
-}
-
-.area-logo {
-  height: 51px;
-  width: 55.17px;
-}
-
-.area-logo-text {
-  font-family: 'Mate', serif;
-  font-size: 20px;
-  color: white;
-  margin: 0;
-}
-
-.area-menu {
-  display: flex;
-  gap: 40px;
-  align-items: center;
-}
-
-.area-menu a {
-  text-decoration: none;
-  color: white;
-  font-family: 'Mate', serif;
-  font-size: 20px;
-  transition: opacity 0.2s ease;
-  white-space: nowrap;
-}
-
-.area-menu a:hover {
-  opacity: 0.7;
-}
-
-.area-menu-toggle {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
-  gap: 6px;
-  z-index: 1100;
-}
-
-.area-menu-toggle span {
-  width: 28px;
-  height: 3px;
-  background: white;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-.area-menu-toggle.active span:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
-}
-
-.area-menu-toggle.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.area-menu-toggle.active span:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
 }
 
 /* ========================= TÍTULO ========================= */
 .area-titulo {
-  font-family: 'Imprima', sans-serif;
+  font-family: var(--font-serif);
   font-size: 40px;
-  color: #C0B070;
+  color: var(--color-primary);
   text-align: center;
   margin: 40px 0 25px 0;
   padding: 0 20px;
   position: relative;
-  z-index: 10;
+  z-index: var(--z-content);
 }
 
 /* ========================= DIVISOR ========================= */
@@ -135,7 +49,7 @@
   object-fit: contain;
   margin: 0 0 30px 0;
   position: relative;
-  z-index: 10;
+  z-index: var(--z-content);
 }
 
 /* ========================= MAIN CONTAINER ========================= */
@@ -143,422 +57,381 @@
   width: 921px;
   height: 790px;
   background: linear-gradient(135deg, #F2FFF9 0%, #D3FFEC 43%, #D3FFEC 100%);
-  border-radius: 40px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-  padding: 40px;
+  border-radius: 25px;
+  padding: 35px;
   box-sizing: border-box;
-  position: relative;
-  z-index: 10;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  overflow-y: auto;
-  
-  /* Bordas duplas e curvadas */
-  border: 3px solid #C0B070;
-  outline: 2px solid #E8EEF5;
-  outline-offset: -8px;
+  gap: 30px;
+  position: relative;
+  z-index: var(--z-content);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
 }
 
 /* ========================= DADOS SECTION ========================= */
 .area-dados-section {
-  width: 822px;
+  width: 433px;
   height: 313.72px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 20px;
-  padding: 25px 30px;
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(192, 176, 112, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 5;
 }
 
 .area-dados-header {
-  border-bottom: 2px solid #C0B070;
-  padding-bottom: 12px;
-  margin-bottom: 8px;
+  margin-bottom: 20px;
 }
 
 .area-dados-titulo {
-  font-family: 'Imprima', sans-serif;
-  font-size: 24px;
-  color: #C0B070;
+  font-family: var(--font-serif-mate);
+  font-size: 22px;
+  font-weight: var(--font-bold);
+  color: var(--color-text-dark);
   margin: 0;
-  text-align: left;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--color-border-gold);
 }
 
 .area-dados-content {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  flex: 1;
-  justify-content: space-between;
+  gap: 15px;
 }
 
 .dado-item {
   display: grid;
-  grid-template-columns: 120px 1fr;
+  grid-template-columns: 80px 1fr;
   gap: 15px;
   align-items: center;
 }
 
 .dado-label {
-  font-family: 'Imprima', sans-serif;
+  font-family: var(--font-serif-mate);
   font-size: 16px;
-  color: #666;
-  font-weight: 500;
+  font-weight: var(--font-semibold);
+  color: var(--color-text-dark);
 }
 
 .dado-valor {
-  font-family: 'Mate', serif;
+  font-family: var(--font-sans);
   font-size: 16px;
-  color: #333;
-  font-weight: 500;
+  color: var(--color-text-light);
+  word-break: break-word;
 }
 
 .status-label {
   grid-column: 1 / -1;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px;
-  background: rgba(192, 176, 112, 0.08);
-  border-radius: 8px;
-  border-left: 4px solid #C0B070;
+  font-size: 16px;
+  font-weight: var(--font-bold);
 }
 
-.status-label strong {
-  font-weight: 700;
-}
-
-.status-label.status-pendente strong {
+.status-label.status-pendente {
   color: #f59e0b;
 }
 
-.status-label.status-confirmado strong {
+.status-label.status-confirmado {
   color: #10b981;
 }
 
-.status-label.status-recusado strong {
+.status-label.status-recusado {
   color: #ef4444;
-}
-
-/* BOTÃO CONFIRMAR PRESENÇA */
-.btn-confirmar-presenca {
-  align-self: flex-end;
-  background: none;
-  border: none;
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-  margin-top: 10px;
-}
-
-.btn-confirmar-presenca img {
-  width: 120px;
-  height: auto;
-  display: block;
-}
-
-.btn-confirmar-presenca:hover:not(:disabled) {
-  transform: scale(1.1);
-}
-
-.btn-confirmar-presenca:active:not(:disabled) {
-  transform: scale(0.95);
-}
-
-.btn-confirmar-presenca:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
 }
 
 /* ========================= PRESENTES SECTION ========================= */
 .area-presentes-section {
-  width: 822px;
+  width: calc(100% - 35px);
   height: 370.17px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 20px;
-  padding: 25px 30px;
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(192, 176, 112, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 5;
+  overflow-y: auto;
 }
 
 .area-presentes-header {
-  border-bottom: 2px solid #C0B070;
-  padding-bottom: 12px;
-  margin-bottom: 8px;
+  margin-bottom: 20px;
 }
 
 .area-presentes-titulo {
-  font-family: 'Imprima', sans-serif;
-  font-size: 24px;
-  color: #C0B070;
+  font-family: var(--font-serif-mate);
+  font-size: 22px;
+  font-weight: var(--font-bold);
+  color: var(--color-text-dark);
   margin: 0;
-  text-align: left;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--color-border-gold);
 }
 
 .area-presentes-content {
-  flex: 1;
-  overflow-y: auto;
-  padding-right: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .presentes-vazio {
   text-align: center;
-  color: #999;
-  font-family: 'Mate', serif;
-  font-size: 16px;
-  padding: 40px 20px;
+  padding: 30px 20px;
+  color: var(--color-text-light);
+  font-style: italic;
+  margin: 0;
 }
 
+/* ========================= PRESENTE ITEM ========================= */
 .presentes-lista {
   display: flex;
   flex-direction: column;
+  gap: 12px;
 }
 
 .presente-item {
   display: grid;
-  grid-template-columns: 20% 40% 40%;
-  gap: 8px;
-  align-items: stretch;
-  padding: 12px;
-  background: #f9f8f6;
-  border-radius: 10px;
-  border: 1px solid #e5e4e7;
+  grid-template-columns: 100px 1fr auto;
+  gap: 15px;
+  align-items: center;
+  padding: 15px;
+  background: #f9f8f5;
+  border-radius: 12px;
+  border: 2px solid transparent;
   transition: all 0.3s ease;
 }
 
 .presente-item:hover {
+  border-color: var(--color-primary);
   background: white;
-  border-color: #C0B070;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* COLUNA 1: IMAGEM */
 .presente-info {
   display: flex;
-  flex-direction: column;
-  gap: 0;
-  align-items: center;
   justify-content: center;
-  width: 100%;
+  align-items: center;
 }
 
 .presente-thumb {
-  width: 100%;
-  max-width: 140px;
-  height: 140px;
-  object-fit: cover;
-  border-radius: 6px;
-  flex-shrink: 0;
+  max-width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 8px;
 }
 
-/* COLUNA 2: DETALHES */
 .presente-details {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  justify-content: flex-start;
-  padding-left: 0;
-  width: 100%;
+  gap: 8px;
 }
 
 .presente-details h3 {
   margin: 0;
-  font-family: 'Mate', serif;
+  font-family: var(--font-serif-mate);
   font-size: 16px;
-  font-weight: 600;
-  color: #333;
-  word-break: break-word;
-  line-height: 1.4;
+  font-weight: var(--font-semibold);
+  color: var(--color-text-dark);
 }
 
 .presente-details p {
   margin: 0;
-  font-size: 13px;
-  color: #666;
+  font-size: 14px;
+  color: var(--color-text-light);
   line-height: 1.4;
-  word-break: break-word;
 }
 
 .presente-price {
-  font-family: 'Mate', serif;
-  font-size: 15px;
-  font-weight: 700;
-  color: #aa3bff;
-  margin-top: 4px;
+  font-family: var(--font-serif-mate);
+  font-size: 16px;
+  font-weight: var(--font-bold);
+  color: var(--color-primary);
+  margin: 4px 0 0 0;
 }
 
 .badge-confirmado {
-  display: inline-block;
-  padding: 5px 10px;
-  background: #d1fae5;
-  color: #065f46;
-  border-radius: 4px;
   font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  width: fit-content;
+  color: #10b981;
+  font-weight: var(--font-semibold);
   margin-top: 4px;
 }
 
-/* COLUNA 3: BOTÕES */
+/* ========================= BOTÕES ========================= */
 .presente-botoes {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 10px;
-  align-items: stretch;
-  justify-content: flex-start;
-  width: 100%;
-  padding: 0;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
 }
 
 .btn-presente {
   background: none;
   border: none;
   cursor: pointer;
-  transition: transform 0.3s ease;
-  flex: 1;
+  transition: transform 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
-  min-height: 80px;
+  flex: 1;
+  min-width: 70px;
+  max-width: 140px;
+}
+
+.btn-presente:hover {
+  transform: scale(1.05);
+}
+
+.btn-presente:active {
+  transform: scale(0.95);
 }
 
 .btn-presente img {
   width: 100%;
-  height: 80px;
-  display: block;
-  object-fit: contain;
+  height: auto;
+  max-width: 70px;
 }
 
-.btn-presente:hover:not(:disabled) {
-  transform: scale(1.15);
+.btn-presente.btn-confirmar {
+  background: linear-gradient(90deg, #BEEAED 16%, #73A9CA 100%);
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  color: white;
+  font-family: var(--font-serif-mate);
+  font-size: 14px;
+  font-weight: var(--font-semibold);
+  text-transform: capitalize;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  min-width: auto;
+  max-width: none;
+  flex: 1;
 }
 
-.btn-presente:active:not(:disabled) {
-  transform: scale(0.9);
+.btn-presente.btn-confirmar:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
 }
 
-.btn-presente:disabled {
+.btn-presente.btn-confirmar:active {
+  transform: scale(0.95);
+}
+
+.btn-presente.btn-confirmar:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-/* Botão Confirmar - tamanho reduzido */
-.btn-presente.btn-confirmar {
-  min-height: 50px;
-}
-
 .btn-presente.btn-confirmar img {
-  height: 50px;
+  display: none;
 }
 
-/* Botão Remover - com X vermelho */
-.btn-presente.btn-remover {
-  background: #f5f5f5;
-  border: 2px solid #e74c3c;
-  border-radius: 8px;
-  min-height: auto;
-  padding: 8px 12px;
-  gap: 8px;
-  font-family: 'Playfair Display', serif;
-}
-
-.btn-remover-text {
-  color: #e74c3c;
-  font-weight: 700;
+.btn-pix {
+  border-radius: 14px;
+  background: #B8A660;
+  color: #000;
+  font-family: 'Imprima', sans-serif;
+  padding: 10px 14px;
+  border: none;
+  text-transform: none;
   font-size: 14px;
-  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
 
-.btn-presente.btn-remover:hover:not(:disabled) {
-  background: #ffe6e6;
+.presente-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.presente-link-cor {
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.presente-links-list {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.presente-links-list a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.presente-links-list a:hover {
+  opacity: 0.8;
+}
+
+.btn-pix:hover {
+  transform: scale(1.02);
+  filter: brightness(1.05);
+}
+
+.btn-presente.btn-remover {
+  background: white;
+  border: 2px solid #ef4444;
+  border-radius: 12px;
+  padding: 12px 20px;
+  color: #ef4444;
+  font-family: var(--font-serif-mate);
+  font-size: 14px;
+  font-weight: var(--font-semibold);
+  text-transform: capitalize;
+  transition: transform 0.2s ease, background 0.2s ease;
+  min-width: auto;
+  max-width: none;
+  flex: 1;
+}
+
+.btn-presente.btn-remover:hover {
+  background: #ffebee;
   transform: scale(1.05);
 }
 
-.btn-presente.btn-remover:active:not(:disabled) {
+.btn-presente.btn-remover:active {
   transform: scale(0.95);
 }
 
-/* Botão Pix/QRcode - estilo texto */
-.btn-presente.btn-pix {
-  background: linear-gradient(135deg, #b8a660 0%, #9d8f52 100%);
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-weight: 700;
-  font-size: 14px;
-  padding: 12px 16px;
-  min-height: auto;
-  font-family: 'Playfair Display', serif;
-  letter-spacing: 0.5px;
+.btn-presente.btn-remover:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-.btn-presente.btn-pix:hover:not(:disabled) {
-  transform: scale(1.08);
-}
-
-.btn-presente.btn-pix:active:not(:disabled) {
-  transform: scale(0.92);
-}
-
-/* Detalhes dos presentes confirmados */
-.detalhe-cor {
-  font-size: 14px;
-  color: #6b6375;
-  margin: 8px 0;
-}
-
-.detalhe-descricao {
-  font-size: 14px;
-  color: #6b6375;
-  line-height: 1.5;
-  margin: 8px 0;
-}
-
-.detalhe-links {
-  margin: 12px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.links-label {
+.btn-remover-text {
   font-size: 13px;
-  color: #3d3424;
-  font-weight: 700;
-  display: block;
+  color: #ef4444;
+  font-weight: var(--font-semibold);
+  white-space: nowrap;
 }
 
-.links-list {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+.btn-confirmar-presenca {
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-.links-list a {
-  font-size: 12px;
-  color: #86732A;
-  text-decoration: none;
-  font-weight: 700;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease;
+.btn-confirmar-presenca:hover {
+  transform: scale(1.05);
 }
 
-.links-list a:hover {
-  border-bottom: 1px solid #86732A;
+.btn-confirmar-presenca img {
+  width: 200px;
+  height: auto;
 }
 
-/* ========================= MEDIA QUERIES TABLET ========================= */
+/* ========================= MEDIA QUERIES ========================= */
 @media (max-width: 1024px) {
   .area-main-container {
     width: 90%;
@@ -573,62 +446,9 @@
   }
 }
 
-/* ========================= MEDIA QUERIES MOBILE ========================= */
 @media (max-width: 768px) {
-  .area-header {
-    padding: 0 20px;
-    height: 80px;
-  }
-
-  .area-logo {
-    height: 40px;
-    width: 43px;
-  }
-
-  .area-logo-text {
-    font-size: 16px;
-  }
-
-  .area-menu-toggle {
-    display: flex;
-  }
-
-  .area-menu {
-    position: absolute;
-    top: 80px;
-    left: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    background: rgba(184, 166, 96, 0.95);
-    padding: 0;
-    gap: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
-    visibility: hidden;
-  }
-
-  .area-menu.open {
-    max-height: 300px;
-    padding: 20px 0;
-    visibility: visible;
-  }
-
-  .area-menu a {
-    padding: 12px 20px;
-    font-size: 18px;
-    white-space: normal;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    display: block;
-  }
-
-  .area-menu a:last-child {
-    border-bottom: none;
-  }
-
-  .area-convidado-page {
-    padding-top: 80px;
+  .area-convidado-page::before {
+    top: var(--header-height-md);
   }
 
   .area-titulo {
@@ -701,39 +521,56 @@
   }
 }
 
-/* ========================= MEDIA QUERIES SMALL MOBILE ========================= */
+@media (max-width: 640px) {
+  .area-titulo {
+    font-size: 28px;
+    margin: 25px 0 18px 0;
+  }
+
+  .area-divisor {
+    height: 45px;
+    margin-bottom: 20px;
+  }
+
+  .area-main-container {
+    padding: 25px 18px;
+    gap: 20px;
+  }
+
+  .area-dados-section,
+  .area-presentes-section {
+    padding: 18px;
+  }
+
+  .dado-item {
+    gap: 8px;
+    font-size: 13px;
+  }
+
+  .presente-item {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .presente-thumb {
+    max-width: 100px;
+    height: 100px;
+  }
+}
+
 @media (max-width: 480px) {
-  .area-header {
-    padding: 0 15px;
-    height: 70px;
-  }
-
-  .area-logo {
-    height: 35px;
-    width: 37px;
-  }
-
-  .area-logo-text {
-    font-size: 14px;
-  }
-
-  .area-menu {
-    top: 70px;
-  }
-
-  .area-convidado-page {
-    padding-top: 70px;
-    padding-bottom: 20px;
+  .area-convidado-page::before {
+    top: var(--header-height-xs);
   }
 
   .area-titulo {
-    font-size: 28px;
+    font-size: 26px;
     margin: 20px 0 15px 0;
   }
 
   .area-divisor {
     height: 40px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 
   .area-main-container {
@@ -790,7 +627,7 @@
     font-size: 11px;
   }
 
-  .apresente-price {
+  .presente-price {
     font-size: 12px;
   }
 
@@ -804,942 +641,112 @@
   }
 }
 
-
-/* Background com opacidade */
-.area-convidado-page::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url(/src/assets/images/backgroundConvidado.png);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.5;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* ========================= HEADER / NAVBAR ========================= */
-.area-header {
-  position: fixed;
-  width: 100%;
-  height: 106px;
-  background: #B8A660;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
-  padding: 0 40px;
-  box-sizing: border-box;
-}
-
-.area-logo-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  flex-shrink: 0;
-}
-
-.area-logo {
-  height: 51px;
-  width: 55.17px;
-}
-
-.area-logo-text {
-  font-family: 'Mate', serif;
-  font-size: 20px;
-  color: white;
-  margin: 0;
-}
-
-.area-menu {
-  display: flex;
-  gap: 40px;
-  align-items: center;
-}
-
-.area-menu a {
-  text-decoration: none;
-  color: white;
-  font-family: 'Mate', serif;
-  font-size: 20px;
-  transition: opacity 0.2s ease;
-  white-space: nowrap;
-}
-
-.area-menu a:hover {
-  opacity: 0.7;
-}
-
-.area-menu-toggle {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
-  gap: 6px;
-  z-index: 1100;
-}
-
-.area-menu-toggle span {
-  width: 28px;
-  height: 3px;
-  background: white;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-.area-menu-toggle.active span:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
-}
-
-.area-menu-toggle.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.area-menu-toggle.active span:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
-}
-
-/* ========================= MAIN CONTAINER ========================= */
-.area-container {
-  margin-top: 106px;
-  padding: 40px 20px 60px;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  z-index: 1;
-}
-
-/* ========================= STATUS CARD ========================= */
-.status-card {
-  background: white;
-  border-radius: 16px;
-  padding: 30px;
-  margin-bottom: 40px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  border-left: 6px solid;
-  animation: slideUp 0.5s ease-out;
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.status-card h2 {
-  margin: 0 0 20px 0;
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  color: #3d3424;
-}
-
-.status-card.status-pendente {
-  border-left-color: #f59e0b;
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, white 100%);
-}
-
-.status-card.status-confirmado {
-  border-left-color: #10b981;
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, white 100%);
-}
-
-.status-card.status-recusado {
-  border-left-color: #ef4444;
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, white 100%);
-}
-
-.status-info {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.status-badge {
-  display: inline-block;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-weight: 700;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.status-card.status-pendente .status-badge {
-  background: #fef3c7;
-  color: #92400e;
-}
-
-.status-card.status-confirmado .status-badge {
-  background: #d1fae5;
-  color: #065f46;
-}
-
-.status-card.status-recusado .status-badge {
-  background: #fee2e2;
-  color: #7f1d1d;
-}
-
-.status-mensagem {
-  font-size: 16px;
-  color: #6b6375;
-  margin: 0;
-  font-family: 'Playfair Display', serif;
-}
-
-/* ========================= PRESENTES SECTION ========================= */
-.presentes-section {
-  background: white;
-  border-radius: 16px;
-  padding: 30px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-}
-
-.presentes-section h2 {
-  margin: 0 0 25px 0;
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  color: #3d3424;
-  border-bottom: 2px solid #B8A660;
-  padding-bottom: 15px;
-}
-
-.presentes-empty {
-  text-align: center;
-  padding: 40px 20px;
-  background: #f9f8f6;
-  border-radius: 12px;
-}
-
-.presentes-empty p {
-  font-size: 18px;
-  color: #6b6375;
-  margin-bottom: 20px;
-  font-family: 'Playfair Display', serif;
-}
-
-.link-presentes {
-  display: inline-block;
-  padding: 12px 28px;
-  background: #B8A660;
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  font-family: 'Mate', serif;
-  transition: background 0.3s ease;
-  font-size: 16px;
-}
-
-.link-presentes:hover {
-  background: #a89450;
-}
-
-/* ========================= PRESENTES LIST ========================= */
-.presentes-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-bottom: 30px;
-}
-
-.presente-item {
-  display: grid;
-  grid-template-columns: 120px 1fr auto;
-  gap: 20px;
-  align-items: center;
-  padding: 20px;
-  border: 2px solid #e5e4e7;
-  border-radius: 12px;
-  background: #fafaf9;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.presente-item:hover:not(.confirmado) {
-  border-color: #B8A660;
-  background: white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.presente-item.selecionado {
-  border-color: #10b981;
-  background: #f0fdf4;
-}
-
-.presente-item.confirmado {
-  opacity: 0.7;
-  background: #f9fafb;
-  border-color: #d1d5db;
-}
-
-.presente-imagem-container {
-  width: 120px;
-  height: 120px;
-  background: #f3f1ed;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.presente-imagem-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.presente-details {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.presente-details h3 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 700;
-  color: #3d3424;
-  font-family: 'Playfair Display', serif;
-}
-
-.presente-descricao {
-  font-size: 14px;
-  color: #6b6375;
-  margin: 0;
-  line-height: 1.4;
-}
-
-.presente-preco {
-  font-size: 16px;
-  font-weight: 700;
-  color: #aa3bff;
-}
-
-/* ========================= CHECKBOX CUSTOMIZADO ========================= */
-.checkbox-container {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-  position: relative;
-}
-
-.checkbox-container input {
-  display: none;
-}
-
-.checkmark {
-  display: inline-block;
-  width: 32px;
-  height: 32px;
-  border: 2px solid #B8A660;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-  background: white;
-  position: relative;
-}
-
-.checkbox-container input:checked ~ .checkmark {
-  background: #10b981;
-  border-color: #10b981;
-}
-
-.checkbox-container input:checked ~ .checkmark::after {
-  content: '✓';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.checkbox-container:hover .checkmark:not(:checked) {
-  border-color: #a89450;
-}
-
-/* ========================= BADGE CONFIRMADO ========================= */
-.badge-confirmed {
-  display: inline-block;
-  padding: 8px 12px;
-  background: #d1fae5;
-  color: #065f46;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-/* ========================= CONFIRMAR SECTION ========================= */
-.area-confirmar-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  background: #f0fdf4;
-  padding: 20px;
-  border-radius: 12px;
-  border: 2px solid #10b981;
-  margin-top: 20px;
-  animation: slideUp 0.4s ease-out;
-}
-
-.confirmar-texto {
-  font-size: 16px;
-  color: #065f46;
-  margin: 0;
-  font-family: 'Playfair Display', serif;
-}
-
-.confirmar-texto strong {
-  font-weight: 700;
-  color: #059669;
-}
-
-.btn-confirmar-grupo {
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-}
-
-.btn-confirmar-grupo img {
-  width: 100px;
-  height: auto;
-  display: block;
-}
-
-.btn-confirmar-grupo:hover:not(:disabled) {
-  transform: scale(1.08);
-}
-
-.btn-confirmar-grupo:active:not(:disabled) {
-  transform: scale(0.95);
-}
-
-.btn-confirmar-grupo:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* ========================= MEDIA QUERIES ========================= */
-@media (max-width: 1024px) {
-  .area-header {
-    padding: 0 30px;
-  }
-
-  .status-card,
-  .presentes-section {
-    max-width: 95%;
-  }
-}
-
-@media (max-width: 768px) {
-  .area-header {
-    padding: 0 20px;
-    height: 80px;
-  }
-
-  .area-logo {
-    height: 40px;
-    width: 43px;
-  }
-
-  .area-logo-text {
-    font-size: 16px;
-  }
-
-  .area-menu-toggle {
-    display: flex;
-  }
-
-  .area-menu {
-    position: absolute;
-    top: 80px;
-    left: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    background: rgba(184, 166, 96, 0.95);
-    padding: 0;
-    gap: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
-    visibility: hidden;
-  }
-
-  .area-menu.open {
-    max-height: 300px;
-    padding: 20px 0;
-    visibility: visible;
-  }
-
-  .area-menu a {
-    padding: 12px 20px;
-    font-size: 16px;
-    white-space: normal;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    display: block;
-  }
-
-  .area-menu a:last-child {
-    border-bottom: none;
-  }
-
-  .area-container {
-    margin-top: 80px;
-    padding: 25px 15px 40px;
-  }
-
-  .status-card {
-    padding: 25px;
-    margin-bottom: 20px;
-  }
-
-  .status-card h2 {
-    font-size: 24px;
-  }
-
-  .status-badge {
-    font-size: 14px;
-    padding: 8px 16px;
-  }
-
-  .presentes-section {
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-
-  .presentes-section h2 {
-    font-size: 22px;
-  }
-
-  .presente-item {
-    grid-template-columns: 100px 1fr auto;
-    gap: 15px;
-    padding: 15px;
-    border-radius: 8px;
-  }
-
-  .presente-imagem-container {
-    width: 100px;
-    height: 100px;
-  }
-
-  .presente-details h3 {
-    font-size: 16px;
-  }
-
-  .presente-descricao {
-    font-size: 13px;
-  }
-
-  .presente-preco {
-    font-size: 18px;
-  }
-
-  .area-confirmar-section {
-    flex-direction: column;
-    text-align: center;
-    padding: 20px;
-  }
-
-  .confirmar-texto {
-    font-size: 14px;
-  }
-
-  .checkmark {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-@media (max-width: 640px) {
-  .area-header {
-    height: 75px;
-    padding: 0 15px;
-  }
-
-  .area-logo {
-    height: 38px;
-    width: 41px;
-  }
-
-  .area-logo-text {
-    font-size: 15px;
-  }
-
-  .area-container {
-    margin-top: 75px;
-    padding: 20px 12px 35px;
-  }
-
-  .status-card {
-    padding: 20px;
-    margin-bottom: 18px;
-  }
-
-  .status-card h2 {
-    font-size: 20px;
-  }
-
-  .status-mensagem {
-    font-size: 13px;
-  }
-
-  .presentes-section {
-    padding: 15px;
-  }
-
-  .presentes-section h2 {
-    font-size: 18px;
-    margin-bottom: 15px;
-  }
-
-  .presente-item {
-    gap: 12px;
-    padding: 12px;
-  }
-
-  .presente-imagem-container {
-    width: 90px;
-    height: 90px;
-    border-radius: 6px;
-  }
-
-  .presente-details h3 {
-    font-size: 15px;
-    line-height: 1.2;
-  }
-
-  .presente-descricao {
-    font-size: 12px;
-  }
-
-  .presente-preco {
-    font-size: 16px;
-  }
-
-  .checkbox-container {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .area-header {
-    padding: 0 12px;
-    height: 70px;
-  }
-
-  .area-logo {
-    height: 35px;
-    width: 37px;
-  }
-
-  .area-logo-text {
-    font-size: 13px;
-  }
-
-  .area-menu {
-    top: 70px;
-    max-height: 350px;
-  }
-
-  .area-menu a {
-    font-size: 14px;
-    padding: 10px 15px;
-  }
-
-  .area-container {
-    margin-top: 70px;
-    padding: 15px 10px 30px;
-  }
-
-  .status-card {
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-  }
-
-  .status-card h2 {
-    font-size: 18px;
-    margin-bottom: 12px;
-  }
-
-  .status-badge {
-    font-size: 12px;
-    padding: 6px 12px;
-  }
-
-  .status-mensagem {
-    font-size: 12px;
-  }
-
-  .presentes-section {
-    padding: 12px;
-    margin-bottom: 15px;
-  }
-
-  .presentes-section h2 {
-    font-size: 16px;
-    margin-bottom: 12px;
-  }
-
-  .presentes-list {
-    gap: 10px;
-  }
-
-  .presente-item {
-    grid-template-columns: 80px 1fr 40px;
-    gap: 10px;
-    padding: 10px;
-    border-radius: 6px;
-    align-items: flex-start;
-  }
-
-  .presente-imagem-container {
-    width: 80px;
-    height: 80px;
-  }
-
-  .presente-details h3 {
-    font-size: 13px;
-    line-height: 1.1;
-  }
-
-  .presente-descricao {
-    font-size: 11px;
-  }
-
-  .presente-preco {
-    font-size: 14px;
-  }
-
-  .badge-confirmed {
-    font-size: 9px;
-    padding: 4px 8px;
-  }
-
-  .checkbox-container {
-    width: 18px;
-    height: 18px;
-  }
-
-  .checkmark {
-    width: 18px;
-    height: 18px;
-  }
-
-  .area-confirmar-section {
-    padding: 12px;
-    gap: 12px;
-  }
-
-  .confirmar-texto {
-    font-size: 12px;
-    line-height: 1.4;
-  }
-
-  .confirmar-texto strong {
-    font-size: 13px;
-  }
-
-  .link-presentes {
-    font-size: 12px;
-  }
-
-  .presentes-empty p {
-    font-size: 13px;
-  }
-}
-
 @media (max-width: 380px) {
-  .area-header {
-    height: 65px;
-    padding: 0 10px;
+  .area-titulo {
+    font-size: 24px;
+    margin: 18px 0 12px 0;
   }
 
-  .area-logo {
-    height: 32px;
-    width: 34px;
-  }
-
-  .area-logo-text {
-    font-size: 12px;
-  }
-
-  .area-container {
-    margin-top: 65px;
-    padding: 12px 8px 25px;
-  }
-
-  .status-card {
-    padding: 12px;
+  .area-divisor {
+    height: 35px;
     margin-bottom: 12px;
   }
 
-  .status-card h2 {
+  .area-main-container {
+    padding: 18px 12px;
+    gap: 12px;
+  }
+
+  .area-dados-section,
+  .area-presentes-section {
+    padding: 12px;
+  }
+
+  .area-dados-titulo,
+  .area-presentes-titulo {
     font-size: 16px;
-    margin-bottom: 10px;
   }
 
-  .status-info {
+  .dado-item {
     gap: 8px;
-  }
-
-  .status-badge {
     font-size: 11px;
-  }
-
-  .presentes-section {
-    padding: 10px;
-  }
-
-  .presentes-section h2 {
-    font-size: 14px;
   }
 
   .presente-item {
-    grid-template-columns: 70px 1fr 35px;
-    gap: 8px;
-    padding: 8px;
-  }
-
-  .presente-imagem-container {
-    width: 70px;
-    height: 70px;
-  }
-
-  .presente-details h3 {
-    font-size: 12px;
-  }
-
-  .presente-descricao {
-    font-size: 10px;
-  }
-
-  .presente-preco {
-    font-size: 13px;
-  }
-
-  .checkbox-container {
-    width: 16px;
-    height: 16px;
-  }
-
-  .checkmark {
-    width: 16px;
-    height: 16px;
-  }
-
-  .area-confirmar-section {
     padding: 10px;
+    gap: 10px;
   }
 
-  .confirmar-texto {
-    font-size: 11px;
+  .presente-thumb {
+    max-width: 80px;
+    height: 80px;
+  }
+
+  .btn-presente img {
+    width: 45px;
   }
 }
 
 @media (max-width: 320px) {
-  .area-header {
-    height: 60px;
-    padding: 0 8px;
+  .area-convidado-page {
+    padding-bottom: 20px;
   }
 
-  .area-logo {
+  .area-titulo {
+    font-size: 22px;
+    margin: 15px 0 10px 0;
+    padding: 0 10px;
+  }
+
+  .area-divisor {
     height: 30px;
-    width: 32px;
+    margin-bottom: 10px;
   }
 
-  .area-logo-text {
-    font-size: 11px;
+  .area-main-container {
+    width: 100%;
+    padding: 15px 10px;
+    gap: 10px;
   }
 
-  .area-menu {
-    top: 60px;
-  }
-
-  .area-container {
-    margin-top: 60px;
-    padding: 10px 6px 20px;
-    gap: 12px;
-  }
-
-  .status-card {
+  .area-dados-section,
+  .area-presentes-section {
     padding: 10px;
-    margin-bottom: 10px;
   }
 
-  .status-card h2 {
-    font-size: 14px;
-    margin-bottom: 8px;
+  .area-dados-titulo,
+  .area-presentes-titulo {
+    font-size: 15px;
+    margin: 0 0 10px 0;
   }
 
-  .status-badge {
-    font-size: 10px;
-    padding: 4px 8px;
-  }
-
-  .presentes-section {
-    padding: 8px;
-  }
-
-  .presentes-section h2 {
+  .dado-label {
     font-size: 13px;
-    margin-bottom: 10px;
+  }
+
+  .dado-valor {
+    font-size: 13px;
   }
 
   .presente-item {
-    grid-template-columns: 60px 1fr 30px;
-    gap: 6px;
-    padding: 6px;
+    padding: 10px;
+    gap: 10px;
   }
 
-  .presente-imagem-container {
-    width: 60px;
-    height: 60px;
+  .presente-thumb {
+    max-width: 70px;
+    height: 70px;
   }
 
   .presente-details h3 {
-    font-size: 11px;
-  }
-
-  .presente-descricao {
-    font-size: 9px;
-  }
-
-  .presente-preco {
     font-size: 12px;
   }
 
-  .checkbox-container {
-    width: 15px;
-    height: 15px;
-  }
-
-  .confirmar-texto {
+  .presente-details p {
     font-size: 10px;
   }
 
-  .presentes-empty p {
-    font-size: 11px;
+  .btn-presente img {
+    width: 40px;
   }
 }

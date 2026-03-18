@@ -1,0 +1,131 @@
+/* ========================= CORES ========================= */
+:root {
+  /* Primárias */
+  --color-primary: #B8A660;
+  --color-primary-dark: #a89450;
+  --color-primary-light: #c9b87a;
+  
+  /* Secundárias */
+  --color-text-dark: #3d3424;
+  --color-text-light: #6b6375;
+  
+  /* Backgrounds */
+  --color-bg-gradient-1: #E8EEF5;
+  --color-bg-gradient-2: #C9D6E5;
+  --color-bg-white: #FFFFFF;
+  --color-bg-light: #F6F1E7;
+  
+  /* Accent Colors */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #b00020;
+  --color-accent-purple: #aa3bff;
+  
+  /* Borders */
+  --color-border-light: #e5e4e7;
+  --color-border-gold: #C0B070;
+  --color-border-gold-dark: #86732A;
+  
+  /* Overlays */
+  --color-overlay-light: rgba(255, 255, 255, 0.35);
+  --color-overlay-dark: rgba(0, 0, 0, 0.1);
+}
+
+/* ========================= TIPOGRAFIA ========================= */
+:root {
+  /* Font Families */
+  --font-serif: 'Playfair Display', serif;
+  --font-serif-mate: 'Mate', serif;
+  --font-custom-imprima: 'Imprima', sans-serif;
+  --font-custom-meaculpa: 'MeaCulpa', cursive;
+  
+  /* Font Sizes */
+  --text-xs: 11px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 28px;
+  --text-4xl: 32px;
+  --text-5xl: 36px;
+  --text-6xl: 56px;
+  
+  /* Font Weights */
+  --font-normal: 400;
+  --font-semibold: 600;
+  --font-bold: 700;
+}
+
+/* ========================= ESPAÇAMENTO ========================= */
+:root {
+  --spacing-xs: 6px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 15px;
+  --spacing-xl: 20px;
+  --spacing-2xl: 30px;
+  --spacing-3xl: 40px;
+  --spacing-4xl: 50px;
+  --spacing-5xl: 100px;
+  --spacing-6xl: 120px;
+}
+
+/* ========================= LAYOUT ========================= */
+:root {
+  /* Header */
+  --header-height: 106px;
+  --header-height-md: 80px;
+  --header-height-sm: 75px;
+  --header-height-xs: 70px;
+  --header-height-xxs: 65px;
+  
+  /* Padding */
+  --padding-horizontal: 40px;
+  --padding-horizontal-md: 30px;
+  --padding-horizontal-sm: 20px;
+  --padding-horizontal-xs: 15px;
+  
+  --padding-vertical: 40px;
+  --padding-vertical-sm: 30px;
+  --padding-vertical-xs: 20px;
+  
+  /* Widths */
+  --max-width-content: 900px;
+  --max-width-card: 500px;
+}
+
+/* ========================= SOMBRAS ========================= */
+:root {
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 10px 30px rgba(255, 254, 254, 0.08);
+  --shadow-primary: 0 6px 16px rgba(184, 166, 96, 0.3);
+}
+
+/* ========================= TRANSIÇÕES ========================= */
+:root {
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* ========================= BORDER RADIUS ========================= */
+:root {
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+}
+
+/* ========================= Z-INDEX ========================= */
+:root {
+  --z-base: 0;
+  --z-content: 10;
+  --z-sticky: 100;
+  --z-dropdown: 500;
+  --z-modal: 1000;
+  --z-header: 1000;
+  --z-menu-toggle: 1100;
+}

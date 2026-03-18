@@ -2,405 +2,289 @@
 .presentes-page {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(135deg, #e8eef5 0%, #c9d6e5 100%);
-  font-family: 'Playfair Display', serif;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--header-height);
+  padding-bottom: 40px;
+  background: linear-gradient(135deg, var(--color-bg-gradient-1) 0%, var(--color-bg-gradient-2) 100%);
+  position: relative;
 }
 
-/* ========================= HEADER / NAVBAR ========================= */
-.header {
+/* Background image */
+.presentes-page::before {
+  content: '';
   position: fixed;
-  width: 100%;
-  height: 106px;
-  background: #b8a660;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
-  padding: 0 40px;
-  box-sizing: border-box;
-}
-
-.logo-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  flex-shrink: 0;
-}
-
-.logo {
-  height: 51px;
-  width: 55.17px;
-}
-
-.logo-text {
-  font-family: 'Mate', serif;
-  font-size: 20px;
-  color: white;
-  margin: 0;
-}
-
-.menu {
-  display: flex;
-  gap: 40px;
-  align-items: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.menu a {
-  text-decoration: none;
-  color: white;
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  transition: opacity 0.2s ease;
-  white-space: nowrap;
-}
-
-.menu a:hover {
-  opacity: 0.7;
-}
-
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
-  gap: 6px;
-  z-index: 1100;
-}
-
-.menu-toggle span {
-  width: 28px;
-  height: 3px;
-  background: white;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-.menu-toggle.active span:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
-}
-
-.menu-toggle.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-toggle.active span:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(../../assets/images/backgroundConvidado.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  opacity: 0.3;
+  z-index: var(--z-base);
+  pointer-events: none;
 }
 
 /* ========================= CONTAINER ========================= */
 .presentes-container {
-  margin-top: 126px;
-  padding: 60px 40px;
-  min-height: calc(100vh - 126px);
+  flex: 1;
+  padding: 40px 20px;
   position: relative;
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
+  z-index: var(--z-content);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
-/* Background pattern */
-.presentes-container::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(
-    circle,
-    rgba(219, 211, 211, 0.3) 1px,
-    transparent 1px
-  );
-  background-size: 20px 20px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ========================= TÍTULOS ========================= */
-.presentes-titulo {
-  text-align: center;
-  font-size: 48px;
-  font-weight: 700;
-  color: #3d3424;
-  margin: 0 0 15px 0;
-  position: relative;
-  z-index: 1;
-}
-
-.presentes-subtitulo {
-  text-align: center;
-  font-size: 24px;
-  color: #6b6375;
-  margin: 0 0 40px 0;
-  position: relative;
-  z-index: 1;
-  font-family: 'Playfair Display', serif;
-  font-weight: 400;
-}
-
-/* ========================= GRID DE PRESENTES ========================= */
+/* ========================= GRID ========================= */
 .presentes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  width: 100%;
   max-width: 1400px;
-  margin: 0 auto 60px;
-  position: relative;
-  z-index: 1;
+  margin: 0 auto;
 }
 
-/* ========================= CARD DO PRESENTE ========================= */
+/* ========================= PRESENTE CARD ========================= */
 .presente-card {
   background: white;
   border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 20px;
   cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
   display: flex;
   flex-direction: column;
+  gap: 15px;
   position: relative;
-  height: 100%;
-  min-height: 550px;
-  border: none;
-  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  align-items: center;
+  font-family: inherit;
+  font-size: inherit;
 }
 
+/* Card background by type */
 .presente-card.tipo-fisico {
   background: linear-gradient(135deg, #FDFFED 23%, #F4F9B9 100%);
-}
-
-.presente-card.tipo-pix-livre {
-  background: linear-gradient(135deg, #F6E6FF 11%, #DCAFF6 100%);
 }
 
 .presente-card.tipo-pix-fechado {
   background: linear-gradient(135deg, #F2EACC 31%, #B8A660 100%);
 }
 
-.presente-card:hover:not(.indisponivel) {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 32px rgba(170, 59, 255, 0.15);
+.presente-card.tipo-pix-livre {
+  background: linear-gradient(135deg, #F6E6FF 11%, #DCAFF6 100%);
 }
 
-.presente-card.indisponivel {
+.presente-card:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 24px rgba(184, 166, 96, 0.2);
+  transform: translateY(-4px);
+}
+
+.presente-card:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.presente-card:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.presente-card.indisponivel::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.12);
-  filter: blur(1px);
-  pointer-events: none;
-  border-radius: 12px;
-}
-
-
 .presente-card.selecionado {
-  border: 3px solid #4caf50;
-  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.25);
+  background: linear-gradient(135deg, rgba(184, 166, 96, 0.08) 0%, rgba(184, 166, 96, 0.03) 100%);
+  border-color: var(--color-primary);
 }
 
-/* ========================= IMAGEM DO PRESENTE ========================= */
+.presente-card.indisponivel {
+  opacity: 0.5;
+  background: #f5f5f5;
+}
+
+/* ========================= PRESENTE NOME ========================= */
+.presente-nome {
+  font-family: var(--font-serif-mate);
+  font-size: 18px;
+  font-weight: var(--font-bold);
+  color: var(--color-text-dark);
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* ========================= PRESENTE IMAGEM ========================= */
 .presente-imagem {
   width: 100%;
-  height: 280px;
+  height: 200px;
+  border-radius: 8px;
+  overflow: hidden;
   background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  padding: 20px;
-  box-sizing: border-box;
 }
 
 .presente-imagem img {
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+  padding: 10px;
 }
 
-/* ========================= CONTEÚDO DO CARD ========================= */
+/* ========================= PRESENTE CONTENT ========================= */
 .presente-content {
-  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   flex: 1;
+  text-align: center;
   align-items: center;
-  text-align: center;
-  justify-content: space-between;
+  width: 100%;
 }
 
-.presente-nome {
-  font-size: 22px;
-  font-weight: 700;
-  color: #3d3424;
-  margin: 0;
-  line-height: 1.3;
-  padding: 20px;
-  text-align: center;
-  font-family: 'Playfair Display', serif;
-}
-
+.presente-cor,
 .presente-descricao {
   font-size: 14px;
-  color: #6b6375;
+  color: var(--color-text-dark);
   margin: 0;
-  line-height: 1.5;
-  font-family: 'Playfair Display', serif;
+  line-height: 1.4;
 }
 
 .presente-preco {
-  font-size: 40px;
-  font-weight: 700;
-  color: white;
-  margin-top: auto;
-  padding-top: 10px;
-  border-top: 1px solid #e5e4e7;
-  font-family: 'Quintessential', serif;
+  font-family: var(--font-serif-mate);
+  font-size: 18px;
+  font-weight: var(--font-bold);
+  color: var(--color-primary);
+  margin: 5px 0 0 0;
+}
+
+.presente-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
+.links-label {
+  font-weight: var(--font-semibold);
+  color: var(--color-text-dark);
+}
+
+.links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.links-list a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 12px;
+  transition: opacity 0.2s ease;
+}
+
+.links-list a:hover {
+  opacity: 0.7;
 }
 
 /* ========================= BADGES ========================= */
 .badge-selecionado,
 .badge-indisponivel {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  padding: 8px 12px;
+  top: 10px;
+  right: 10px;
+  padding: 6px 12px;
   border-radius: 20px;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: var(--font-bold);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .badge-selecionado {
-  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
-  color: white;
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
 }
 
 .badge-indisponivel {
-  background: linear-gradient(135deg, #888 0%, #666 100%);
-  color: white;
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
 }
 
-/* ========================= AÇÃO DO CARD ========================= */
+/* ========================= AÇÃO ========================= */
 .presente-acao {
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  opacity: 0.6;
-  pointer-events: none;
-  color: #3d3424;
-  margin-top: auto;
-  text-align: center;
-  padding: 12px;
-}
-
-.presente-cor {
+  font-family: var(--font-serif-mate);
   font-size: 14px;
-  color: #3d3424;
-  margin: 0;
+  font-weight: var(--font-bold);
+  color: var(--color-primary);
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
-.presente-links {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: auto;
+.presente-card:hover:not(:disabled) .presente-acao {
+  opacity: 1;
 }
 
-.links-label {
-  font-size: 14px;
-  color: #3d3424;
-  font-weight: 700;
-  font-family: 'Playfair Display', serif;
-}
-
-.links-list {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.links-list a {
-  font-size: 13px;
-  color: #86732A;
-  text-decoration: none;
-  font-weight: 700;
-  border-bottom: 1px solid transparent;
-}
-
-.links-list a:hover {
-  border-bottom: 1px solid #86732A;
-}
-
-/* ========================= RESUMO E CONFIRMAR ========================= */
+/* ========================= RESUMO ========================= */
 .presentes-resumo {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: white;
-  border-top: 2px solid #b8a660;
-  padding: 20px 40px 20px 100px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   gap: 30px;
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 99;
-  animation: fadeIn 0.3s ease-out;
-}
+  padding: 30px 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+  flex-wrap: wrap;
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  /* Keep summary fixed at viewport bottom while scrolling */
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(600px, calc(100% - 40px));
+  z-index: var(--z-content);
 }
 
 .resumo-info {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+  flex: 1;
+  min-width: 200px;
 }
 
 .resumo-texto {
-  font-size: 18px;
-  color: #6b6375;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-serif-mate);
+  font-size: 16px;
+  color: var(--color-text-dark);
 }
 
 .resumo-texto strong {
-  color: #aa3bff;
-  font-weight: 700;
+  color: var(--color-primary);
+  font-weight: var(--font-bold);
 }
 
+/* ========================= BOTÃO CONFIRMAR ========================= */
 .btn-confirmar-presentes {
   background: none;
   border: none;
   cursor: pointer;
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
+  transition: transform 0.2s ease;
+  padding: 0;
   display: flex;
   align-items: center;
-}
-
-.btn-confirmar-presentes img {
-  width: 120px;
-  height: auto;
-  display: block;
+  justify-content: center;
 }
 
 .btn-confirmar-presentes:hover:not(:disabled) {
@@ -416,556 +300,227 @@
   cursor: not-allowed;
 }
 
+.btn-confirmar-presentes img {
+  width: 200px;
+  height: auto;
+  display: block;
+}
+
 /* ========================= MEDIA QUERIES ========================= */
 @media (max-width: 1024px) {
-  .header {
-    padding: 0 30px;
-  }
-
-  .presentes-container {
-    padding: 50px 30px;
-  }
-
-  .presentes-titulo {
-    font-size: 42px;
-  }
-
   .presentes-grid {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
   }
 
-  .presente-links {
-    margin-bottom: auto;
+  .presente-card {
+    padding: 18px;
+    gap: 12px;
+  }
+
+  .presente-imagem {
+    height: 180px;
   }
 }
 
 @media (max-width: 768px) {
-  .presente-links {
-    margin-bottom: auto;
-  }
-
-  .header {
-    padding: 0 20px;
-    height: 80px;
-  }
-
-  .logo {
-    height: 40px;
-    width: 43px;
-  }
-
-  .logo-text {
-    font-size: 16px;
-  }
-
-  .menu-toggle {
-    display: flex;
-  }
-
-  .menu {
-    position: absolute;
-    top: 80px;
-    left: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    background: rgba(184, 166, 96, 0.95);
-    padding: 0;
-    gap: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
-    visibility: hidden;
-    z-index: 999;
-  }
-
-  .menu.open {
-    max-height: 350px;
-    padding: 20px 0;
-    visibility: visible;
-  }
-
-  .menu a {
-    padding: 12px 20px;
-    font-size: 16px;
-    white-space: normal;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    display: block;
-  }
-
-  .menu a:last-child {
-    border-bottom: none;
+  .presentes-page::before {
+    top: var(--header-height-md);
   }
 
   .presentes-container {
-    margin-top: 80px;
-    padding: 40px 10px;
-    min-height: calc(100vh - 80px);
-  }
-
-  .presentes-titulo {
-    font-size: 36px;
-    margin-bottom: 12px;
-  }
-
-  .presentes-subtitulo {
-    font-size: 18px;
-    margin-bottom: 30px;
-  }
-
-  .presentes-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-    margin: 0 auto 40px;
-  }
-
-  .presente-card {
-    border-radius: 10px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-  }
-
-  .presente-imagem {
-    height: 220px;
-    padding: 15px;
-  }
-
-  .presente-nome {
-    font-size: 18px;
-    padding: 15px;
-  }
-
-  .presente-descricao {
-    font-size: 12px;
-  }
-
-  .presente-preco {
-    font-size: 30px;
-  }
-
-  .presentes-resumo {
-    max-width: 90%;
-  }
-
-  .resumo-texto {
-    font-size: 14px;
-  }
-
-  .btn-confirmar-presentes img {
-    width: 140px;
-  }
-
-  .presentes-resumo {
-    padding: 15px;
-    flex-direction: column;
-    gap: 15px;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .resumo-info {
-    text-align: center;
-  }
-}
-
-@media (max-width: 640px) {
-  .presente-links {
-    margin-bottom: auto;
-  }
-
-  .header {
-    height: 75px;
-    padding: 0 15px;
-  }
-
-  .logo {
-    height: 38px;
-    width: 41px;
-  }
-
-  .logo-text {
-    font-size: 15px;
-  }
-
-  .presentes-container {
-    margin-top: 75px;
     padding: 30px 15px;
-    min-height: calc(100vh - 75px);
-  }
-
-  .presentes-titulo {
-    font-size: 32px;
-  }
-
-  .presentes-subtitulo {
-    font-size: 16px;
   }
 
   .presentes-grid {
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 18px;
-    margin-bottom: 35px;
   }
 
   .presente-card {
-    border-radius: 8px;
-  }
-
-  .presente-imagem {
-    height: 200px;
-    padding: 12px;
+    padding: 16px;
+    gap: 12px;
   }
 
   .presente-nome {
     font-size: 16px;
-    padding: 12px;
-    line-height: 1.25;
   }
 
-  .presente-descricao {
-    font-size: 11px;
-    line-height: 1.3;
-  }
-
-  .presente-preco {
-    font-size: 26px;
+  .presente-imagem {
+    height: 160px;
   }
 
   .presentes-resumo {
-    padding: 15px 15px 15px 80px;
-    margin-bottom: 20px;
+    gap: 20px;
+    padding: 25px 15px;
   }
 
   .resumo-texto {
-    font-size: 13px;
+    font-size: 15px;
   }
 
   .btn-confirmar-presentes img {
-    width: 130px;
+    width: 180px;
+  }
+}
+
+@media (max-width: 640px) {
+  .presentes-page::before {
+    top: var(--header-height-sm);
+  }
+
+  .presentes-container {
+    padding: 25px 12px;
+  }
+
+  .presentes-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .presente-card {
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .presente-nome {
+    font-size: 15px;
+  }
+
+  .presente-imagem {
+    height: 140px;
+  }
+
+  .presente-content {
+    font-size: 12px;
+  }
+
+  .presentes-resumo {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 12px;
+  }
+
+  .btn-confirmar-presentes img {
+    width: 160px;
   }
 }
 
 @media (max-width: 480px) {
-  .presente-links {
-    margin-bottom: auto;
-  }
-
-  .header {
-    padding: 0 12px;
-    height: 70px;
-  }
-
-  .logo {
-    height: 35px;
-    width: 37px;
-  }
-
-  .logo-text {
-    font-size: 13px;
-  }
-
-  .menu {
-    top: 70px;
-    max-height: 300px;
-  }
-
-  .menu a {
-    font-size: 14px;
-    padding: 10px 15px;
+  .presentes-page::before {
+    top: var(--header-height-xs);
   }
 
   .presentes-container {
-    margin-top: 70px;
-    padding: 20px 10px 180px;
-    min-height: calc(100vh - 70px);
-    gap: 0;
-    align-items: center;
-  }
-
-  .presentes-container::before {
-    background-size: 15px 15px;
-  }
-
-  .presentes-titulo {
-    font-size: 26px;
-    margin-bottom: 10px;
-  }
-
-  .presentes-subtitulo {
-    font-size: 14px;
-    margin-bottom: 20px;
+    padding: 20px 10px;
   }
 
   .presentes-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
-    margin: 0 auto 25px;
-    max-width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 14px;
   }
 
   .presente-card {
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  .presente-card:hover:not(.indisponivel) {
-    transform: translateY(-4px);
-  }
-
-  .presente-imagem {
-    height: 160px;
-    padding: 10px;
-  }
-
-  .presente-imagem img {
-    max-width: 90%;
-    max-height: 90%;
-  }
-
-  .presente-content {
     padding: 12px;
-    gap: 8px;
+    gap: 10px;
   }
 
   .presente-nome {
-    font-size: 13px;
-    padding: 10px;
-    font-weight: 600;
+    font-size: 14px;
   }
 
+  .presente-imagem {
+    height: 120px;
+  }
+
+  .presente-cor,
   .presente-descricao {
-    font-size: 10px;
-  }
-
-  .presente-preco {
-    font-size: 22px;
-    margin-top: 5px;
-  }
-
-  .badge-selecionado,
-  .badge-indisponivel {
-    font-size: 9px;
-    padding: 3px 6px;
+    font-size: 12px;
   }
 
   .presentes-resumo {
-    padding: 12px;
-    border-radius: 8px;
-    animation: slideUp 0.3s ease-out;
-    flex-direction: column;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
+    gap: 12px;
+    padding: 18px 10px;
   }
 
   .resumo-texto {
-    font-size: 12px;
-    line-height: 1.3;
-  }
-
-  .resumo-texto strong {
-    display: block;
-    margin-bottom: 8px;
-  }
-
-  .btn-confirmar-presentes {
-    width: 100%;
-    max-width: 100%;
-    min-height: 44px;
+    font-size: 13px;
   }
 
   .btn-confirmar-presentes img {
-    width: 100%;
-    max-width: 120px;
+    width: 140px;
   }
 }
 
 @media (max-width: 380px) {
-  .presente-links {
-    margin-bottom: auto;
-  }
-
-  .header {
-    height: 65px;
-    padding: 0 10px;
-  }
-
-  .logo {
-    height: 32px;
-    width: 34px;
-  }
-
-  .logo-text {
-    font-size: 12px;
-  }
-
   .presentes-container {
-    margin-top: 65px;
-    padding: 15px 10px 150px;
-    min-height: calc(100vh - 65px);
-  }
-
-  .presentes-container::before {
-    background-size: 14px 14px;
-  }
-
-  .presentes-titulo {
-    font-size: 24px;
-    margin-bottom: 8px;
-  }
-
-  .presentes-subtitulo {
-    font-size: 13px;
-    margin-bottom: 15px;
+    padding: 18px 8px;
   }
 
   .presentes-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 12px;
-    margin-bottom: 20px;
   }
 
   .presente-card {
-    border-radius: 6px;
-  }
-
-  .presente-imagem {
-    height: 160px;
-    padding: 8px;
-  }
-
-  .presente-nome {
-    font-size: 14px;
-    padding: 8px;
-  }
-
-  .presente-descricao {
-    font-size: 11px;
-  }
-
-  .presente-preco {
-    font-size: 24px;
-  }
-
-  .presentes-resumo {
-    padding: 10px 10px 10px 60px;
-    animation: slideUp 0.3s ease-out;
-    flex-direction: column;
+    padding: 10px;
     gap: 8px;
   }
 
-  .resumo-texto {
-    font-size: 11px;
+  .presente-nome {
+    font-size: 13px;
   }
 
-  .btn-confirmar-presentes img {
-    max-width: 110px;
+  .presente-imagem {
+    height: 100px;
   }
 
   .presentes-resumo {
-    padding: 10px;
-    flex-direction: column;
     gap: 10px;
-    justify-content: center;
-    align-items: center;
+    padding: 15px 8px;
   }
 
-  .resumo-info {
-    text-align: center;
+  .btn-confirmar-presentes img {
+    width: 120px;
   }
 }
 
 @media (max-width: 320px) {
-  .presente-links {
-    margin-bottom: auto;
-  }
-
-  .header {
-    height: 60px;
-    padding: 0 8px;
-  }
-
-  .logo {
-    height: 30px;
-    width: 32px;
-  }
-
-  .logo-text {
-    font-size: 11px;
-  }
-
-  .menu {
-    top: 60px;
+  .presentes-page {
+    padding-bottom: 30px;
   }
 
   .presentes-container {
-    margin-top: 60px;
-    padding: 12px 8px 145px;
-    min-height: calc(100vh - 60px);
-  }
-
-  .presentes-container::before {
-    background-size: 12px 12px;
-  }
-
-  .presentes-titulo {
-    font-size: 22px;
-    margin-bottom: 6px;
-  }
-
-  .presentes-subtitulo {
-    font-size: 12px;
-    margin-bottom: 12px;
+    padding: 15px 6px;
   }
 
   .presentes-grid {
     grid-template-columns: 1fr;
     gap: 10px;
-    margin-bottom: 15px;
   }
 
   .presente-card {
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .presente-imagem {
-    height: 180px;
-    padding: 6px;
-  }
-
-  .presente-content {
     padding: 10px;
-    gap: 6px;
   }
 
   .presente-nome {
-    font-size: 13px;
-    padding: 8px;
+    font-size: 12px;
   }
 
-  .presente-descricao {
-    font-size: 10px;
-  }
-
-  .presente-preco {
-    font-size: 22px;
+  .presente-imagem {
+    height: 90px;
   }
 
   .presentes-resumo {
-    padding: 10px;
-    animation: slideUp 0.3s ease-out;
+    gap: 10px;
+    padding: 12px 6px;
   }
 
   .resumo-texto {
-    font-size: 10px;
-  }
-
-  .btn-confirmar-presentes {
-    min-height: 42px;
+    font-size: 12px;
   }
 
   .btn-confirmar-presentes img {
-    max-width: 100px;
+    width: 100px;
   }
 }

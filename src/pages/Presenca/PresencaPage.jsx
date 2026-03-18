@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useGuest } from '@/context';
 import { useScrollToTop, useRequireGuest } from '@/hooks';
 import { useSupabase } from '@/hooks';
+import Header from '@/components/Header';
 
-import logo from '@/assets/images/header-logo.png';
 import btnSimPresenca from '@/assets/images/btnSimPresenca.png';
 import btnNaoPresenca from '@/assets/images/btnNaoPresenca.png';
 
@@ -15,13 +15,11 @@ export default function PresencaPage() {
   const { guest, setCurrentGuest } = useGuest();
   const { updateGuest, loading } = useSupabase();
   const [respondendo, setRespondendo] = useState(false);
-  const [menuAberto, setMenuAberto] = useState(false);
   useScrollToTop();
   useRequireGuest();
 
   const handlePresenca = async (confirmado) => {
     if (!guest?.id) {
-      console.error('Guest não identificado:', guest);
       alert('Por favor, identifique-se primeiro');
       navigate('/');
       return;
@@ -62,31 +60,7 @@ export default function PresencaPage() {
 
   return (
     <div className="presenca-page">
-      {/* HEADER */}
-      <header className="presenca-header">
-        <Link to="/introducao" style={{textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', flexShrink: 0}}>
-          <div className="presenca-logo-area">
-            <img src={logo} alt="logo" className="presenca-logo" />
-            <p className="presenca-logo-text">Estella & Lucas</p>
-          </div>
-        </Link>
-
-        <button 
-          className={`presenca-menu-toggle ${menuAberto ? 'active' : ''}`}
-          onClick={() => setMenuAberto(!menuAberto)}
-          aria-label="Menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
-        <nav className={`presenca-menu ${menuAberto ? 'open' : ''}`}>
-          <Link to="/confirmacao" onClick={() => setMenuAberto(false)}>Confirmar presença</Link>
-          <Link to="/presentes" onClick={() => setMenuAberto(false)}>Lista de presentes</Link>
-          <Link to="/area-convidado" onClick={() => setMenuAberto(false)}>Área do convidado</Link>
-        </nav>
-      </header>
+      <Header />
 
       {/* MAIN CONTENT */}
       <section className="presenca-container">

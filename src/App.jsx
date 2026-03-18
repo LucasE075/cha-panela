@@ -12,13 +12,11 @@ import AgradecimentoPresentePage from "@/pages/AgradecimentoPresente/Agradecimen
 
 import musica from "@/assets/audio/musica.mp3";
 
-const basename = import.meta.env.BASE_URL || "/";
-
 function App() {
   return (
     <GuestProvider>
       <MusicProvider>
-        <HashRouter basename={basename}>
+        <HashRouter>
           <MusicToggle />
           <Routes>
             <Route path="/" element={<IdentificacaoPage />} />

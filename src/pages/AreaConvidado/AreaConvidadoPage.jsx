@@ -3,11 +3,9 @@ import { useNavigate, Link } from "react-router-dom";
 import { useGuest } from "@/context";
 import { useScrollToTop, useRequireGuest } from "@/hooks";
 import { supabase } from "@/services/supabase/supabaseClient";
+import Header from "@/components/Header";
 
-import logo from "@/assets/images/header-logo.png";
 import ornamentoDivisor from "@/assets/images/ornament-divider.png";
-import btnConfirmar from "@/assets/images/btn-confirmar.png";
-import btnConfirmarPresente from "@/assets/images/btn-confirmarPresente.png";
 
 import "./areaConvidado.css";
 
@@ -17,7 +15,6 @@ export default function AreaConvidadoPage() {
 
   const [presentes, setPresentes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [menuAberto, setMenuAberto] = useState(false);
   const [confirmando, setConfirmando] = useState(null);
   useScrollToTop();
   useRequireGuest();
@@ -67,7 +64,11 @@ export default function AreaConvidadoPage() {
             descricao,
             preco,
             imagem,
-            tipo
+            tipo,
+            cor,
+            link1,
+            link2,
+            link3
           )
         `)
         .eq("convidado_id", guest.id);
@@ -168,31 +169,7 @@ export default function AreaConvidadoPage() {
 
   return (
     <div className="area-convidado-page">
-      {/* HEADER */}
-      <header className="area-header">
-        <Link to="/introducao" style={{textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', flexShrink: 0}}>
-          <div className="area-logo-area">
-            <img src={logo} alt="logo" className="area-logo" />
-            <p className="area-logo-text">Estella & Lucas</p>
-          </div>
-        </Link>
-
-        <button 
-          className={`area-menu-toggle ${menuAberto ? 'active' : ''}`}
-          onClick={() => setMenuAberto(!menuAberto)}
-          aria-label="Menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
-        <nav className={`area-menu ${menuAberto ? 'open' : ''}`}>
-          <Link to="/confirmacao" onClick={() => setMenuAberto(false)}>Confirmar presença</Link>
-          <Link to="/presentes" onClick={() => setMenuAberto(false)}>Lista de presentes</Link>
-          <Link to="/area-convidado" onClick={() => setMenuAberto(false)}>Área do convidado</Link>
-        </nav>
-      </header>
+      <Header />
 
       {/* TÍTULO */}
       <h1 className="area-titulo">Área do Convidado</h1>
@@ -233,7 +210,6 @@ export default function AreaConvidadoPage() {
                 onClick={confirmarPresenca}
                 disabled={confirmando === "presenca"}
               >
-                <img src={btnConfirmar} alt="Confirmar presença" />
               </button>
             ) : null}
           </div>
@@ -281,37 +257,6 @@ export default function AreaConvidadoPage() {
                         {jáConfirmado ? (
                           // PRESENTES CONFIRMADOS
                           <>
-                            {presente.tipo === 'fisico' && (
-                              <>
-                                {presente.cor && (
-                                  <p className="detalhe-cor">
-                                    <strong>Cor:</strong> {presente.cor}
-                                  </p>
-                                )}
-                                {(formatarURL(presente.link1) || formatarURL(presente.link2) || formatarURL(presente.link3)) && (
-                                  <div className="detalhe-links">
-                                    <span className="links-label"><strong>Links:</strong></span>
-                                    <div className="links-list">
-                                      {formatarURL(presente.link1) && (
-                                        <a href={formatarURL(presente.link1)} target="_blank" rel="noreferrer">
-                                          Sugestão 1
-                                        </a>
-                                      )}
-                                      {formatarURL(presente.link2) && (
-                                        <a href={formatarURL(presente.link2)} target="_blank" rel="noreferrer">
-                                          Sugestão 2
-                                        </a>
-                                      )}
-                                      {formatarURL(presente.link3) && (
-                                        <a href={formatarURL(presente.link3)} target="_blank" rel="noreferrer">
-                                          Sugestão 3
-                                        </a>
-                                      )}
-                                    </div>
-                                  </div>
-                                )}
-                              </>
-                            )}
                             {(presente.tipo === 'pix_livre' || presente.tipo === 'pix_fechado') && (
                               <p className="detalhe-descricao">{presente.descricao}</p>
                             )}
@@ -343,7 +288,7 @@ export default function AreaConvidadoPage() {
                               disabled={confirmando === selecao.id}
                               title="Confirmar este presente"
                             >
-                              <img src={btnConfirmarPresente} alt="Confirmar" />
+                              Confirmar
                             </button>
                             <button 
                               className="btn-presente btn-remover"
@@ -356,15 +301,49 @@ export default function AreaConvidadoPage() {
                           </>
                         ) : (
                           // PRESENTES CONFIRMADOS
-                          <button 
-                            className="btn-presente btn-pix"
-                            onClick={() => navigate("/agradecimento-presente", {
-                              state: { presente }
-                            })}
-                            title="Ver chave Pix/QRcode"
-                          >
-                            Chave Pix/QRcode
-                          </button>
+                          <>
+                            {(presente.tipo === 'pix_fechado' || presente.tipo === 'pix_livre') && (
+                              <button 
+                                className="btn-presente btn-pix"
+                                onClick={() => navigate("/agradecimento-presente", {
+                                  state: { presente }
+                                })}
+                                title="Ver chave Pix/QRcode"
+                              >
+                                Chave Pix/QRcode
+                              </button>
+                            )}
+
+                            {presente.tipo === 'fisico' && (
+                              <div className="presente-links">
+                                {presente.cor && (
+                                  <span className="presente-link-cor">
+                                    <strong>Cor:</strong> {presente.cor}
+                                  </span>
+                                )}
+
+                                {(formatarURL(presente.link1) || formatarURL(presente.link2) || formatarURL(presente.link3)) && (
+                                  <div className="presente-links-list">
+                                    {formatarURL(presente.link1) && (
+                                      <a href={formatarURL(presente.link1)} target="_blank" rel="noreferrer">
+                                        Sugestão 1
+                                      </a>
+                                    )}
+                                    {formatarURL(presente.link2) && (
+                                      <a href={formatarURL(presente.link2)} target="_blank" rel="noreferrer">
+                                        Sugestão 2
+                                      </a>
+                                    )}
+                                    {formatarURL(presente.link3) && (
+                                      <a href={formatarURL(presente.link3)} target="_blank" rel="noreferrer">
+                                        Sugestão 3
+                                      </a>
+                                    )}
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          </>
                         )}
                       </div>
                     </div>

@@ -1,16 +1,13 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useGuest } from '@/context';
 import { useScrollToTop, useRequireGuest } from '@/hooks';
-
-import logo from '@/assets/images/header-logo.png';
+import Header from '@/components/Header';
 import btnPresentes from '@/assets/images/btn-presentes.png';
 
 import './agradecimento.css';
 
 export default function AgradecimentoPage() {
   const { guest } = useGuest();
-  const [menuAberto, setMenuAberto] = useState(false);
   useScrollToTop();
   useRequireGuest();
 
@@ -22,31 +19,7 @@ export default function AgradecimentoPage() {
 
   return (
     <div className="agradecimento-page">
-      {/* HEADER */}
-      <header className="agradecimento-header">
-        <Link to="/introducao" style={{textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', flexShrink: 0}}>
-          <div className="agradecimento-logo-area">
-            <img src={logo} alt="logo" className="agradecimento-logo" />
-            <p className="agradecimento-logo-text">Estella & Lucas</p>
-          </div>
-        </Link>
-
-        <button
-          className={`agradecimento-menu-toggle ${menuAberto ? 'active' : ''}`}
-          onClick={() => setMenuAberto(!menuAberto)}
-          aria-label="Menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
-        <nav className={`agradecimento-menu ${menuAberto ? 'open' : ''}`}>
-          <Link to="/confirmacao" onClick={() => setMenuAberto(false)}>Confirmar presença</Link>
-          <Link to="/presentes" onClick={() => setMenuAberto(false)}>Lista de presentes</Link>
-          <Link to="/area-convidado" onClick={() => setMenuAberto(false)}>Área do convidado</Link>
-        </nav>
-      </header>
+      <Header />
 
       {/* MAIN CONTENT */}
       <section className="agradecimento-container">

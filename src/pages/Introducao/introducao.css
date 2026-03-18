@@ -1,281 +1,239 @@
-
-/* ========================= PAGE ROOT ========================= */ 
-.introducao-page { 
-    width: 100%; 
-    min-height: 100vh; 
-    overflow-x: hidden; 
-    font-family: 'Playfair Display', serif;
-} 
-/* ========================= HEADER / NAVBAR ========================= */
-.presenca-header {
-  position: fixed;
+/* ========================= PAGE ROOT ========================= */
+.introducao-page {
   width: 100%;
-  height: 106px;
-  background: #B8A660;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
-  padding: 0 40px;
-  box-sizing: border-box;
-}
-
-.presenca-logo-area {
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: var(--font-serif);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  flex-shrink: 0;
+  padding-top: 0;
+  margin-top: 0;
 }
 
-.presenca-logo {
-  height: 51px;
-  width: 55.17px;
-}
-
-.presenca-logo-text {
-  font-family: 'Mate', serif;
-  font-size: 20px;
-  color: white;
-  margin: 0;
-}
-
-.presenca-menu {
+/* ========================= SEÇÃO CARTA ========================= */
+.secao-carta {
+  margin-top: var(--header-height);
+  position: relative;
+  padding: 120px 20px;
   display: flex;
-  gap: 40px;
+  justify-content: center;
   align-items: center;
+  background: linear-gradient(135deg, var(--color-bg-gradient-1) 0%, var(--color-bg-gradient-1) 100%);
 }
 
-.presenca-menu a {
-  text-decoration: none;
-  color: white;
-  font-family: 'Mate', serif;
-  font-size: 20px;
-  transition: opacity 0.2s ease;
-  white-space: nowrap;
+.secao-carta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgb(219, 211, 211) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.35;
+  pointer-events: none;
 }
 
-.presenca-menu a:hover {
-  opacity: 0.7;
+/* ========================= FLORES CARTA ========================= */
+.flores-esquerda,
+.flores-direita {
+  position: absolute;
+  top: 0;
+  width: 419px;
+  height: 364.42px;
+  z-index: 15; /* na frente da carta, atrás do header */
+  pointer-events: none;
 }
 
-.presenca-menu-toggle {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
-  gap: 6px;
-  z-index: 1100;
+.flores-esquerda {
+  left: 0;
 }
 
-.presenca-menu-toggle span {
-  width: 28px;
-  height: 3px;
-  background: white;
-  border-radius: 2px;
-  transition: all 0.3s ease;
+.flores-direita {
+  right: 0;
 }
 
-.presenca-menu-toggle.active span:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
+.ornamento-medalhao {
+  position: absolute;
+  top: 0;
+  width: 631.28px;
+  height: 186px;
+  z-index: 15; /* na frente da carta */
+  pointer-events: none;
 }
 
-.presenca-menu-toggle.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.presenca-menu-toggle.active span:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
-}
-
-/* ========================= SEÇÃO CARTA ========================= */ 
-.secao-carta { 
-    margin-top: 106px; 
-    position: relative; 
-    padding: 120px 20px; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    background: linear-gradient( #E8EEF5, #E8EEF5 ); 
-} 
-/* pontilhado */ 
-.secao-carta::before { 
-    content: ""; 
-    position: absolute; 
-    inset: 0; 
-    background-image: radial-gradient( rgb(219, 211, 211) 1px, transparent 1px ); 
-    background-size: 20px 20px; 
-    opacity: 0.35; 
-    pointer-events: none; 
-} 
-/* ========================= FLORES ========================= */ 
-.flores-esquerda { 
-    position: absolute; 
-    left: 0;
-    top : 0;  
-    width: 419px;
-    height: 364.42px;
-} 
-.flores-direita { 
-    position: absolute; 
-    right: 0;
-    top: 0;
-    width: 419px;
-    height: 364.42px; 
-} 
-.ornamento-medalhao { 
-    position: absolute; 
-    top: 0; 
-    width: 631.28px;
-    height: 186px;
-} 
-/* ========================= CARTA ========================= */ 
+/* ========================= CARTA ========================= */
 .carta {
   width: 80%;
   display: flex;
   justify-content: center;
   background: #F6F1E7;
+  position: relative;
+  z-index: var(--z-content);
 }
 
 .borda-externa {
   width: 100%;
-  border: 3px solid #B8A660;
+  border: 3px solid var(--color-primary);
   padding: 14px;
 }
 
 .borda-interna {
-  border: 2px solid #86732A;
+  border: 2px solid var(--color-primary-dark);
   padding: 40px;
   font-size: 20px;
   line-height: 1.7;
-  font-family: Playfair Display, serif;
+  font-family: var(--font-serif);
   text-align: left;
-  color: #000000;
+  color: var(--color-text-dark);
 }
 
-/* ========================= FOTO DO CASAL ========================= */ 
-.secao-foto { 
-    width: 100%; 
-    height: 600px;
-} 
-.foto-casal { 
-    width: 100%; 
-    height: 100%;
-    display: block;
-    object-fit: cover;
-} 
+/* ========================= FOTO DO CASAL ========================= */
+.secao-foto {
+  width: 100%;
+  height: 600px;
+}
 
-/* ========================= SEÇÃO EVENTO ========================= */ 
-.secao-evento { 
-    position: relative; 
-    min-height: 100vh;
-    padding: 100px 20px;
-    background: linear-gradient( #E8EEF5 0%, #C9D6E5 100% ); 
-    display: flex; 
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-} 
-/*Pontilhado evento*/
-.secao-evento::before { 
-    content: ""; 
-    position: absolute; 
-    inset: 0; 
-    background-image: radial-gradient( rgb(219, 211, 211) 1px, transparent 1px ); 
-    background-size: 20px 20px; 
-    opacity: 0.35; 
-    pointer-events: none; 
-} 
-/* flores evento */ 
-.flores-evento-esq { 
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 603.74px;
-    height: 615.92px;
-    object-fit: cover;
-} 
-.flores-evento-dir { 
-    position: absolute; 
-    right: 0; 
-    bottom: 0; 
-    width: 529.1px;
-    height: 558.53px;
-    object-fit: cover;
-} 
-/* conteúdo central */ 
-.conteudo-evento { 
-    max-width: 700px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-} 
-/* ========================= TÍTULOS ========================= */ 
-.ornamento-titulo { 
-    width: 535px;
-    height: 392.81px; 
-    margin-bottom: 20px; 
-} 
-/* ========================= INFO EVENTO ========================= */ 
-.info-evento { 
-    margin-top: 40px; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 15px;
-    text-align: left;
-} 
-.linha-info { 
-    display: flex; 
-    justify-content: center; 
-    gap: 12px; 
-    font-size: 28px;
-    color: #000000;
-    text-align: left;
-} 
-.linha-info img { 
-    width: 37.87px;
-    height: 32.61px;
-    align-items: left; 
-} 
-/* ========================= DIVISOR ========================= */ 
-.divisor-ornamento { 
-    margin: 40px auto; 
-    width: 436.03px;
-    height: 30.28;
+.foto-casal {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
 }
-/* ========================= MENSAGEM FINAL ========================= */ 
-.mensagem-final { 
-    max-width: 520px; 
-    margin: 0 auto; 
-    font-size: 28px;
-    color: #000000; 
+
+/* ========================= SEÇÃO EVENTO ========================= */
+.secao-evento {
+  position: relative;
+  min-height: 100vh;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, var(--color-bg-gradient-1) 0%, var(--color-bg-gradient-2) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-/* ========================= BOTÕES ========================= */ 
-.botoes-evento { 
-    margin-top: 40px; 
-    display: flex; 
-    justify-content: center; 
-    gap: 30px; 
-} 
-.botao-img { 
-    width: 399px;
-    height: 94.72;
-    cursor: pointer; 
-    transition: transform 0.2s ease; 
-} 
-.botao-img:hover { 
-    transform: scale(1.05); 
+
+.secao-evento::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgb(219, 211, 211) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ========================= FLORES EVENTO ========================= */
+.flores-evento-esq {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 603.74px;
+  height: 615.92px;
+  object-fit: cover;
+}
+
+.flores-evento-dir {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 529.1px;
+  height: 558.53px;
+  object-fit: cover;
+}
+
+/* ========================= CONTEÚDO EVENTO ========================= */
+.conteudo-evento {
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: var(--z-content);
+  text-align: center;
+  width: 100%;
+}
+
+/* ========================= ORNAMENTO TÍTULO ========================= */
+.ornamento-titulo {
+  width: 535px;
+  height: 392.81px;
+  margin-bottom: 20px;
+}
+
+/* ========================= INFO EVENTO ========================= */
+.info-evento {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: center;
+  max-width: 520px;
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+  font-weight: var(--font-bold);
+  font-size: 20px;
+}
+
+.linha-info {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  font-size: 32px;
+  color: var(--color-text-dark);
+  text-align: center;
+  align-items: center;
+}
+
+.linha-info img {
+  width: 37.87px;
+  height: 32.61px;
+  align-items: left;
+}
+
+/* ========================= DIVISOR ========================= */
+.divisor-ornamento {
+  margin: 40px auto;
+  width: 436.03px;
+  height: 30.28px;
+}
+
+/* ========================= MENSAGEM FINAL ========================= */
+.mensagem-final {
+  max-width: 520px;
+  margin: 0 auto;
+  font-size: 28px;
+  color: var(--color-text-dark);
+}
+
+/* ========================= BOTÕES ========================= */
+.botoes-evento {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 520px;
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.botao-img {
+  width: 240px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  display: block;
+}
+
+.botao-img:hover {
+  transform: scale(1.05);
 }
 
 /* ========================= MEDIA QUERIES ========================= */
 @media (max-width: 1024px) {
-  .header {
-    padding: 0 30px;
-  }
-
   .secao-carta {
     padding: 100px 30px;
   }
@@ -284,72 +242,11 @@
     padding: 35px;
     font-size: 18px;
   }
-
-  .titulo-evento {
-    font-size: 42px;
-  }
-
-  .nomes-evento {
-    font-size: 56px;
-  }
 }
 
 @media (max-width: 768px) {
-  .header {
-    padding: 0 20px;
-    height: 80px;
-  }
-
-  .logo {
-    height: 40px;
-    width: 43px;
-  }
-
-  .logo-text {
-    font-size: 16px;
-  }
-
-  .menu-toggle {
-    display: flex;
-  }
-
-  .menu {
-    position: absolute;
-    top: 80px;
-    left: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    background: rgba(184, 166, 96, 0.95);
-    padding: 0;
-    gap: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
-    visibility: hidden;
-    z-index: 999;
-  }
-
-  .menu.open {
-    max-height: 350px;
-    padding: 20px 0;
-    visibility: visible;
-  }
-
-  .menu a {
-    padding: 12px 20px;
-    font-size: 16px;
-    white-space: normal;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    display: block;
-  }
-
-  .menu a:last-child {
-    border-bottom: none;
-  }
-
   .secao-carta {
-    margin-top: 80px;
+    margin-top: 0;
     padding: 80px 20px;
   }
 
@@ -374,10 +271,8 @@
     line-height: 1.6;
   }
 
-  .foto-casal {
-    width: 100%;
+  .secao-foto {
     height: 300px;
-    object-fit: cover;
   }
 
   .secao-evento {
@@ -394,14 +289,6 @@
     width: 90%;
   }
 
-  .titulo-evento {
-    font-size: 32px;
-  }
-
-  .nomes-evento {
-    font-size: 42px;
-  }
-
   .ornamento-titulo {
     width: 80%;
     height: auto;
@@ -409,12 +296,16 @@
   }
 
   .info-evento {
-    font-size: 18px;
+    font-size: 20px;
     gap: 12px;
+    font-weight: var(--font-bold);
   }
 
   .linha-info {
-    font-size: 16px;
+    font-size: 18px;
+    gap: 12px;
+    min-height: 50px;
+    align-items: center;
   }
 
   .mensagem-final {
@@ -429,47 +320,28 @@
   .botao-img {
     width: 100%;
     max-width: 350px;
-    height: auto;
   }
 }
 
 @media (max-width: 640px) {
-  .header {
-    height: 75px;
-    padding: 0 15px;
-  }
-
-  .logo {
-    height: 38px;
-    width: 41px;
-  }
-
-  .logo-text {
-    font-size: 15px;
-  }
-
   .secao-carta {
-    margin-top: 75px;
+    margin-top: var(--header-height-sm);
     padding: 70px 15px;
   }
 
   .borda-externa {
-    border: 2px solid #B8A660;
+    border: 2px solid var(--color-primary);
     padding: 12px;
   }
 
   .borda-interna {
     padding: 25px;
     font-size: 15px;
-    border: 1px solid #86732A;
+    border: 1px solid var(--color-primary-dark);
   }
 
   .secao-foto {
     height: 400px;
-  }
-
-  .foto-casal {
-    height: 100%;
   }
 
   .secao-evento {
@@ -480,21 +352,16 @@
     width: 95%;
   }
 
-  .titulo-evento {
-    font-size: 28px;
-  }
-
-  .nomes-evento {
-    font-size: 36px;
-  }
-
   .info-evento {
     font-size: 14px;
     gap: 10px;
+    font-weight: var(--font-bold);
   }
 
   .linha-info {
     font-size: 13px;
+    min-height: 45px;
+    align-items: center;
   }
 
   .linha-info img {
@@ -511,42 +378,19 @@
   }
 
   .botao-img {
-    max-width: 300px;
+    max-width: 280px;
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .header {
-    padding: 0 12px;
-    height: 70px;
-  }
-
-  .logo {
-    height: 35px;
-    width: 37px;
-  }
-
-  .logo-text {
-    font-size: 13px;
-  }
-
-  .menu {
-    top: 70px;
-    max-height: 300px;
-  }
-
-  .menu a {
-    font-size: 14px;
-    padding: 10px 15px;
-  }
-
   .secao-carta {
-    margin-top: 70px;
+    margin-top: var(--header-height-xs);
     padding: 60px 12px;
   }
 
   .borda-externa {
-    border: 2px solid #B8A660;
+    border: 2px solid var(--color-primary);
     padding: 10px;
   }
 
@@ -569,23 +413,18 @@
     height: auto;
   }
 
-  .titulo-evento {
-    font-size: 24px;
-  }
-
-  .nomes-evento {
-    font-size: 30px;
-  }
-
   .info-evento {
     font-size: 12px;
     gap: 8px;
     margin-top: 25px;
+    font-weight: var(--font-bold);
   }
 
   .linha-info {
     font-size: 12px;
     gap: 10px;
+    min-height: 45px;
+    align-items: center;
   }
 
   .linha-info img {
@@ -611,27 +450,13 @@
 
   .botao-img {
     width: 100%;
-    max-width: none;
-    height: auto;
+    max-width: 240px;
   }
 }
 
 @media (max-width: 380px) {
-  .header {
-    height: 65px;
-    padding: 0 10px;
-  }
-
-  .logo {
-    height: 32px;
-    width: 34px;
-  }
-
-  .logo-text {
-    font-size: 12px;
-  }
-
   .secao-carta {
+    margin-top: 65px;
     padding: 50px 10px;
   }
 
@@ -646,39 +471,34 @@
   .borda-interna {
     padding: 18px;
     font-size: 13px;
-  }
-
-  .secao-foto {
-    height: 300px;
+    line-height: 1.4;
   }
 
   .secao-evento {
-    padding: 35px 10px;
+    padding: 30px 10px;
   }
 
-  .conteudo-evento {
-    width: 100%;
-  }
-
-  .titulo-evento {
-    font-size: 22px;
-  }
-
-  .nomes-evento {
-    font-size: 26px;
+  .ornamento-titulo {
+    width: 90%;
+    height: auto;
   }
 
   .info-evento {
     font-size: 11px;
+    gap: 6px;
+    font-weight: var(--font-bold);
   }
 
   .linha-info {
     font-size: 11px;
+    gap: 8px;
+    min-height: 40px;
+    align-items: center;
   }
 
   .linha-info img {
-    width: 25px;
-    height: 22px;
+    width: 24px;
+    height: 20px;
   }
 
   .mensagem-final {
@@ -688,70 +508,51 @@
   .botoes-evento {
     gap: 12px;
   }
+
+  .botao-img {
+    width: 100%;
+    max-width: 220px;
+  }
 }
 
 @media (max-width: 320px) {
-  .header {
-    height: 60px;
-    padding: 0 8px;
-  }
-
-  .logo {
-    height: 30px;
-    width: 32px;
-  }
-
-  .logo-text {
-    font-size: 11px;
-  }
-
   .secao-carta {
+    margin-top: 60px;
     padding: 40px 8px;
   }
 
   .borda-interna {
     padding: 15px;
     font-size: 12px;
-    line-height: 1.4;
-  }
-
-  .secao-foto {
-    height: 250px;
+    line-height: 1.3;
   }
 
   .secao-evento {
-    padding: 30px 8px;
-  }
-
-  .titulo-evento {
-    font-size: 20px;
-  }
-
-  .nomes-evento {
-    font-size: 24px;
+    padding: 25px 8px;
+    min-height: auto;
   }
 
   .ornamento-titulo {
-    width: 90%;
+    width: 95%;
+    height: auto;
   }
 
   .info-evento {
     font-size: 10px;
-    gap: 6px;
+    gap: 5px;
+    font-weight: var(--font-bold);
   }
 
   .linha-info {
     font-size: 10px;
-    gap: 8px;
+    gap: 6px;
+    min-height: 35px;
+    align-items: center;
   }
 
   .linha-info img {
-    width: 22px;
-    height: 20px;
-  }
-
-  .divisor-ornamento {
-    margin: 20px auto;
+    width: 20px;
+    height: 18px;
   }
 
   .mensagem-final {
@@ -760,6 +561,11 @@
 
   .botoes-evento {
     gap: 10px;
-    margin-top: 20px;
   }
+
+  .botao-img {
+    width: 100%;
+    max-width: 200px;
+  }
+}
 }
