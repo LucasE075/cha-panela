@@ -199,8 +199,7 @@
 }
 
 /* ========================= BADGES ========================= */
-.badge-selecionado,
-.badge-indisponivel {
+.badge-selecionado, .badge-indisponivel {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -433,8 +432,7 @@
     height: 120px;
   }
 
-  .presente-cor,
-  .presente-descricao {
+  .presente-cor, .presente-descricao {
     font-size: 12px;
   }
 
