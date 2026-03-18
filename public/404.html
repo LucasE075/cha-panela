@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Page not found</title>
+    <meta name="robots" content="noindex" />
+    <script>
+      // GitHub Pages serves this page for unknown routes.
+      // Redirect to the SPA entry point so client-side routing can take over.
+      (function () {
+        var base = '/cha-panela';
+        var path = window.location.pathname;
+        if (path.startsWith(base)) {
+          path = path.slice(base.length);
+        }
+        if (!path || path === '/') {
+          path = '/';
+        }
+        var target = base + '/#' + path + window.location.search + window.location.hash;
+        window.location.replace(target);
+      })();
+    </script>
+  </head>
+  <body>
+    <h1>Página não encontrada</h1>
+    <p>Redirecionando...</p>
+  </body>
+</html>
