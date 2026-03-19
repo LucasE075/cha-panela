@@ -18,8 +18,8 @@ export default function AgradecimentoPresentePage() {
   useRequireGuest();
 
   // Código PIX
-  const PIX_CODE = '00020126330014BR.GOV.BCB.PIX0111065196341905204000053039865802BR5925Estella Gabriela Santos d6009SAO PAULO62140510SEI5aCq2qL63043B2D';
-  const PIX_CPF = '065.196.341-90';
+  const PIX_CODE = '00020126360014br.gov.bcb.pix0114+55619926120735204000053039865802BR5925Estella Gabriela Santos D6009Sao Paulo62290525REC69BB5B181BF5D749284508630481EA';
+  const PIX_CPF = '61992612073';
 
   // Copiar código para clipboard
   const copiarCodigoPix = async () => {
@@ -138,6 +138,7 @@ export default function AgradecimentoPresentePage() {
                   className="pix-copy-inline"
                   onClick={copiarCpfPix}
                   title="Clique para copiar"
+                  src={copiarTextoIcon}  
                 >
                   {PIX_CPF}
                 </button>
@@ -147,11 +148,10 @@ export default function AgradecimentoPresentePage() {
                     alt="Copiar CPF"
                     className="pix-copy-icon"
                   />
-                  {copiadoCpf ? '✓ Copiado!' : 'Copiar'}
                 </span>
               </p>
               <p className="pix-dado"><span className="pix-label">Nome:</span> Estella Gabriela Santos de Oliveira</p>
-              <p className="pix-dado"><span className="pix-label">Banco:</span> 260 - Nu Pagamentos S.A. - Instituição de Pagamento</p>
+              <p className="pix-dado"><span className="pix-label">Banco:</span> 380- PicPay Serviços S.A</p>
             </div>
           )}
 
